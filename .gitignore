@@ -12,3 +12,8 @@
 
 # Project-local glide cache, RE: https://github.com/Masterminds/glide/issues/736
 .glide/
+*.exe
+*.test
+*.prof
+*.ark
+main/log/goark-node.log
