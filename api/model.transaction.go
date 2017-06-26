@@ -1,5 +1,7 @@
 package api
 
+import "log"
+
 //TransactionType to store the type)
 type TransactionType byte
 
@@ -64,9 +66,33 @@ type TransactionQueryParams struct {
 //when calling list methods the Transactions [] has results
 //when calling get methods the transaction object (Single) has results
 type TransactionResponse struct {
-	Success           bool          `json:"success"`
-	Transactions      []Transaction `json:"transactions"`
-	SingleTransaction Transaction   `json:"transaction"`
-	Count             string        `json:"count"`
-	Error             string        `json:"error"`
+	Success      bool           `json:"success"`
+	Transactions []*Transaction `json:"transactions"`
+	Count        string         `json:"count"`
+	Error        string         `json:"error"`
+}
+
+//QueryTransactions returns TX from node database
+func QueryTransactions() ([]*Transaction, error) {
+	rows, err := db.Query("SELECT * FROM TRANSACTIONS")
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	log.Println(rows)
+	bks := make([]*Transaction, 0)
+	for rows.Next() {
+		bk := new(Transaction)
+		err := rows.Scan(&bk.ID, &bk.SenderID, &bk.Amount, &bk.Timestamp)
+		if err != nil {
+			return nil, err
+		}
+		log.Println(rows)
+		bks = append(bks, bk)
+	}
+	if err = rows.Err(); err != nil {
+		return nil, err
+	}
+	return bks, nil
 }
