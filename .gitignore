@@ -17,3 +17,5 @@
 *.prof
 *.ark
 main/log/goark-node.log
+
+main/debug
