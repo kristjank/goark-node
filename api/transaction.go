@@ -1,11 +1,18 @@
 package api
 
-import "gopkg.in/gin-gonic/gin.v1"
+import (
+	"log"
+
+	"gopkg.in/gin-gonic/gin.v1"
+)
 
 //GetTransactions Returns a list of peers to client call. Response is in JSON
 func GetTransactions(c *gin.Context) {
 
-	res, _ := QueryTransactions()
+	res, err := QueryTransactions()
+	if err != nil {
+		log.Println(err.Error())
+	}
 
 	var a TransactionResponse
 
