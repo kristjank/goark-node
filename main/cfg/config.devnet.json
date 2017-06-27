@@ -1,6 +1,6 @@
 {
-  "port": 5000,
-  "address": "0.0.0.0",
+  "port": 4002,
+  "address": "127.0.0.1",
   "version": "0.2.0",
   "fileLogLevel": "debug",
   "logFileName": "logs/ark.log",
@@ -8,9 +8,9 @@
   "trustProxy": false,
   "db": {
     "host": "localhost",
-    "port": 5432,
+    "port": 5433,
     "database": "ark_devnet",
-    "user": null,
+    "user": "arkdev",
     "password": "password",
     "poolSize": 20,
     "poolIdleTimeout": 30000,

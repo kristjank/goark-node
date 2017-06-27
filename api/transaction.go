@@ -17,6 +17,7 @@ func GetTransactions(c *gin.Context) {
 	var a TransactionResponse
 
 	a.Success = true
+	//logger.pr
 	a.Transactions = res
 
 	/*c.JSON(200, gin.H{

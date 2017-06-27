@@ -7,6 +7,7 @@ import (
 
 	"github.com/kristjank/goark-node/api"
 	_ "github.com/lib/pq"
+	"github.com/spf13/viper"
 	"gopkg.in/gin-gonic/gin.v1"
 )
 
@@ -14,9 +15,18 @@ var errorlog *os.File
 var logger *log.Logger
 var router *gin.Engine
 
+var env *ArkEnv
+
+//ArkEnv struct
+type ArkEnv struct {
+	logger *log.Logger
+}
+
 func init() {
 	initLogger()
+	loadConfig()
 
+	api.InitDB(viper.Sub("db"))
 }
 
 func initLogger() {
@@ -27,13 +37,24 @@ func initLogger() {
 	}
 
 	logger = log.New(errorlog, "ark-go: ", log.Lshortfile|log.LstdFlags)
+	env = &ArkEnv{logger: logger}
+}
+
+func loadConfig() {
+	viper.SetConfigName("config.devnet") // name of config file (without extension)
+	viper.SetConfigType("json")
+	viper.AddConfigPath("cfg") // path to look for the config file in
+
+	err := viper.ReadInConfig() // Find and read the config file
+
+	if err != nil {
+		logger.Panic("No configuration file")
+	}
 }
 
 ///////////////////////////
 func main() {
 	logger.Println("GOArk-Node starting")
-	initLogger()
-	api.InitDB()
 
 	// Set the router as the default one provided by Gin
 	router = gin.Default()
@@ -42,6 +63,7 @@ func main() {
 	initializeRoutes()
 
 	// Start serving the application
-	router.Run("localhost:4002")
+	pNodeInfo := fmt.Sprintf("%s:%d", viper.GetString("address"), viper.GetInt("port"))
+	router.Run(pNodeInfo)
 
 }
