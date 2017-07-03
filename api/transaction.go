@@ -8,7 +8,6 @@ import (
 
 //GetTransactions Returns a list of peers to client call. Response is in JSON
 func GetTransactions(c *gin.Context) {
-
 	res, err := QueryTransactions()
 	if err != nil {
 		log.Println(err.Error())
@@ -25,4 +24,9 @@ func GetTransactions(c *gin.Context) {
 	})*/
 
 	c.JSON(200, a)
+}
+
+//ReceiveBlocks
+func ReceiveBlocks(c *gin.Context) {
+
 }

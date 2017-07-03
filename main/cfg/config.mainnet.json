@@ -8,9 +8,9 @@
   "trustProxy": false,
   "db": {
     "host": "localhost",
-    "port": 5432,
-    "database": "ark_mainnet",
-    "user": null,
+    "port": 5433,
+    "database": "ark_devnet",
+    "user": "arkdev",
     "password": "password",
     "poolSize": 20,
     "poolIdleTimeout": 30000,

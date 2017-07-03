@@ -41,7 +41,7 @@ func initLogger() {
 }
 
 func loadConfig() {
-	viper.SetConfigName("config.devnet") // name of config file (without extension)
+	viper.SetConfigName("config.mainnet") // name of config file (without extension)
 	viper.SetConfigType("json")
 	viper.AddConfigPath("cfg") // path to look for the config file in
 
@@ -54,8 +54,9 @@ func loadConfig() {
 
 ///////////////////////////
 func main() {
-	logger.Println("GOArk-Node starting")
-
+	logger.Println("GOArk Relay Node Starting")
+	arkapi := api.NewArkClient(nil)
+	arkapi = arkapi.SetActiveConfiguration(api.MAINNET)
 	// Set the router as the default one provided by Gin
 	router = gin.Default()
 
