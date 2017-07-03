@@ -26,7 +26,7 @@ func init() {
 	initLogger()
 	loadConfig()
 
-	api.InitDB(viper.Sub("db"))
+	//api.InitDB(viper.Sub("db"))
 }
 
 func initLogger() {
