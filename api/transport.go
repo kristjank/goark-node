@@ -52,3 +52,8 @@ func SendPeerStatus(c *gin.Context) {
 
 	c.JSON(200, peerStat)
 }
+
+//ReceiveBlocks from blockchain
+func GetHeight(c *gin.Context) {
+	c.JSON(200, gin.H{"success": true, "height": 0, "id": ""})
+}
