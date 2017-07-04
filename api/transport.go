@@ -3,8 +3,11 @@ package api
 import (
 	"log"
 
+	"github.com/kristjank/goark-node/api/model"
 	"gopkg.in/gin-gonic/gin.v1"
 )
+
+var DBClient IBoltClient
 
 //GetTransactions Returns a list of peers to client call. Response is in JSON
 func GetTransactions(c *gin.Context) {
@@ -29,14 +32,17 @@ func GetTransactions(c *gin.Context) {
 //ReceiveBlocks from blockchain
 func ReceiveBlocks(c *gin.Context) {
 	//x, _ := ioutil.ReadAll(c.Request.Body)
-	var recv BlockReceiveStruct
+	var recv model.BlockReceiveStruct
 	c.BindJSON(&recv)
+
+	DBClient.SaveBlock(recv.Block)
+	//DBClient.
 	log.Printf("%v", recv)
 
 }
 
 func SendPeerStatus(c *gin.Context) {
-	var peerStat PeerStatus
+	var peerStat model.PeerStatus
 
 	peerStat.Success = true
 	//peerStat.Header.

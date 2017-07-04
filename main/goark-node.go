@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"github.com/kristjank/ark-go/core"
+	"github.com/kristjank/goark-node/api"
 	_ "github.com/lib/pq"
 	"github.com/spf13/viper"
 	"gopkg.in/gin-gonic/gin.v1"
@@ -25,6 +26,7 @@ type ArkEnv struct {
 func init() {
 	initLogger()
 	loadConfig()
+	initializeBoltClient()
 
 	//api.InitDB(viper.Sub("db"))
 }
@@ -50,6 +52,13 @@ func loadConfig() {
 	if err != nil {
 		logger.Panic("No configuration file")
 	}
+}
+
+func initializeBoltClient() {
+	api.DBClient = &api.BoltClient{}
+	api.DBClient.OpenBoltDb()
+	api.DBClient.InitializeBucket()
+	//transport.DBClient.Seed()
 }
 
 ///////////////////////////

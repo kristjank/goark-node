@@ -1,4 +1,4 @@
-package api
+package model
 
 //BlockReceiveStruct struktura prejetih blockov
 type BlockReceiveStruct struct {

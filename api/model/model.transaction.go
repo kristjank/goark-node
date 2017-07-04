@@ -1,4 +1,4 @@
-package api
+package model
 
 //TransactionType to store the type)
 type TransactionType byte
@@ -27,6 +27,7 @@ type Transaction struct {
 	Confirmations         int               `json:"confirmations,omitempty"`
 }
 
+/*
 //,signatures::json as signatures,rawasset::json as asset
 var listQuery = "SELECT id,\"blockId\",type,timestamp,amount,fee,COALESCE(\"vendorField\", '') as \"vendorField\",\"senderId\",COALESCE(\"recipientId\", '') as \"recipientId\",COALESCE(encode(\"senderPublicKey\", 'hex'), '') as \"senderPublicKey\",COALESCE(encode(\"requesterPublicKey\", 'hex'), '') as \"requesterPublicKey\",COALESCE(encode(\"signature\", 'hex'), '') as \"signature\",COALESCE(encode(\"signSignature\", 'hex'), '') as \"signSignature\" FROM transactions"
 
@@ -53,3 +54,4 @@ func QueryTransactions() ([]*Transaction, error) {
 	}
 	return bks, nil
 }
+*/
