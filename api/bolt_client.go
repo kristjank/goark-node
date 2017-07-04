@@ -15,6 +15,7 @@ type IBoltClient interface {
 	SaveBlock(block model.Block)
 	Check() bool
 	InitializeBucket()
+	LastBlock() (model.Block, error)
 }
 
 // Real implementation
@@ -86,4 +87,33 @@ func (bc *BoltClient) SaveBlock(block model.Block) {
 		err := b.Put([]byte(block.ID), jsonBytes)
 		return err
 	})
+}
+
+func (bc *BoltClient) LastBlock() (model.Block, error) {
+	// Allocate an empty Account instance we'll let json.Unmarhal populate for us in a bit.
+	block := model.Block{}
+
+	// Read an object from the bucket using boltDB.View
+	err := bc.boltDB.View(func(tx *bolt.Tx) error {
+		// Read the bucket from the DB
+		b := tx.Bucket([]byte("BlockBucket"))
+
+		_, val := b.Cursor().Last()
+		// Read the value identified by our accountId supplied as []byte
+		if val == nil {
+			return fmt.Errorf("No last block found...")
+		}
+		// Unmarshal the returned bytes into the account struct we created at
+		// the top of the function
+		json.Unmarshal(val, &block)
+
+		// Return nil to indicate nothing went wrong, e.g no error
+		return nil
+	})
+	// If there were an error, return the error
+	if err != nil {
+		return model.Block{}, err
+	}
+	// Return the Account struct and nil as error.
+	return block, nil
 }

@@ -38,14 +38,17 @@ func ReceiveBlocks(c *gin.Context) {
 	DBClient.SaveBlock(recv.Block)
 	//DBClient.
 	log.Printf("%v", recv)
-
+	c.JSON(200, gin.H{"message": "OK"})
 }
 
 func SendPeerStatus(c *gin.Context) {
 	var peerStat model.PeerStatus
 
+	lastBlock, _ := DBClient.LastBlock()
+
 	peerStat.Success = true
-	//peerStat.Header.
+	peerStat.Header = lastBlock
+	peerStat.Height = lastBlock.Height
 
 	c.JSON(200, peerStat)
 }

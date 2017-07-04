@@ -20,5 +20,5 @@ type Block struct {
 	PreviousBlock        string        `json:"previousBlock"`
 	GeneratorPublicKey   string        `json:"generatorPublicKey"`
 	BlockSignature       string        `json:"blockSignature"`
-	Transactions         []Transaction `json:"transactions"`
+	Transactions         []Transaction `json:"transactions,omitempty"`
 }

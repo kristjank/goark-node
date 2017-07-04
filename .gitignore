@@ -21,3 +21,4 @@ main/log/goark-node.log
 main/debug
 
 api/goark-node\.db
+api/goark-node.db.lock
