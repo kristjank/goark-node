@@ -5,7 +5,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/kristjank/goark-node/api"
+	"github.com/kristjank/ark-go/core"
 	_ "github.com/lib/pq"
 	"github.com/spf13/viper"
 	"gopkg.in/gin-gonic/gin.v1"
@@ -55,8 +55,8 @@ func loadConfig() {
 ///////////////////////////
 func main() {
 	logger.Println("GOArk Relay Node Starting")
-	arkapi := api.NewArkClient(nil)
-	arkapi = arkapi.SetActiveConfiguration(api.MAINNET)
+	arkapi := core.NewArkClient(nil)
+	arkapi = arkapi.SetActiveConfiguration(core.MAINNET)
 	// Set the router as the default one provided by Gin
 	router = gin.Default()
 
