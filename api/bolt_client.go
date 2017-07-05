@@ -9,20 +9,22 @@ import (
 	"github.com/kristjank/goark-node/api/model"
 )
 
+//IBoltClient interface defitnion
 type IBoltClient interface {
 	OpenBoltDb()
-	QueryBlock(blockId string) (model.Block, error)
+	QueryBlock(blockID string) (model.Block, error)
 	SaveBlock(block model.Block)
 	Check() bool
 	InitializeBucket()
 	LastBlock() (model.Block, error)
 }
 
-// Real implementation
+//BoltClient Realimplementation
 type BoltClient struct {
 	boltDB *bolt.DB
 }
 
+//OpenBoltDb db opening
 func (bc *BoltClient) OpenBoltDb() {
 	var err error
 	bc.boltDB, err = bolt.Open("goark-node.db", 0600, nil)
@@ -31,6 +33,7 @@ func (bc *BoltClient) OpenBoltDb() {
 	}
 }
 
+//QueryBlock returns the block by id
 func (bc *BoltClient) QueryBlock(blockID string) (model.Block, error) {
 	// Allocate an empty Account instance we'll let json.Unmarhal populate for us in a bit.
 	block := model.Block{}
@@ -60,12 +63,12 @@ func (bc *BoltClient) QueryBlock(blockID string) (model.Block, error) {
 	return block, nil
 }
 
-// Naive healthcheck, just makes sure the DB connection has been initialized.
+//Check Naive healthcheck, just makes sure the DB connection has been initialized.
 func (bc *BoltClient) Check() bool {
 	return bc.boltDB != nil
 }
 
-// Creates an "AccountBucket" in our BoltDB. It will overwrite any existing bucket of the same name.
+//InitializeBucket Creates an "BlockBucket" in our BoltDB. It will overwrite any existing bucket of the same name.
 func (bc *BoltClient) InitializeBucket() {
 	bc.boltDB.Update(func(tx *bolt.Tx) error {
 		_, err := tx.CreateBucket([]byte("BlockBucket"))
@@ -76,12 +79,12 @@ func (bc *BoltClient) InitializeBucket() {
 	})
 }
 
-// Seed (n) make-believe account objects into the AcountBucket bucket.
+//SaveBlock to blockbucker
 func (bc *BoltClient) SaveBlock(block model.Block) {
 	// Serialize the struct to JSON
 	jsonBytes, _ := json.Marshal(block)
 
-	// Write the data to the AccountBucket
+	// Write the data to the BlockBucketBlockBucket
 	bc.boltDB.Update(func(tx *bolt.Tx) error {
 		b := tx.Bucket([]byte("BlockBucket"))
 		err := b.Put([]byte(block.ID), jsonBytes)
@@ -89,8 +92,9 @@ func (bc *BoltClient) SaveBlock(block model.Block) {
 	})
 }
 
+//LastBlock returns the last written block header
 func (bc *BoltClient) LastBlock() (model.Block, error) {
-	// Allocate an empty Account instance we'll let json.Unmarhal populate for us in a bit.
+	// Allocate an empty block instance we'll let json.Unmarhal populate for us in a bit.
 	block := model.Block{}
 
 	// Read an object from the bucket using boltDB.View
@@ -99,11 +103,11 @@ func (bc *BoltClient) LastBlock() (model.Block, error) {
 		b := tx.Bucket([]byte("BlockBucket"))
 
 		_, val := b.Cursor().Last()
-		// Read the value identified by our accountId supplied as []byte
+		// Read the value identified by our blockId supplied as []byte
 		if val == nil {
-			return fmt.Errorf("No last block found...")
+			return fmt.Errorf("no last block found")
 		}
-		// Unmarshal the returned bytes into the account struct we created at
+		// Unmarshal the returned bytes into the block struct we created at
 		// the top of the function
 		json.Unmarshal(val, &block)
 
@@ -114,6 +118,6 @@ func (bc *BoltClient) LastBlock() (model.Block, error) {
 	if err != nil {
 		return model.Block{}, err
 	}
-	// Return the Account struct and nil as error.
+	// Return the model.Block struct and nil as error.
 	return block, nil
 }

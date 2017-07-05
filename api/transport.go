@@ -6,6 +6,7 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
+//DBClient interface is setup in goark-node.go.
 var DBClient IBoltClient
 
 //GetTransactions Returns a list of peers to client call. Response is in JSON
@@ -41,6 +42,7 @@ func ReceiveBlocks(c *gin.Context) {
 	c.JSON(200, gin.H{"message": "OK"})
 }
 
+//SendPeerStatus respondes to other peers about node statuts
 func SendPeerStatus(c *gin.Context) {
 	var peerStat model.PeerStatus
 
@@ -53,7 +55,7 @@ func SendPeerStatus(c *gin.Context) {
 	c.JSON(200, peerStat)
 }
 
-//ReceiveBlocks from blockchain
+//GetHeight returns local blockchain height
 func GetHeight(c *gin.Context) {
 	c.JSON(200, gin.H{"success": true, "height": 0, "id": ""})
 }
