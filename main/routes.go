@@ -13,20 +13,20 @@ func initializeRoutes() {
 	// Group peer related routes together
 	peerRoutes := router.Group("/peer")
 	{
-		peerRoutes.GET("/list", api.CheckNetworkHeaders(), api.GetTransactions)
-		peerRoutes.GET("/status", api.CheckNetworkHeaders(), api.SendPeerStatus)
+		peerRoutes.GET("/list", api.GetTransactions)
+		peerRoutes.GET("/status", api.SendPeerStatus)
 
-		peerRoutes.POST("/blocks", api.CheckNetworkHeaders(), api.ReceiveBlocks)
+		peerRoutes.POST("/blocks", api.ReceiveBlocks)
 	}
 
 	transactionRoutes := router.Group("/api/transactions")
 	{
 		// Handle the GET requests at /peer/list
-		transactionRoutes.GET("/", api.CheckNetworkHeaders(), api.GetTransactions)
+		transactionRoutes.GET("/", api.GetTransactions)
 	}
 
 	apiRoutes := router.Group("/api/blocks")
 	{
-	apiRoutes.GET("/getHeight", api.CheckNetworkHeaders(), api.GetHeight)	
+		apiRoutes.GET("/getHeight", api.GetHeight)
 	}
 }
