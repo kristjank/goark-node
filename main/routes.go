@@ -1,9 +1,12 @@
 package main
 
-import "github.com/kristjank/goark-node/api"
+import (
+	"github.com/kristjank/goark-node/api"
+	log "github.com/sirupsen/logrus"
+)
 
 func initializeRoutes() {
-	logger.Println("Initializing routes")
+	log.Info("Initializing routes")
 
 	// TODO implement checkHeaders function to check the correct header data
 	// indicating whether the request was from an authenticated peer? or not

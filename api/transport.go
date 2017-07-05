@@ -1,10 +1,9 @@
 package api
 
 import (
-	"log"
-
+	"github.com/gin-gonic/gin"
 	"github.com/kristjank/goark-node/api/model"
-	"gopkg.in/gin-gonic/gin.v1"
+	log "github.com/sirupsen/logrus"
 )
 
 var DBClient IBoltClient
@@ -31,13 +30,14 @@ func GetTransactions(c *gin.Context) {
 
 //ReceiveBlocks from blockchain
 func ReceiveBlocks(c *gin.Context) {
+	log.Debug("Received blocks")
 	//x, _ := ioutil.ReadAll(c.Request.Body)
 	var recv model.BlockReceiveStruct
 	c.BindJSON(&recv)
 
 	DBClient.SaveBlock(recv.Block)
 	//DBClient.
-	log.Printf("%v", recv)
+	//log.Printf("%v", recv)
 	c.JSON(200, gin.H{"message": "OK"})
 }
 
