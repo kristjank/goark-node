@@ -8,17 +8,20 @@ type BlockReceiveStruct struct {
 //Block structure
 type Block struct {
 	ID                   string        `json:"id"`
-	Height               int           `json:"height"`
 	Version              int           `json:"version"`
+	Timestamp            int           `json:"timestamp"`
+	Height               int           `json:"height"`
+	PreviousBlock        string        `json:"previousBlock"`
+	NumberOfTransactions int           `json:"numberOfTransactions"`
 	TotalAmount          int           `json:"totalAmount"`
 	TotalFee             int           `json:"totalFee"`
 	Reward               int           `json:"reward"`
-	PayloadHash          string        `json:"payloadHash"`
-	Timestamp            int           `json:"timestamp"`
-	NumberOfTransactions int           `json:"numberOfTransactions"`
 	PayloadLength        int           `json:"payloadLength"`
-	PreviousBlock        string        `json:"previousBlock"`
+	PayloadHash          string        `json:"payloadHash"`
 	GeneratorPublicKey   string        `json:"generatorPublicKey"`
+	GeneratorID          string        `json:"generatorId"`
 	BlockSignature       string        `json:"blockSignature"`
+	Confirmations        int           `json:"confirmations"`
+	TotalForged          string        `json:"totalForged"`
 	Transactions         []Transaction `json:"transactions,omitempty"`
 }
