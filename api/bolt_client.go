@@ -2,6 +2,7 @@ package api
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"log"
 
@@ -13,11 +14,22 @@ import (
 type IBoltClient interface {
 	OpenBoltDb()
 	QueryBlock(blockID string) (model.Block, error)
-	SaveBlock(block model.Block)
+	SaveBlock(block model.Block) error
 	Check() bool
 	InitializeBucket()
 	LastBlock() (model.Block, error)
+	GetAll() (results []model.Block, err error)
+	Close()
 }
+
+var (
+	ErrBucketNotFound = errors.New("Bucket not found")
+	ErrKeyNotFound    = errors.New("Key not found")
+	ErrDoesNotExist   = errors.New("Does not exist")
+	ErrFoundIt        = errors.New("Found it")
+	ErrExistsInSet    = errors.New("Element already exists in set")
+	ErrInvalidID      = errors.New("Element ID can not contain \":\"")
+)
 
 //BoltClient Realimplementation
 type BoltClient struct {
@@ -31,6 +43,11 @@ func (bc *BoltClient) OpenBoltDb() {
 	if err != nil {
 		log.Fatal(err)
 	}
+}
+
+// Close the database
+func (bc *BoltClient) Close() {
+	bc.boltDB.Close()
 }
 
 //QueryBlock returns the block by id
@@ -80,12 +97,12 @@ func (bc *BoltClient) InitializeBucket() {
 }
 
 //SaveBlock to blockbucker
-func (bc *BoltClient) SaveBlock(block model.Block) {
+func (bc *BoltClient) SaveBlock(block model.Block) error {
 	// Serialize the struct to JSON
 	jsonBytes, _ := json.Marshal(block)
 
 	// Write the data to the BlockBucketBlockBucket
-	bc.boltDB.Update(func(tx *bolt.Tx) error {
+	return bc.boltDB.Update(func(tx *bolt.Tx) error {
 		b := tx.Bucket([]byte("BlockBucket"))
 		err := b.Put([]byte(block.ID), jsonBytes)
 		return err
@@ -99,7 +116,7 @@ func (bc *BoltClient) LastBlock() (model.Block, error) {
 
 	// Read an object from the bucket using boltDB.View
 	err := bc.boltDB.View(func(tx *bolt.Tx) error {
-		// Read the bucket from the DB
+		// Read the buckDBClientet from the DB
 		b := tx.Bucket([]byte("BlockBucket"))
 
 		_, val := b.Cursor().Last()
@@ -120,4 +137,20 @@ func (bc *BoltClient) LastBlock() (model.Block, error) {
 	}
 	// Return the model.Block struct and nil as error.
 	return block, nil
+}
+
+//GetAll elements of a list
+func (bc *BoltClient) GetAll() (results []model.Block, err error) {
+	return results, bc.boltDB.View(func(tx *bolt.Tx) error {
+		bucket := tx.Bucket([]byte("BlockBucket"))
+		if bucket == nil {
+			return ErrBucketNotFound
+		}
+		return bucket.ForEach(func(_, value []byte) error {
+			block := model.Block{}
+			json.Unmarshal(value, &block)
+			results = append(results, block)
+			return nil // Continue ForEach
+		})
+	})
 }

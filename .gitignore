@@ -25,3 +25,7 @@ api/goark-node.db.lock
 main/goark-node.db
 main/goark-node.db.lock
 main/goark-node.db
+main/goark-node.db
+main/bolter
+
+\.vscode/
