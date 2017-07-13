@@ -58,7 +58,8 @@ func SendPeerStatus(c *gin.Context) {
 
 //GetHeight returns local blockchain height
 func GetHeight(c *gin.Context) {
-	c.JSON(200, gin.H{"success": true, "height": 0, "id": ""})
+	lastBlock, _ := DBClient.LastBlock()
+	c.JSON(200, gin.H{"success": true, "height": lastBlock.Height, "id": lastBlock.ID})
 }
 
 //GetAutoConfigureParams - send autoconfigure parameters

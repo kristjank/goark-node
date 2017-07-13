@@ -1,106 +1,353 @@
-{"level":"info","msg":"[]","time":"2017-07-13T14:48:49+02:00"}
-{"level":"info","msg":"Initializing routes","time":"2017-07-13T14:48:49+02:00"}
-"level":"info","msg":"Initializing routes","time":"2017-07-13T14:47:14+02:00"}
-rk","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"[b595ed9c77e879c22ada70eafbac8cd4bbbc39ade5b6e5985855f40dc3beb907]","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"{b595ed9c77e879c22ada70eafbac8cd4bbbc39ade5b6e5985855f40dc3beb907 9845257 DFTzLwEHKKn3VGce6vZSueEmoPWpEZswhB 1 map[] 10000000 0 1ARK-GOLang is saying whoop whooop 3045022100bcfe4642cbc8876e292e8d6aef2446e4920b112aa4127d092c567a9e76da7d2102204f5f97ea3aa91aa91f773cf6f106eb315a6f7ceebe4d9be3a70719933a13f7e7   03a151b47a5779949a47dd9c17e05c832304721a242b535f36528cd7e547dac439    0  0}","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"[b595ed9c77e879c22ada70eafbac8cd4bbbc39ade5b6e5985855f40dc3beb907 7702c2d310128704b9a6895d95cb220aa075c656d0974b1e6dcb2f2fac8f06e7]","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"{7702c2d310128704b9a6895d95cb220aa075c656d0974b1e6dcb2f2fac8f06e7 9845257 DFTzLwEHKKn3VGce6vZSueEmoPWpEZswhB 2 map[] 10000000 0 2ARK-GOLang is saying whoop whooop 3044022035ed26872f071ec398a64859136350bc785f13caabf13592e434048dc2f17344022041056653f2e8b760979c685e712b763e4ad921aa0d342f1937fb14c22b443ba0   03a151b47a5779949a47dd9c17e05c832304721a242b535f36528cd7e547dac439    0  0}","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"[b595ed9c77e879c22ada70eafbac8cd4bbbc39ade5b6e5985855f40dc3beb907 7702c2d310128704b9a6895d95cb220aa075c656d0974b1e6dcb2f2fac8f06e7 859da5d3bc95b0656897a47c27006612d0f79f9739849042c29ce5eed11221c2]","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"{859da5d3bc95b0656897a47c27006612d0f79f9739849042c29ce5eed11221c2 9845257 DFTzLwEHKKn3VGce6vZSueEmoPWpEZswhB 3 map[] 10000000 0 3ARK-GOLang is saying whoop whooop 304402203d1a37375a304e1497902ca5c5f231d3b7a0d2f2b33d8616bfd6b333124a4fcd022021de9c58a1ccca6f3e4ed1f99be68397a7a0260afb9e31c6c55b57c5dbab6c16   03a151b47a5779949a47dd9c17e05c832304721a242b535f36528cd7e547dac439    0  0}","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"Received Tx from network","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"[b595ed9c77e879c22ada70eafbac8cd4bbbc39ade5b6e5985855f40dc3beb907]","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"{b595ed9c77e879c22ada70eafbac8cd4bbbc39ade5b6e5985855f40dc3beb907 9845257 DFTzLwEHKKn3VGce6vZSueEmoPWpEZswhB 1 map[] 10000000 0 1ARK-GOLang is saying whoop whooop 3045022100bcfe4642cbc8876e292e8d6aef2446e4920b112aa4127d092c567a9e76da7d2102204f5f97ea3aa91aa91f773cf6f106eb315a6f7ceebe4d9be3a70719933a13f7e7   03a151b47a5779949a47dd9c17e05c832304721a242b535f36528cd7e547dac439    0  0}","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"[b595ed9c77e879c22ada70eafbac8cd4bbbc39ade5b6e5985855f40dc3beb907 7702c2d310128704b9a6895d95cb220aa075c656d0974b1e6dcb2f2fac8f06e7]","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"{7702c2d310128704b9a6895d95cb220aa075c656d0974b1e6dcb2f2fac8f06e7 9845257 DFTzLwEHKKn3VGce6vZSueEmoPWpEZswhB 2 map[] 10000000 0 2ARK-GOLang is saying whoop whooop 3044022035ed26872f071ec398a64859136350bc785f13caabf13592e434048dc2f17344022041056653f2e8b760979c685e712b763e4ad921aa0d342f1937fb14c22b443ba0   03a151b47a5779949a47dd9c17e05c832304721a242b535f36528cd7e547dac439    0  0}","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"[b595ed9c77e879c22ada70eafbac8cd4bbbc39ade5b6e5985855f40dc3beb907 7702c2d310128704b9a6895d95cb220aa075c656d0974b1e6dcb2f2fac8f06e7 859da5d3bc95b0656897a47c27006612d0f79f9739849042c29ce5eed11221c2]","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"{859da5d3bc95b0656897a47c27006612d0f79f9739849042c29ce5eed11221c2 9845257 DFTzLwEHKKn3VGce6vZSueEmoPWpEZswhB 3 map[] 10000000 0 3ARK-GOLang is saying whoop whooop 304402203d1a37375a304e1497902ca5c5f231d3b7a0d2f2b33d8616bfd6b333124a4fcd022021de9c58a1ccca6f3e4ed1f99be68397a7a0260afb9e31c6c55b57c5dbab6c16   03a151b47a5779949a47dd9c17e05c832304721a242b535f36528cd7e547dac439    0  0}","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"Received Tx from network","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"[b595ed9c77e879c22ada70eafbac8cd4bbbc39ade5b6e5985855f40dc3beb907]","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"{b595ed9c77e879c22ada70eafbac8cd4bbbc39ade5b6e5985855f40dc3beb907 9845257 DFTzLwEHKKn3VGce6vZSueEmoPWpEZswhB 1 map[] 10000000 0 1ARK-GOLang is saying whoop whooop 3045022100bcfe4642cbc8876e292e8d6aef2446e4920b112aa4127d092c567a9e76da7d2102204f5f97ea3aa91aa91f773cf6f106eb315a6f7ceebe4d9be3a70719933a13f7e7   03a151b47a5779949a47dd9c17e05c832304721a242b535f36528cd7e547dac439    0  0}","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"[b595ed9c77e879c22ada70eafbac8cd4bbbc39ade5b6e5985855f40dc3beb907 7702c2d310128704b9a6895d95cb220aa075c656d0974b1e6dcb2f2fac8f06e7]","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"{7702c2d310128704b9a6895d95cb220aa075c656d0974b1e6dcb2f2fac8f06e7 9845257 DFTzLwEHKKn3VGce6vZSueEmoPWpEZswhB 2 map[] 10000000 0 2ARK-GOLang is saying whoop whooop 3044022035ed26872f071ec398a64859136350bc785f13caabf13592e434048dc2f17344022041056653f2e8b760979c685e712b763e4ad921aa0d342f1937fb14c22b443ba0   03a151b47a5779949a47dd9c17e05c832304721a242b535f36528cd7e547dac439    0  0}","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"[b595ed9c77e879c22ada70eafbac8cd4bbbc39ade5b6e5985855f40dc3beb907 7702c2d310128704b9a6895d95cb220aa075c656d0974b1e6dcb2f2fac8f06e7 859da5d3bc95b0656897a47c27006612d0f79f9739849042c29ce5eed11221c2]","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"{859da5d3bc95b0656897a47c27006612d0f79f9739849042c29ce5eed11221c2 9845257 DFTzLwEHKKn3VGce6vZSueEmoPWpEZswhB 3 map[] 10000000 0 3ARK-GOLang is saying whoop whooop 304402203d1a37375a304e1497902ca5c5f231d3b7a0d2f2b33d8616bfd6b333124a4fcd022021de9c58a1ccca6f3e4ed1f99be68397a7a0260afb9e31c6c55b57c5dbab6c16   03a151b47a5779949a47dd9c17e05c832304721a242b535f36528cd7e547dac439    0  0}","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"Received Tx from network","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"[b595ed9c77e879c22ada70eafbac8cd4bbbc39ade5b6e5985855f40dc3beb907]","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"{b595ed9c77e879c22ada70eafbac8cd4bbbc39ade5b6e5985855f40dc3beb907 9845257 DFTzLwEHKKn3VGce6vZSueEmoPWpEZswhB 1 map[] 10000000 0 1ARK-GOLang is saying whoop whooop 3045022100bcfe4642cbc8876e292e8d6aef2446e4920b112aa4127d092c567a9e76da7d2102204f5f97ea3aa91aa91f773cf6f106eb315a6f7ceebe4d9be3a70719933a13f7e7   03a151b47a5779949a47dd9c17e05c832304721a242b535f36528cd7e547dac439    0  0}","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"[b595ed9c77e879c22ada70eafbac8cd4bbbc39ade5b6e5985855f40dc3beb907 7702c2d310128704b9a6895d95cb220aa075c656d0974b1e6dcb2f2fac8f06e7]","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"{7702c2d310128704b9a6895d95cb220aa075c656d0974b1e6dcb2f2fac8f06e7 9845257 DFTzLwEHKKn3VGce6vZSueEmoPWpEZswhB 2 map[] 10000000 0 2ARK-GOLang is saying whoop whooop 3044022035ed26872f071ec398a64859136350bc785f13caabf13592e434048dc2f17344022041056653f2e8b760979c685e712b763e4ad921aa0d342f1937fb14c22b443ba0   03a151b47a5779949a47dd9c17e05c832304721a242b535f36528cd7e547dac439    0  0}","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"[b595ed9c77e879c22ada70eafbac8cd4bbbc39ade5b6e5985855f40dc3beb907 7702c2d310128704b9a6895d95cb220aa075c656d0974b1e6dcb2f2fac8f06e7 859da5d3bc95b0656897a47c27006612d0f79f9739849042c29ce5eed11221c2]","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"{859da5d3bc95b0656897a47c27006612d0f79f9739849042c29ce5eed11221c2 9845257 DFTzLwEHKKn3VGce6vZSueEmoPWpEZswhB 3 map[] 10000000 0 3ARK-GOLang is saying whoop whooop 304402203d1a37375a304e1497902ca5c5f231d3b7a0d2f2b33d8616bfd6b333124a4fcd022021de9c58a1ccca6f3e4ed1f99be68397a7a0260afb9e31c6c55b57c5dbab6c16   03a151b47a5779949a47dd9c17e05c832304721a242b535f36528cd7e547dac439    0  0}","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"Received Tx from network","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"[b595ed9c77e879c22ada70eafbac8cd4bbbc39ade5b6e5985855f40dc3beb907]","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"{b595ed9c77e879c22ada70eafbac8cd4bbbc39ade5b6e5985855f40dc3beb907 9845257 DFTzLwEHKKn3VGce6vZSueEmoPWpEZswhB 1 map[] 10000000 0 1ARK-GOLang is saying whoop whooop 3045022100bcfe4642cbc8876e292e8d6aef2446e4920b112aa4127d092c567a9e76da7d2102204f5f97ea3aa91aa91f773cf6f106eb315a6f7ceebe4d9be3a70719933a13f7e7   03a151b47a5779949a47dd9c17e05c832304721a242b535f36528cd7e547dac439    0  0}","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"[b595ed9c77e879c22ada70eafbac8cd4bbbc39ade5b6e5985855f40dc3beb907 7702c2d310128704b9a6895d95cb220aa075c656d0974b1e6dcb2f2fac8f06e7]","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"{7702c2d310128704b9a6895d95cb220aa075c656d0974b1e6dcb2f2fac8f06e7 9845257 DFTzLwEHKKn3VGce6vZSueEmoPWpEZswhB 2 map[] 10000000 0 2ARK-GOLang is saying whoop whooop 3044022035ed26872f071ec398a64859136350bc785f13caabf13592e434048dc2f17344022041056653f2e8b760979c685e712b763e4ad921aa0d342f1937fb14c22b443ba0   03a151b47a5779949a47dd9c17e05c832304721a242b535f36528cd7e547dac439    0  0}","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"[b595ed9c77e879c22ada70eafbac8cd4bbbc39ade5b6e5985855f40dc3beb907 7702c2d310128704b9a6895d95cb220aa075c656d0974b1e6dcb2f2fac8f06e7 859da5d3bc95b0656897a47c27006612d0f79f9739849042c29ce5eed11221c2]","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"{859da5d3bc95b0656897a47c27006612d0f79f9739849042c29ce5eed11221c2 9845257 DFTzLwEHKKn3VGce6vZSueEmoPWpEZswhB 3 map[] 10000000 0 3ARK-GOLang is saying whoop whooop 304402203d1a37375a304e1497902ca5c5f231d3b7a0d2f2b33d8616bfd6b333124a4fcd022021de9c58a1ccca6f3e4ed1f99be68397a7a0260afb9e31c6c55b57c5dbab6c16   03a151b47a5779949a47dd9c17e05c832304721a242b535f36528cd7e547dac439    0  0}","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"Received Tx from network","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"[b595ed9c77e879c22ada70eafbac8cd4bbbc39ade5b6e5985855f40dc3beb907]","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"{b595ed9c77e879c22ada70eafbac8cd4bbbc39ade5b6e5985855f40dc3beb907 9845257 DFTzLwEHKKn3VGce6vZSueEmoPWpEZswhB 1 map[] 10000000 0 1ARK-GOLang is saying whoop whooop 3045022100bcfe4642cbc8876e292e8d6aef2446e4920b112aa4127d092c567a9e76da7d2102204f5f97ea3aa91aa91f773cf6f106eb315a6f7ceebe4d9be3a70719933a13f7e7   03a151b47a5779949a47dd9c17e05c832304721a242b535f36528cd7e547dac439    0  0}","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"[b595ed9c77e879c22ada70eafbac8cd4bbbc39ade5b6e5985855f40dc3beb907 7702c2d310128704b9a6895d95cb220aa075c656d0974b1e6dcb2f2fac8f06e7]","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"{7702c2d310128704b9a6895d95cb220aa075c656d0974b1e6dcb2f2fac8f06e7 9845257 DFTzLwEHKKn3VGce6vZSueEmoPWpEZswhB 2 map[] 10000000 0 2ARK-GOLang is saying whoop whooop 3044022035ed26872f071ec398a64859136350bc785f13caabf13592e434048dc2f17344022041056653f2e8b760979c685e712b763e4ad921aa0d342f1937fb14c22b443ba0   03a151b47a5779949a47dd9c17e05c832304721a242b535f36528cd7e547dac439    0  0}","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"[b595ed9c77e879c22ada70eafbac8cd4bbbc39ade5b6e5985855f40dc3beb907 7702c2d310128704b9a6895d95cb220aa075c656d0974b1e6dcb2f2fac8f06e7 859da5d3bc95b0656897a47c27006612d0f79f9739849042c29ce5eed11221c2]","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"{859da5d3bc95b0656897a47c27006612d0f79f9739849042c29ce5eed11221c2 9845257 DFTzLwEHKKn3VGce6vZSueEmoPWpEZswhB 3 map[] 10000000 0 3ARK-GOLang is saying whoop whooop 304402203d1a37375a304e1497902ca5c5f231d3b7a0d2f2b33d8616bfd6b333124a4fcd022021de9c58a1ccca6f3e4ed1f99be68397a7a0260afb9e31c6c55b57c5dbab6c16   03a151b47a5779949a47dd9c17e05c832304721a242b535f36528cd7e547dac439    0  0}","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"Received Tx from network","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"[b595ed9c77e879c22ada70eafbac8cd4bbbc39ade5b6e5985855f40dc3beb907]","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"{b595ed9c77e879c22ada70eafbac8cd4bbbc39ade5b6e5985855f40dc3beb907 9845257 DFTzLwEHKKn3VGce6vZSueEmoPWpEZswhB 1 map[] 10000000 0 1ARK-GOLang is saying whoop whooop 3045022100bcfe4642cbc8876e292e8d6aef2446e4920b112aa4127d092c567a9e76da7d2102204f5f97ea3aa91aa91f773cf6f106eb315a6f7ceebe4d9be3a70719933a13f7e7   03a151b47a5779949a47dd9c17e05c832304721a242b535f36528cd7e547dac439    0  0}","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"[b595ed9c77e879c22ada70eafbac8cd4bbbc39ade5b6e5985855f40dc3beb907 7702c2d310128704b9a6895d95cb220aa075c656d0974b1e6dcb2f2fac8f06e7]","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"{7702c2d310128704b9a6895d95cb220aa075c656d0974b1e6dcb2f2fac8f06e7 9845257 DFTzLwEHKKn3VGce6vZSueEmoPWpEZswhB 2 map[] 10000000 0 2ARK-GOLang is saying whoop whooop 3044022035ed26872f071ec398a64859136350bc785f13caabf13592e434048dc2f17344022041056653f2e8b760979c685e712b763e4ad921aa0d342f1937fb14c22b443ba0   03a151b47a5779949a47dd9c17e05c832304721a242b535f36528cd7e547dac439    0  0}","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"[b595ed9c77e879c22ada70eafbac8cd4bbbc39ade5b6e5985855f40dc3beb907 7702c2d310128704b9a6895d95cb220aa075c656d0974b1e6dcb2f2fac8f06e7 859da5d3bc95b0656897a47c27006612d0f79f9739849042c29ce5eed11221c2]","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"{859da5d3bc95b0656897a47c27006612d0f79f9739849042c29ce5eed11221c2 9845257 DFTzLwEHKKn3VGce6vZSueEmoPWpEZswhB 3 map[] 10000000 0 3ARK-GOLang is saying whoop whooop 304402203d1a37375a304e1497902ca5c5f231d3b7a0d2f2b33d8616bfd6b333124a4fcd022021de9c58a1ccca6f3e4ed1f99be68397a7a0260afb9e31c6c55b57c5dbab6c16   03a151b47a5779949a47dd9c17e05c832304721a242b535f36528cd7e547dac439    0  0}","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"Received Tx from network","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"[b595ed9c77e879c22ada70eafbac8cd4bbbc39ade5b6e5985855f40dc3beb907]","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"{b595ed9c77e879c22ada70eafbac8cd4bbbc39ade5b6e5985855f40dc3beb907 9845257 DFTzLwEHKKn3VGce6vZSueEmoPWpEZswhB 1 map[] 10000000 0 1ARK-GOLang is saying whoop whooop 3045022100bcfe4642cbc8876e292e8d6aef2446e4920b112aa4127d092c567a9e76da7d2102204f5f97ea3aa91aa91f773cf6f106eb315a6f7ceebe4d9be3a70719933a13f7e7   03a151b47a5779949a47dd9c17e05c832304721a242b535f36528cd7e547dac439    0  0}","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"[b595ed9c77e879c22ada70eafbac8cd4bbbc39ade5b6e5985855f40dc3beb907 7702c2d310128704b9a6895d95cb220aa075c656d0974b1e6dcb2f2fac8f06e7]","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"{7702c2d310128704b9a6895d95cb220aa075c656d0974b1e6dcb2f2fac8f06e7 9845257 DFTzLwEHKKn3VGce6vZSueEmoPWpEZswhB 2 map[] 10000000 0 2ARK-GOLang is saying whoop whooop 3044022035ed26872f071ec398a64859136350bc785f13caabf13592e434048dc2f17344022041056653f2e8b760979c685e712b763e4ad921aa0d342f1937fb14c22b443ba0   03a151b47a5779949a47dd9c17e05c832304721a242b535f36528cd7e547dac439    0  0}","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"[b595ed9c77e879c22ada70eafbac8cd4bbbc39ade5b6e5985855f40dc3beb907 7702c2d310128704b9a6895d95cb220aa075c656d0974b1e6dcb2f2fac8f06e7 859da5d3bc95b0656897a47c27006612d0f79f9739849042c29ce5eed11221c2]","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"{859da5d3bc95b0656897a47c27006612d0f79f9739849042c29ce5eed11221c2 9845257 DFTzLwEHKKn3VGce6vZSueEmoPWpEZswhB 3 map[] 10000000 0 3ARK-GOLang is saying whoop whooop 304402203d1a37375a304e1497902ca5c5f231d3b7a0d2f2b33d8616bfd6b333124a4fcd022021de9c58a1ccca6f3e4ed1f99be68397a7a0260afb9e31c6c55b57c5dbab6c16   03a151b47a5779949a47dd9c17e05c832304721a242b535f36528cd7e547dac439    0  0}","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"Received Tx from network","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"[b595ed9c77e879c22ada70eafbac8cd4bbbc39ade5b6e5985855f40dc3beb907]","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"{b595ed9c77e879c22ada70eafbac8cd4bbbc39ade5b6e5985855f40dc3beb907 9845257 DFTzLwEHKKn3VGce6vZSueEmoPWpEZswhB 1 map[] 10000000 0 1ARK-GOLang is saying whoop whooop 3045022100bcfe4642cbc8876e292e8d6aef2446e4920b112aa4127d092c567a9e76da7d2102204f5f97ea3aa91aa91f773cf6f106eb315a6f7ceebe4d9be3a70719933a13f7e7   03a151b47a5779949a47dd9c17e05c832304721a242b535f36528cd7e547dac439    0  0}","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"[b595ed9c77e879c22ada70eafbac8cd4bbbc39ade5b6e5985855f40dc3beb907 7702c2d310128704b9a6895d95cb220aa075c656d0974b1e6dcb2f2fac8f06e7]","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"{7702c2d310128704b9a6895d95cb220aa075c656d0974b1e6dcb2f2fac8f06e7 9845257 DFTzLwEHKKn3VGce6vZSueEmoPWpEZswhB 2 map[] 10000000 0 2ARK-GOLang is saying whoop whooop 3044022035ed26872f071ec398a64859136350bc785f13caabf13592e434048dc2f17344022041056653f2e8b760979c685e712b763e4ad921aa0d342f1937fb14c22b443ba0   03a151b47a5779949a47dd9c17e05c832304721a242b535f36528cd7e547dac439    0  0}","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"[b595ed9c77e879c22ada70eafbac8cd4bbbc39ade5b6e5985855f40dc3beb907 7702c2d310128704b9a6895d95cb220aa075c656d0974b1e6dcb2f2fac8f06e7 859da5d3bc95b0656897a47c27006612d0f79f9739849042c29ce5eed11221c2]","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"{859da5d3bc95b0656897a47c27006612d0f79f9739849042c29ce5eed11221c2 9845257 DFTzLwEHKKn3VGce6vZSueEmoPWpEZswhB 3 map[] 10000000 0 3ARK-GOLang is saying whoop whooop 304402203d1a37375a304e1497902ca5c5f231d3b7a0d2f2b33d8616bfd6b333124a4fcd022021de9c58a1ccca6f3e4ed1f99be68397a7a0260afb9e31c6c55b57c5dbab6c16   03a151b47a5779949a47dd9c17e05c832304721a242b535f36528cd7e547dac439    0  0}","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"Received Tx from network","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"[b595ed9c77e879c22ada70eafbac8cd4bbbc39ade5b6e5985855f40dc3beb907]","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"{b595ed9c77e879c22ada70eafbac8cd4bbbc39ade5b6e5985855f40dc3beb907 9845257 DFTzLwEHKKn3VGce6vZSueEmoPWpEZswhB 1 map[] 10000000 0 1ARK-GOLang is saying whoop whooop 3045022100bcfe4642cbc8876e292e8d6aef2446e4920b112aa4127d092c567a9e76da7d2102204f5f97ea3aa91aa91f773cf6f106eb315a6f7ceebe4d9be3a70719933a13f7e7   03a151b47a5779949a47dd9c17e05c832304721a242b535f36528cd7e547dac439    0  0}","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"[b595ed9c77e879c22ada70eafbac8cd4bbbc39ade5b6e5985855f40dc3beb907 7702c2d310128704b9a6895d95cb220aa075c656d0974b1e6dcb2f2fac8f06e7]","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"{7702c2d310128704b9a6895d95cb220aa075c656d0974b1e6dcb2f2fac8f06e7 9845257 DFTzLwEHKKn3VGce6vZSueEmoPWpEZswhB 2 map[] 10000000 0 2ARK-GOLang is saying whoop whooop 3044022035ed26872f071ec398a64859136350bc785f13caabf13592e434048dc2f17344022041056653f2e8b760979c685e712b763e4ad921aa0d342f1937fb14c22b443ba0   03a151b47a5779949a47dd9c17e05c832304721a242b535f36528cd7e547dac439    0  0}","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"[b595ed9c77e879c22ada70eafbac8cd4bbbc39ade5b6e5985855f40dc3beb907 7702c2d310128704b9a6895d95cb220aa075c656d0974b1e6dcb2f2fac8f06e7 859da5d3bc95b0656897a47c27006612d0f79f9739849042c29ce5eed11221c2]","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"{859da5d3bc95b0656897a47c27006612d0f79f9739849042c29ce5eed11221c2 9845257 DFTzLwEHKKn3VGce6vZSueEmoPWpEZswhB 3 map[] 10000000 0 3ARK-GOLang is saying whoop whooop 304402203d1a37375a304e1497902ca5c5f231d3b7a0d2f2b33d8616bfd6b333124a4fcd022021de9c58a1ccca6f3e4ed1f99be68397a7a0260afb9e31c6c55b57c5dbab6c16   03a151b47a5779949a47dd9c17e05c832304721a242b535f36528cd7e547dac439    0  0}","time":"2017-07-13T13:47:37+02:00"}
-{"level":"debug","msg":"Received Tx from network","time":"2017-07-13T13:48:16+02:00"}
-{"level":"debug","msg":"[0320a14817c82d1cd24b77662b2104e5683f4189d5627ab3cc3d91bf6ccbc0b8]","time":"2017-07-13T13:48:16+02:00"}
-{"level":"debug","msg":"{0320a14817c82d1cd24b77662b2104e5683f4189d5627ab3cc3d91bf6ccbc0b8 9845296 DFTzLwEHKKn3VGce6vZSueEmoPWpEZswhB 1 map[] 10000000 0 1ARK-GOLang is saying whoop whooop 30450221009365515279a1f0ce988e88e251663a781be9d3253e73d07cd1f165f8168483cd022014ac05d7f804f3978ecff1cff24d7747301d756510c3b6bebfe03d711c798520   03a151b47a5779949a47dd9c17e05c832304721a242b535f36528cd7e547dac439    0  0}","time":"2017-07-13T13:48:16+02:00"}
-{"level":"debug","msg":"[0320a14817c82d1cd24b77662b2104e5683f4189d5627ab3cc3d91bf6ccbc0b8 a743b9f4fbb4fe541b7fe7e478413ade36718252cd82c06f27eafebe05dfc4ea]","time":"2017-07-13T13:48:16+02:00"}
-{"level":"debug","msg":"{a743b9f4fbb4fe541b7fe7e478413ade36718252cd82c06f27eafebe05dfc4ea 9845296 DFTzLwEHKKn3VGce6vZSueEmoPWpEZswhB 2 map[] 10000000 0 2ARK-GOLang is saying whoop whooop 3045022100ab290075b1b564ce6cad7b3ff627dc0ef58bee841f9536403f6f2396f7e3fc5f02206240285ab3eefa26b9bc117cbd087b9727d2b8b1cbc3848a78d76b0269fba17a   03a151b47a5779949a47dd9c17e05c832304721a242b535f36528cd7e547dac439    0  0}","time":"2017-07-13T13:48:16+02:00"}
-{"level":"debug","msg":"[0320a14817c82d1cd24b77662b2104e5683f4189d5627ab3cc3d91bf6ccbc0b8 a743b9f4fbb4fe541b7fe7e478413ade36718252cd82c06f27eafebe05dfc4ea 4cbf33ed1a4d2760b6d512cad676ac67ed8d6b040933e205ce89ccf4585d3fe4]","time":"2017-07-13T13:48:16+02:00"}
-{"level":"debug","msg":"{4cbf33ed1a4d2760b6d512cad676ac67ed8d6b040933e205ce89ccf4585d3fe4 9845296 DFTzLwEHKKn3VGce6vZSueEmoPWpEZswhB 3 map[] 10000000 0 3ARK-GOLang is saying whoop whooop 304402201f7b742ebe3488aa35c90c79f10abb212ee21a4171477913773fd8bf4a0c6bd402201e94abdb8ea402f863d3a44e1976f0d9ea7b213570b15d757477000667f4589d   03a151b47a5779949a47dd9c17e05c832304721a242b535f36528cd7e547dac439    0  0}","time":"2017-07-13T13:48:16+02:00"}
-{"level":"debug","msg":"Received Tx from network","time":"2017-07-13T13:48:16+02:00"}
-{"level":"debug","msg":"[0320a14817c82d1cd24b77662b2104e5683f4189d5627ab3cc3d91bf6ccbc0b8]","time":"2017-07-13T13:48:16+02:00"}
-{"level":"debug","msg":"{0320a14817c82d1cd24b77662b2104e5683f4189d5627ab3cc3d91bf6ccbc0b8 9845296 DFTzLwEHKKn3VGce6vZSueEmoPWpEZswhB 1 map[] 10000000 0 1ARK-GOLang is saying whoop whooop 30450221009365515279a1f0ce988e88e251663a781be9d3253e73d07cd1f165f8168483cd022014ac05d7f804f3978ecff1cff24d7747301d756510c3b6bebfe03d711c798520   03a151b47a5779949a47dd9c17e05c832304721a242b535f36528cd7e547dac439    0  0}","time":"2017-07-13T13:48:16+02:00"}
-{"level":"debug","msg":"[0320a14817c82d1cd24b77662b2104e5683f4189d5627ab3cc3d91bf6ccbc0b8 a743b9f4fbb4fe541b7fe7e478413ade36718252cd82c06f27eafebe05dfc4ea]","time":"2017-07-13T13:48:16+02:00"}
-{"level":"debug","msg":"{a743b9f4fbb4fe541b7fe7e478413ade36718252cd82c06f27eafebe05dfc4ea 9845296 DFTzLwEHKKn3VGce6vZSueEmoPWpEZswhB 2 map[] 10000000 0 2ARK-GOLang is saying whoop whooop 3045022100ab290075b1b564ce6cad7b3ff627dc0ef58bee841f9536403f6f2396f7e3fc5f02206240285ab3eefa26b9bc117cbd087b9727d2b8b1cbc3848a78d76b0269fba17a   03a151b47a5779949a47dd9c17e05c832304721a242b535f36528cd7e547dac439    0  0}","time":"2017-07-13T13:48:16+02:00"}
-{"level":"debug","msg":"[0320a14817c82d1cd24b77662b2104e5683f4189d5627ab3cc3d91bf6ccbc0b8 a743b9f4fbb4fe541b7fe7e478413ade36718252cd82c06f27eafebe05dfc4ea 4cbf33ed1a4d2760b6d512cad676ac67ed8d6b040933e205ce89ccf4585d3fe4]","time":"2017-07-13T13:48:16+02:00"}
-{"level":"debug","msg":"{4cbf33ed1a4d2760b6d512cad676ac67ed8d6b040933e205ce89ccf4585d3fe4 9845296 DFTzLwEHKKn3VGce6vZSueEmoPWpEZswhB 3 map[] 10000000 0 3ARK-GOLang is saying whoop whooop 304402201f7b742ebe3488aa35c90c79f10abb212ee21a4171477913773fd8bf4a0c6bd402201e94abdb8ea402f863d3a44e1976f0d9ea7b213570b15d757477000667f4589d   03a151b47a5779949a47dd9c17e05c832304721a242b535f36528cd7e547dac439    0  0}","time":"2017-07-13T13:48:16+02:00"}
-{"level":"debug","msg":"Received Tx from network","time":"2017-07-13T13:48:16+02:00"}
-{"level":"debug","msg":"[0320a14817c82d1cd24b77662b2104e5683f4189d5627ab3cc3d91bf6ccbc0b8]","time":"2017-07-13T13:48:16+02:00"}
-{"level":"debug","msg":"{0320a14817c82d1cd24b77662b2104e5683f4189d5627ab3cc3d91bf6ccbc0b8 9845296 DFTzLwEHKKn3VGce6vZSueEmoPWpEZswhB 1 map[] 10000000 0 1ARK-GOLang is saying whoop whooop 30450221009365515279a1f0ce988e88e251663a781be9d3253e73d07cd1f165f8168483cd022014ac05d7f804f3978ecff1cff24d7747301d756510c3b6bebfe03d711c798520   03a151b47a5779949a47dd9c17e05c832304721a242b535f36528cd7e547dac439    0  0}","time":"2017-07-13T13:48:16+02:00"}
-{"level":"debug","msg":"[0320a14817c82d1cd24b77662b2104e5683f4189d5627ab3cc3d91bf6ccbc0b8 a743b9f4fbb4fe541b7fe7e478413ade36718252cd82c06f27eafebe05dfc4ea]","time":"2017-07-13T13:48:16+02:00"}
-{"level":"debug","msg":"{a743b9f4fbb4fe541b7fe7e478413ade36718252cd82c06f27eafebe05dfc4ea 9845296 DFTzLwEHKKn3VGce6vZSueEmoPWpEZswhB 2 map[] 10000000 0 2ARK-GOLang is saying whoop whooop 3045022100ab290075b1b564ce6cad7b3ff627dc0ef58bee841f9536403f6f2396f7e3fc5f02206240285ab3eefa26b9bc117cbd087b9727d2b8b1cbc3848a78d76b0269fba17a   03a151b47a5779949a47dd9c17e05c832304721a242b535f36528cd7e547dac439    0  0}","time":"2017-07-13T13:48:16+02:00"}
-{"level":"debug","msg":"[0320a14817c82d1cd24b77662b2104e5683f4189d5627ab3cc3d91bf6ccbc0b8 a743b9f4fbb4fe541b7fe7e478413ade36718252cd82c06f27eafebe05dfc4ea 4cbf33ed1a4d2760b6d512cad676ac67ed8d6b040933e205ce89ccf4585d3fe4]","time":"2017-07-13T13:48:16+02:00"}
-{"level":"debug","msg":"{4cbf33ed1a4d2760b6d512cad676ac67ed8d6b040933e205ce89ccf4585d3fe4 9845296 DFTzLwEHKKn3VGce6vZSueEmoPWpEZswhB 3 map[] 10000000 0 3ARK-GOLang is saying whoop whooop 304402201f7b742ebe3488aa35c90c79f10abb212ee21a4171477913773fd8bf4a0c6bd402201e94abdb8ea402f863d3a44e1976f0d9ea7b213570b15d757477000667f4589d   03a151b47a5779949a47dd9c17e05c832304721a242b535f36528cd7e547dac439    0  0}","time":"2017-07-13T13:48:16+02:00"}
-{"level":"debug","msg":"Received Tx from network","time":"2017-07-13T13:48:16+02:00"}
-{"level":"debug","msg":"[0320a14817c82d1cd24b77662b2104e5683f4189d5627ab3cc3d91bf6ccbc0b8]","time":"2017-07-13T13:48:16+02:00"}
-{"level":"debug","msg":"{0320a14817c82d1cd24b77662b2104e5683f4189d5627ab3cc3d91bf6ccbc0b8 9845296 DFTzLwEHKKn3VGce6vZSueEmoPWpEZswhB 1 map[] 10000000 0 1ARK-GOLang is saying whoop whooop 30450221009365515279a1f0ce988e88e251663a781be9d3253e73d07cd1f165f8168483cd022014ac05d7f804f3978ecff1cff24d7747301d756510c3b6bebfe03d711c798520   03a151b47a5779949a47dd9c17e05c832304721a242b535f36528cd7e547dac439    0  0}","time":"2017-07-13T13:48:16+02:00"}
-{"level":"debug","msg":"[0320a14817c82d1cd24b77662b2104e5683f4189d5627ab3cc3d91bf6ccbc0b8 a743b9f4fbb4fe541b7fe7e478413ade36718252cd82c06f27eafebe05dfc4ea]","time":"2017-07-13T13:48:16+02:00"}
-{"level":"debug","msg":"{a743b9f4fbb4fe541b7fe7e478413ade36718252cd82c06f27eafebe05dfc4ea 9845296 DFTzLwEHKKn3VGce6vZSueEmoPWpEZswhB 2 map[] 10000000 0 2ARK-GOLang is saying whoop whooop 3045022100ab290075b1b564ce6cad7b3ff627dc0ef58bee841f9536403f6f2396f7e3fc5f02206240285ab3eefa26b9bc117cbd087b9727d2b8b1cbc3848a78d76b0269fba17a   03a151b47a5779949a47dd9c17e05c832304721a242b535f36528cd7e547dac439    0  0}","time":"2017-07-13T13:48:16+02:00"}
-{"level":"debug","msg":"[0320a14817c82d1cd24b77662b2104e5683f4189d5627ab3cc3d91bf6ccbc0b8 a743b9f4fbb4fe541b7fe7e478413ade36718252cd82c06f27eafebe05dfc4ea 4cbf33ed1a4d2760b6d512cad676ac67ed8d6b040933e205ce89ccf4585d3fe4]","time":"2017-07-13T13:48:16+02:00"}
-{"level":"debug","msg":"{4cbf33ed1a4d2760b6d512cad676ac67ed8d6b040933e205ce89ccf4585d3fe4 9845296 DFTzLwEHKKn3VGce6vZSueEmoPWpEZswhB 3 map[] 10000000 0 3ARK-GOLang is saying whoop whooop 304402201f7b742ebe3488aa35c90c79f10abb212ee21a4171477913773fd8bf4a0c6bd402201e94abdb8ea402f863d3a44e1976f0d9ea7b213570b15d757477000667f4589d   03a151b47a5779949a47dd9c17e05c832304721a242b535f36528cd7e547dac439    0  0}","time":"2017-07-13T13:48:16+02:00"}
-{"level":"debug","msg":"Received Tx from network","time":"2017-07-13T13:48:16+02:00"}
-{"level":"debug","msg":"[0320a14817c82d1cd24b77662b2104e5683f4189d5627ab3cc3d91bf6ccbc0b8]","time":"2017-07-13T13:48:16+02:00"}
+{"level":"info","msg":"[]","time":"2017-07-13T15:02:34+02:00"}
+{"level":"info","msg":"Initializing routes","time":"2017-07-13T15:02:34+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:02:35+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:02:35+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:02:35+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:02:35+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:02:35+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:02:35+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:02:35+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:02:35+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:02:35+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:02:35+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:02:43+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:02:43+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:02:43+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:02:43+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:02:43+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:02:43+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:02:43+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:02:43+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:02:50+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:02:50+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:02:50+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:02:50+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:02:50+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:02:50+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:02:50+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:02:50+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:02:50+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:02:50+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:02:51+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:02:51+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:02:58+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:02:58+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:02:58+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:02:58+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:02:58+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:02:58+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:02:58+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:02:58+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:02:58+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:07+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:07+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:07+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:07+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:07+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:07+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:07+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:07+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:07+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:07+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:07+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:07+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:07+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:08+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:08+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:15+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:15+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:15+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:15+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:15+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:15+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:15+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:15+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:15+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:15+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:16+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:22+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:22+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:23+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:23+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:23+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:23+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:23+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:23+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:23+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:31+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:31+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:31+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:31+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:31+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:31+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:31+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:31+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:38+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:38+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:38+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:38+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:38+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:38+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:38+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:38+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:38+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:38+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:38+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:38+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:39+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:46+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:46+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:46+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:46+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:46+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:47+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:54+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:54+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:54+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:54+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:54+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:54+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:54+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:54+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:54+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:54+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:54+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:54+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:54+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:03:54+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:03+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:03+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:03+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:03+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:03+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:03+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:03+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:03+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:03+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:03+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:03+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:10+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:10+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:10+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:10+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:10+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:10+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:10+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:10+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:10+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:10+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:10+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:18+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:18+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:18+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:18+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:18+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:18+02:00"}
+{"level":"debug","msg":"Received Tx from network","time":"2017-07-13T15:04:18+02:00"}
+{"level":"debug","msg":"[b3e9b80ff5e51bbca40970bb5ecc94d1b9949e48dc02a9d70339c1fcb244e666]","time":"2017-07-13T15:04:18+02:00"}
+{"level":"debug","msg":"{b3e9b80ff5e51bbca40970bb5ecc94d1b9949e48dc02a9d70339c1fcb244e666 9849858 DFTzLwEHKKn3VGce6vZSueEmoPWpEZswhB 1 map[] 10000000 0 1ARK-GOLang is saying whoop whooop 3045022100d74d0a3e3a7e5ad0d0ae0d33e0ce095ecfb0ae9b79f4500bff5eabc86b55ce4f02207e604d5e0008131f1ab69a1ab7d9b8eaaec7e83c56591e7fb497efdd995dceee   03a151b47a5779949a47dd9c17e05c832304721a242b535f36528cd7e547dac439    0  0}","time":"2017-07-13T15:04:18+02:00"}
+{"level":"debug","msg":"[b3e9b80ff5e51bbca40970bb5ecc94d1b9949e48dc02a9d70339c1fcb244e666 42792d26de7fe15b46c9796026fcc4483708ce72182cb91b8095010a57a4eef5]","time":"2017-07-13T15:04:18+02:00"}
+{"level":"debug","msg":"{42792d26de7fe15b46c9796026fcc4483708ce72182cb91b8095010a57a4eef5 9849858 DFTzLwEHKKn3VGce6vZSueEmoPWpEZswhB 2 map[] 10000000 0 2ARK-GOLang is saying whoop whooop 304402204107197b5993f8c640681bd3f13cf1605dc95ae83f75ca6c05d6d055c5b794b702204871822589544a08ac93e85fe15bcd0cd6b1215e17d3a283d532299e47708fa6   03a151b47a5779949a47dd9c17e05c832304721a242b535f36528cd7e547dac439    0  0}","time":"2017-07-13T15:04:18+02:00"}
+{"level":"debug","msg":"[b3e9b80ff5e51bbca40970bb5ecc94d1b9949e48dc02a9d70339c1fcb244e666 42792d26de7fe15b46c9796026fcc4483708ce72182cb91b8095010a57a4eef5 de855c013aaa848fec2bb3cc1688a224633dcc96f464939aadae7c5131890092]","time":"2017-07-13T15:04:18+02:00"}
+{"level":"debug","msg":"{de855c013aaa848fec2bb3cc1688a224633dcc96f464939aadae7c5131890092 9849858 DFTzLwEHKKn3VGce6vZSueEmoPWpEZswhB 3 map[] 10000000 0 3ARK-GOLang is saying whoop whooop 304402203523a5963b89ce143e861ffacc844e40e855c0aecee2a395c9b154cc0322b29802207c0b87f79372e6e556fd6ba66117b6d4137835a3c0d577fbb06c983560359b25   03a151b47a5779949a47dd9c17e05c832304721a242b535f36528cd7e547dac439    0  0}","time":"2017-07-13T15:04:18+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:18+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:18+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:26+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:26+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:26+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:26+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:26+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:26+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:26+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:26+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:26+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:26+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:26+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:35+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:35+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:35+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:35+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:35+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:35+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:35+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:35+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:35+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:35+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:35+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:35+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:42+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:42+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:42+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:42+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:42+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:42+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:42+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:42+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:42+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:42+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:42+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:51+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:51+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:51+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:51+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:51+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:51+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:51+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:51+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:51+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:51+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:51+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:51+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:51+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:51+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:51+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:51+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:51+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:58+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:58+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:58+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:58+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:58+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:59+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:59+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:59+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:59+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:59+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:59+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:04:59+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:07+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:07+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:07+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:07+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:07+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:15+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:15+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:15+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:15+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:15+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:15+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:15+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:15+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:15+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:15+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:15+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:15+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:15+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:15+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:15+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:15+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:15+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:23+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:23+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:23+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:23+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:23+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:23+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:23+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:23+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:23+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:23+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:23+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:23+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:23+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:30+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:30+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:30+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:30+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:30+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:30+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:30+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:30+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:30+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:30+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:31+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:31+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:38+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:38+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:38+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:38+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:38+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:38+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:38+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:39+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:46+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:46+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:46+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:46+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:46+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:46+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:46+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:46+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:46+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:46+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:46+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:46+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:46+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:46+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:46+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:46+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:46+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:46+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:46+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:46+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:46+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:54+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:54+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:54+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:54+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:54+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:54+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:54+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:54+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:54+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:54+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:54+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:54+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:54+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:54+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:54+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:54+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:54+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:05:54+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:06:02+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:06:02+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:06:03+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:06:03+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:06:03+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:06:03+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:06:03+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:06:03+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:06:03+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:06:03+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:06:03+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:06:03+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:06:03+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:06:03+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:06:03+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:06:03+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:06:03+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:06:03+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:06:03+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:06:10+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:06:10+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:06:10+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:06:10+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:06:10+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:06:10+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:06:10+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:06:10+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:06:10+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:06:10+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:06:10+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:06:10+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:06:10+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:06:10+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:06:10+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:06:10+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:06:10+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:06:10+02:00"}
+{"level":"debug","msg":"Received blocks","time":"2017-07-13T15:06:10+02:00"}
+07-13T13:48:16+02:00"}
 {"level":"debug","msg":"{0320a14817c82d1cd24b77662b2104e5683f4189d5627ab3cc3d91bf6ccbc0b8 9845296 DFTzLwEHKKn3VGce6vZSueEmoPWpEZswhB 1 map[] 10000000 0 1ARK-GOLang is saying whoop whooop 30450221009365515279a1f0ce988e88e251663a781be9d3253e73d07cd1f165f8168483cd022014ac05d7f804f3978ecff1cff24d7747301d756510c3b6bebfe03d711c798520   03a151b47a5779949a47dd9c17e05c832304721a242b535f36528cd7e547dac439    0  0}","time":"2017-07-13T13:48:16+02:00"}
 {"level":"debug","msg":"[0320a14817c82d1cd24b77662b2104e5683f4189d5627ab3cc3d91bf6ccbc0b8 a743b9f4fbb4fe541b7fe7e478413ade36718252cd82c06f27eafebe05dfc4ea]","time":"2017-07-13T13:48:16+02:00"}
 {"level":"debug","msg":"{a743b9f4fbb4fe541b7fe7e478413ade36718252cd82c06f27eafebe05dfc4ea 9845296 DFTzLwEHKKn3VGce6vZSueEmoPWpEZswhB 2 map[] 10000000 0 2ARK-GOLang is saying whoop whooop 3045022100ab290075b1b564ce6cad7b3ff627dc0ef58bee841f9536403f6f2396f7e3fc5f02206240285ab3eefa26b9bc117cbd087b9727d2b8b1cbc3848a78d76b0269fba17a   03a151b47a5779949a47dd9c17e05c832304721a242b535f36528cd7e547dac439    0  0}","time":"2017-07-13T13:48:16+02:00"}
