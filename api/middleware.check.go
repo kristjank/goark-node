@@ -3,15 +3,18 @@ package api
 import (
 	"net/http"
 
-	"gopkg.in/gin-gonic/gin.v1"
+	"github.com/gin-gonic/gin"
+	"github.com/spf13/viper"
 )
 
 //CheckNetworkHeaders check on middleware level
+//NOT USED ATM
 func CheckNetworkHeaders() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		a := c.Request.Header.Get("nethash")
-		//fmt.Println(a)
-		if a != "6e84d08bd299ed97c212c886c98a57e36545c8f5d645ca7eeae63a8bd62d8988" {
+		if c.Request.Header.Get("nethash") != viper.GetString("network.nethash") {
+			c.AbortWithStatus(http.StatusBadRequest)
+		}
+		if c.Request.Header.Get("version") != viper.GetString("network.version") {
 			c.AbortWithStatus(http.StatusBadRequest)
 		}
 		c.Next()

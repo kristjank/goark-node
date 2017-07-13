@@ -1,6 +1,10 @@
 package api
 
 import (
+	"errors"
+	"net/http"
+	"strconv"
+
 	"github.com/gin-gonic/gin"
 	"github.com/kristjank/goark-node/api/model"
 	log "github.com/sirupsen/logrus"
@@ -10,56 +14,82 @@ import (
 //DBClient interface is setup in goark-node.go.
 var DBClient IBoltClient
 
+//sanityCheck - checking if call came from correct network
+func sanityCheck(header http.Header) error {
+	if header.Get("nethash") != viper.GetString("network.nethash") {
+		return errors.New("NetHash mismatch - network version mismatch")
+	}
+	/*if header.Get("version") != viper.GetString("version") {
+		return errors.New("Version mismatch")
+	}*/
+	return nil
+}
+
 //GetTransactions Returns a list of peers to client call. Response is in JSON
 func GetTransactions(c *gin.Context) {
-	/*res, err := QueryTransactions()
+	err := sanityCheck(c.Request.Header)
 	if err != nil {
-		log.Println(err.Error())
+		c.JSON(http.StatusBadRequest, gin.H{"success": false, "message": err.Error()})
+	} else {
+
+		res, err := DBClient.GetAllTransactions()
+		if err == nil {
+			var response model.TransactionGetResponse
+			response.Success = true
+			response.Transactions = res
+			response.Count = strconv.Itoa(len(res))
+			c.JSON(200, response)
+		} else {
+			c.JSON(500, gin.H{"success": false, "message": err.Error()})
+		}
 	}
-
-	var a core.TransactionResponse
-
-	a.Success = true
-	//logger.pr
-	//a.&Transactions = res
-
-	c.JSON(200, gin.H{
-		"message": "pong",
-	})
-
-	c.JSON(200, a)*/
 }
 
 //ReceiveBlocks from blockchain
 func ReceiveBlocks(c *gin.Context) {
-	log.Debug("Received blocks")
-	//x, _ := ioutil.ReadAll(c.Request.Body)
-	var recv model.BlockReceiveStruct
-	c.BindJSON(&recv)
+	err := sanityCheck(c.Request.Header)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"success": false, "message": err.Error()})
+	} else {
 
-	DBClient.SaveBlock(recv.Block)
-	//DBClient.
-	//log.Printf("%v", recv)
-	c.JSON(200, gin.H{"message": "OK"})
+		log.Debug("Received blocks")
+		var recv model.BlockReceiveStruct
+		c.BindJSON(&recv)
+
+		DBClient.SaveBlock(recv.Block)
+		c.JSON(200, gin.H{"message": "OK"})
+	}
 }
 
 //SendPeerStatus respondes to other peers about node statuts
 func SendPeerStatus(c *gin.Context) {
-	var peerStat model.PeerStatus
+	err := sanityCheck(c.Request.Header)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"success": false, "message": err.Error()})
+	} else {
 
-	lastBlock, _ := DBClient.LastBlock()
+		var peerStat model.PeerStatus
 
-	peerStat.Success = true
-	peerStat.Header = lastBlock
-	peerStat.Height = lastBlock.Height
+		lastBlock, _ := DBClient.LastBlock()
 
-	c.JSON(200, peerStat)
+		peerStat.Success = true
+		peerStat.Header = lastBlock
+		peerStat.Height = lastBlock.Height
+
+		c.JSON(200, peerStat)
+	}
 }
 
 //GetHeight returns local blockchain height
 func GetHeight(c *gin.Context) {
-	lastBlock, _ := DBClient.LastBlock()
-	c.JSON(200, gin.H{"success": true, "height": lastBlock.Height, "id": lastBlock.ID})
+	err := sanityCheck(c.Request.Header)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"success": false, "message": err.Error()})
+	} else {
+
+		lastBlock, _ := DBClient.LastBlock()
+		c.JSON(200, gin.H{"success": true, "height": lastBlock.Height, "id": lastBlock.ID})
+	}
 }
 
 //GetAutoConfigureParams - send autoconfigure parameters
@@ -78,27 +108,33 @@ func GetAutoConfigureParams(c *gin.Context) {
 
 //ReceiveTransactions Returns a list of peers to client call. Response is in JSON
 func ReceiveTransactions(c *gin.Context) {
-	log.Debug("Received Tx from network")
-	var recv model.TransactionPayload
-	var txIDs []string
+	err := sanityCheck(c.Request.Header)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"success": false, "message": err.Error()})
+	} else {
 
-	c.BindJSON(&recv)
+		log.Debug("Received Tx from network")
+		var recv model.TransactionPayload
+		var txIDs []string
 
-	//saving tx to db
-	for _, element := range recv.Transactions {
-		id, err := DBClient.SaveTransaction(element)
-		if err == nil {
-			txIDs = append(txIDs, id)
-			log.Debug(txIDs)
+		c.BindJSON(&recv)
+
+		//saving tx to db
+		for _, element := range recv.Transactions {
+			id, err := DBClient.SaveTransaction(element)
+			if err == nil {
+				txIDs = append(txIDs, id)
+				log.Debug(txIDs)
+			}
+			log.Debug(element)
 		}
-		log.Debug(element)
+
+		//preparing response to client
+		var txResponse model.TransactionPostResponse
+		txResponse.Success = true
+		txResponse.TransactionIDs = txIDs
+
+		//sending response
+		c.JSON(200, txResponse)
 	}
-
-	//preparing response to client
-	var txResponse model.TransactionPostResponse
-	txResponse.Success = true
-	txResponse.TransactionIDs = txIDs
-
-	//sending response
-	c.JSON(200, txResponse)
 }
