@@ -1,6 +1,7 @@
-{"level":"info","msg":"---- GOArk Relay Node Starting ----","time":"2017-07-13T13:47:20+02:00"}
-{"level":"info","msg":"Initializing routes","time":"2017-07-13T13:47:20+02:00"}
-{"level":"debug","msg":"Received Tx from network","time":"2017-07-13T13:47:37+02:00"}
+{"level":"info","msg":"[]","time":"2017-07-13T14:48:49+02:00"}
+{"level":"info","msg":"Initializing routes","time":"2017-07-13T14:48:49+02:00"}
+"level":"info","msg":"Initializing routes","time":"2017-07-13T14:47:14+02:00"}
+rk","time":"2017-07-13T13:47:37+02:00"}
 {"level":"debug","msg":"[b595ed9c77e879c22ada70eafbac8cd4bbbc39ade5b6e5985855f40dc3beb907]","time":"2017-07-13T13:47:37+02:00"}
 {"level":"debug","msg":"{b595ed9c77e879c22ada70eafbac8cd4bbbc39ade5b6e5985855f40dc3beb907 9845257 DFTzLwEHKKn3VGce6vZSueEmoPWpEZswhB 1 map[] 10000000 0 1ARK-GOLang is saying whoop whooop 3045022100bcfe4642cbc8876e292e8d6aef2446e4920b112aa4127d092c567a9e76da7d2102204f5f97ea3aa91aa91f773cf6f106eb315a6f7ceebe4d9be3a70719933a13f7e7   03a151b47a5779949a47dd9c17e05c832304721a242b535f36528cd7e547dac439    0  0}","time":"2017-07-13T13:47:37+02:00"}
 {"level":"debug","msg":"[b595ed9c77e879c22ada70eafbac8cd4bbbc39ade5b6e5985855f40dc3beb907 7702c2d310128704b9a6895d95cb220aa075c656d0974b1e6dcb2f2fac8f06e7]","time":"2017-07-13T13:47:37+02:00"}

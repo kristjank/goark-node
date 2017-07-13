@@ -33,4 +33,9 @@ func initializeRoutes() {
 	{
 		apiRoutes.GET("/getHeight", api.GetHeight)
 	}
+
+	autoconfigureRoutes := router.Group("/api/loader")
+	{
+		autoconfigureRoutes.GET("/autoconfigure", api.GetAutoConfigureParams)
+	}
 }

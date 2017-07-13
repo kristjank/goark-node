@@ -23,3 +23,15 @@ type TransactionPostResponse struct {
 	Error          string   `json:"error,omitempty"`
 	TransactionIDs []string `json:"transactionIds"`
 }
+
+//AutoConfigureResponse to clients - so they can setup communcation accordingly
+type AutoConfigureResponse struct {
+	Success bool `json:"success"`
+	Network struct {
+		Nethash  string `json:"nethash,omitempty"`
+		Token    string `json:"token,omitempty"`
+		Symbol   string `json:"symbol,omitempty"`
+		Explorer string `json:"explorer,omitempty"`
+		Version  int    `json:"version,omitempty"`
+	} `json:"network"`
+}

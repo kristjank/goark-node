@@ -5,7 +5,14 @@
   "fileLogLevel": "info",
   "logFileName": "logs/ark.log",
   "consoleLogLevel": "info",
-  "trustProxy": false,
+	"trustProxy": false,
+	"network" : {
+    "nethash": "6e84d08bd299ed97c212c886c98a57e36545c8f5d645ca7eeae63a8bd62d8988",
+    "explorer" : "https://explorer.arkcoin.net",
+    "token" : "ARK",
+    "symbol" : "Ѧ",
+    "version" : 23
+  },
   "db": {
     "filename": "db/ark-node.db"
   },
@@ -206,6 +213,5 @@
       "key": "./ssl/ark.key",
       "cert": "./ssl/ark.crt"
     }
-  },
-  "nethash": "6e84d08bd299ed97c212c886c98a57e36545c8f5d645ca7eeae63a8bd62d8988"
+  }
 }

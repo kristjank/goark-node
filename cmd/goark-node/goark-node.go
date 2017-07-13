@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"os"
 
@@ -12,12 +13,6 @@ import (
 )
 
 var router *gin.Engine
-
-func init() {
-	loadConfig()
-	initLogger()
-	initializeBoltClient()
-}
 
 func initLogger() {
 	// Log as JSON instead of the default ASCII formatter.
@@ -33,19 +28,24 @@ func initLogger() {
 		log.Info("Failed to log to file, using default stderr")
 	}
 
-	// Only log the warning severity or above.
 	//TODO set log level according to cfg/settings
 	log.SetLevel(log.DebugLevel)
 }
 
-func loadConfig() {
-	viper.SetConfigName("config.mainnet") // name of config file (without extension)
+func loadConfig(isDEVNET bool) {
 	viper.SetConfigType("json")
 	viper.AddConfigPath("cfg") // path to look for the config file in
+
+	if isDEVNET {
+		viper.SetConfigName("config.devnet") // name of config file (without extension)
+	} else {
+		viper.SetConfigName("config.mainnet") // name of config file (without extension)
+	}
 
 	err := viper.ReadInConfig() // Find and read the config file
 
 	if err != nil {
+		fmt.Println(err.Error())
 		panic("No configuration file")
 	}
 }
@@ -54,20 +54,33 @@ func initializeBoltClient() {
 	api.DBClient = &api.BoltClient{}
 	api.DBClient.OpenBoltDb()
 	api.DBClient.InitializeBucket()
-	//transport.DBClient.Seed()
 }
 
-///////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
 func main() {
-	log.Info("---- GOArk Relay Node Starting ----")
+	log.Info("---- GOARK Relay Node Starting ----")
 	arkapi := core.NewArkClient(nil)
 	arkapi = arkapi.SetActiveConfiguration(core.MAINNET)
+
+	//reading commandline args
+	//SILENT MODE CHECKING AND AUTOMATION RUNNING
+	networkMode := flag.Bool("devnet", false, "Is devnet mode")
+	flag.Parse()
+
+	loadConfig(*networkMode)
+	initLogger()
+	initializeBoltClient()
+
+	log.Println(flag.Args())
+	if *networkMode {
+		log.Info("DEVNET mode active")
+		arkapi = arkapi.SetActiveConfiguration(core.DEVNET)
+	}
+
 	// Set the router as the default one provided by Gin
 	router = gin.Default()
-
 	// Initialize the routes
 	initializeRoutes()
-
 	// Start serving the application
 	pNodeInfo := fmt.Sprintf("%s:%d", viper.GetString("address"), viper.GetInt("port"))
 	router.Run(pNodeInfo)
