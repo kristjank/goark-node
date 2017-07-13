@@ -32,3 +32,6 @@ main/bolter
 api/ark-node.db
 main/ark-node.db
 main/ark-node.db
+cmd/goark-node/debug
+cmd/goark-node/db/ark-node.db
+cmd/goark-node/db/ark-node.db

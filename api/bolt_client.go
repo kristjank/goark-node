@@ -8,6 +8,7 @@ import (
 
 	"github.com/boltdb/bolt"
 	"github.com/kristjank/goark-node/api/model"
+	"github.com/spf13/viper"
 )
 
 //IBoltClient interface definition
@@ -47,7 +48,7 @@ type BoltClient struct {
 //OpenBoltDb db opening
 func (bc *BoltClient) OpenBoltDb() {
 	var err error
-	bc.boltDB, err = bolt.Open("ark-node.db", 0600, nil)
+	bc.boltDB, err = bolt.Open(viper.GetString("db.filename"), 0600, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
