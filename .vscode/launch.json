@@ -9,7 +9,7 @@
             "remotePath": "",
             "port": 2345,
             "host": "127.0.0.1",
-            "program": "${workspaceRoot}/main/goark-node.go",
+            "program": "${workspaceRoot}/cmd/goark-node/goark-node.go",
             "env": {},
             "args": [],
             "showLog": true
