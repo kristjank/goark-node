@@ -3,7 +3,7 @@
   "address": "127.0.0.1",
   "version": "0.2.0",
   "fileLogLevel": "debug",
-  "logFileName": "logs/ark.log",
+  "logFileName": "logs/dark.log",
   "consoleLogLevel": "debug",
   "trustProxy": false,
   "network" : {
