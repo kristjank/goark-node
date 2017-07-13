@@ -59,3 +59,23 @@ func SendPeerStatus(c *gin.Context) {
 func GetHeight(c *gin.Context) {
 	c.JSON(200, gin.H{"success": true, "height": 0, "id": ""})
 }
+
+//ReceiveTransactions Returns a list of peers to client call. Response is in JSON
+func ReceiveTransactions(c *gin.Context) {
+	log.Debug("Received Tx")
+	//x, _ := ioutil.ReadAll(c.Request.Body)
+	var recv model.TransactionReceiveStruct
+	c.BindJSON(&recv)
+
+	if recv.Success {
+		for _, element := range recv.Transactions {
+			DBClient.SaveTransaction(element)
+			log.Println(element)
+		}
+	}
+
+	//DBClient.
+	//log.Printf("%v", recv)
+	//c.JSON(200, gin.H{"message": "OK"})
+
+}

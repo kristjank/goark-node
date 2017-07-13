@@ -77,7 +77,7 @@ func TestBoltClient_AllBlocks(t *testing.T) {
 	seedData()
 	initDB()
 
-	res, err := DBClient.GetAll()
+	res, err := DBClient.GetAllBlocks()
 
 	if err != nil {
 		t.Errorf(err.Error())

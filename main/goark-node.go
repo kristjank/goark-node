@@ -13,14 +13,10 @@ import (
 
 var router *gin.Engine
 
-//var log = logrus.New()
-
 func init() {
 	initLogger()
 	loadConfig()
 	initializeBoltClient()
-
-	//api.InitDB(viper.Sub("db"))
 }
 
 func initLogger() {
@@ -30,7 +26,7 @@ func initLogger() {
 	//log.SetOutput(os.Stdout)
 
 	// You could set this to any `io.Writer` such as a file
-	file, err := os.OpenFile("log/goark-node.log", os.O_CREATE|os.O_WRONLY, 0666)
+	file, err := os.OpenFile(viper.GetString("logFileName"), os.O_CREATE|os.O_WRONLY, 0666)
 	if err == nil {
 		log.SetOutput(file)
 	} else {
@@ -38,6 +34,7 @@ func initLogger() {
 	}
 
 	// Only log the warning severity or above.
+	//TODO set log level according to cfg/settings
 	log.SetLevel(log.DebugLevel)
 }
 

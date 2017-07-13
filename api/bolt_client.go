@@ -15,10 +15,11 @@ type IBoltClient interface {
 	OpenBoltDb()
 	QueryBlock(blockID string) (model.Block, error)
 	SaveBlock(block model.Block) error
+	SaveTransaction(trans model.Transaction) error
 	Check() bool
 	InitializeBucket()
 	LastBlock() (model.Block, error)
-	GetAll() (results []model.Block, err error)
+	GetAllBlocks() (results []model.Block, err error)
 	Close()
 }
 
@@ -29,6 +30,11 @@ var (
 	ErrFoundIt        = errors.New("Found it")
 	ErrExistsInSet    = errors.New("Element already exists in set")
 	ErrInvalidID      = errors.New("Element ID can not contain \":\"")
+)
+
+const (
+	BlockBucket       = "BlockBucket"
+	TransactionBucket = "TransactionBucket"
 )
 
 //BoltClient Realimplementation
@@ -58,7 +64,7 @@ func (bc *BoltClient) QueryBlock(blockID string) (model.Block, error) {
 	// Read an object from the bucket using boltDB.View
 	err := bc.boltDB.View(func(tx *bolt.Tx) error {
 		// Read the bucket from the DB
-		b := tx.Bucket([]byte("BlockBucket"))
+		b := tx.Bucket([]byte(BlockBucket))
 
 		// Read the value identified by our accountId supplied as []byte
 		blockBytes := b.Get([]byte(blockID))
@@ -88,10 +94,16 @@ func (bc *BoltClient) Check() bool {
 //InitializeBucket Creates an "BlockBucket" in our BoltDB. It will overwrite any existing bucket of the same name.
 func (bc *BoltClient) InitializeBucket() {
 	bc.boltDB.Update(func(tx *bolt.Tx) error {
-		_, err := tx.CreateBucket([]byte("BlockBucket"))
+		_, err := tx.CreateBucket([]byte(BlockBucket))
 		if err != nil {
-			return fmt.Errorf("create bucket failed: %s", err)
+			return fmt.Errorf("create BlockBucket failed: %s", err)
 		}
+
+		_, err = tx.CreateBucket([]byte("TransactionBucket"))
+		if err != nil {
+			return fmt.Errorf("create TransactionBucket failed: %s", err)
+		}
+
 		return nil
 	})
 }
@@ -103,8 +115,21 @@ func (bc *BoltClient) SaveBlock(block model.Block) error {
 
 	// Write the data to the BlockBucketBlockBucket
 	return bc.boltDB.Update(func(tx *bolt.Tx) error {
-		b := tx.Bucket([]byte("BlockBucket"))
+		b := tx.Bucket([]byte(BlockBucket))
 		err := b.Put([]byte(block.ID), jsonBytes)
+		return err
+	})
+}
+
+//SaveTransaction to TransactionBucket
+func (bc *BoltClient) SaveTransaction(trans model.Transaction) error {
+	// Serialize the struct to JSON
+	jsonBytes, _ := json.Marshal(trans)
+
+	// Write the data to the BlockBucketBlockBucket
+	return bc.boltDB.Update(func(tx *bolt.Tx) error {
+		b := tx.Bucket([]byte(TransactionBucket))
+		err := b.Put([]byte(trans.ID), jsonBytes)
 		return err
 	})
 }
@@ -117,12 +142,12 @@ func (bc *BoltClient) LastBlock() (model.Block, error) {
 	// Read an object from the bucket using boltDB.View
 	err := bc.boltDB.View(func(tx *bolt.Tx) error {
 		// Read the buckDBClientet from the DB
-		b := tx.Bucket([]byte("BlockBucket"))
+		b := tx.Bucket([]byte(BlockBucket))
 
 		_, val := b.Cursor().Last()
 		// Read the value identified by our blockId supplied as []byte
 		if val == nil {
-			return fmt.Errorf("no last block found")
+			return fmt.Errorf("No last block found")
 		}
 		// Unmarshal the returned bytes into the block struct we created at
 		// the top of the function
@@ -139,10 +164,10 @@ func (bc *BoltClient) LastBlock() (model.Block, error) {
 	return block, nil
 }
 
-//GetAll elements of a list
-func (bc *BoltClient) GetAll() (results []model.Block, err error) {
+//GetAllBlocks elements of a list
+func (bc *BoltClient) GetAllBlocks() (results []model.Block, err error) {
 	return results, bc.boltDB.View(func(tx *bolt.Tx) error {
-		bucket := tx.Bucket([]byte("BlockBucket"))
+		bucket := tx.Bucket([]byte(BlockBucket))
 		if bucket == nil {
 			return ErrBucketNotFound
 		}

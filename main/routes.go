@@ -20,12 +20,13 @@ func initializeRoutes() {
 		peerRoutes.GET("/status", api.SendPeerStatus)
 
 		peerRoutes.POST("/blocks", api.ReceiveBlocks)
+		peerRoutes.POST("/transactions", api.ReceiveTransactions)
 	}
 
 	transactionRoutes := router.Group("/api/transactions")
 	{
 		// Handle the GET requests at /peer/list
-		transactionRoutes.GET("/", api.GetTransactions)
+		transactionRoutes.GET("", api.GetTransactions)
 	}
 
 	apiRoutes := router.Group("/api/blocks")

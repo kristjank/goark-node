@@ -8,3 +8,9 @@ type PeerStatus struct {
 	CurrentSlot    int   `json:"currentSlot"`
 	Header         Block `json:"header"`
 }
+
+//TransactionReceiveStruct receive structure
+type TransactionReceiveStruct struct {
+	Success      bool          `json:"success"`
+	Transactions []Transaction `json:"transactions"`
+}
