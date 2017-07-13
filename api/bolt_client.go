@@ -10,16 +10,17 @@ import (
 	"github.com/kristjank/goark-node/api/model"
 )
 
-//IBoltClient interface defitnion
+//IBoltClient interface definition
 type IBoltClient interface {
 	OpenBoltDb()
 	QueryBlock(blockID string) (model.Block, error)
 	SaveBlock(block model.Block) error
-	SaveTransaction(trans model.Transaction) error
+	SaveTransaction(trans model.Transaction) (string, error)
 	Check() bool
 	InitializeBucket()
 	LastBlock() (model.Block, error)
 	GetAllBlocks() (results []model.Block, err error)
+	GetAllTransactions() (results []model.Transaction, err error)
 	Close()
 }
 
@@ -32,6 +33,7 @@ var (
 	ErrInvalidID      = errors.New("Element ID can not contain \":\"")
 )
 
+//Constant names for BoltDb bucket initializations
 const (
 	BlockBucket       = "BlockBucket"
 	TransactionBucket = "TransactionBucket"
@@ -45,7 +47,7 @@ type BoltClient struct {
 //OpenBoltDb db opening
 func (bc *BoltClient) OpenBoltDb() {
 	var err error
-	bc.boltDB, err = bolt.Open("goark-node.db", 0600, nil)
+	bc.boltDB, err = bolt.Open("ark-node.db", 0600, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -122,16 +124,21 @@ func (bc *BoltClient) SaveBlock(block model.Block) error {
 }
 
 //SaveTransaction to TransactionBucket
-func (bc *BoltClient) SaveTransaction(trans model.Transaction) error {
+func (bc *BoltClient) SaveTransaction(trans model.Transaction) (string, error) {
 	// Serialize the struct to JSON
 	jsonBytes, _ := json.Marshal(trans)
 
 	// Write the data to the BlockBucketBlockBucket
-	return bc.boltDB.Update(func(tx *bolt.Tx) error {
+	err := bc.boltDB.Update(func(tx *bolt.Tx) error {
 		b := tx.Bucket([]byte(TransactionBucket))
 		err := b.Put([]byte(trans.ID), jsonBytes)
 		return err
 	})
+	if err != nil {
+		return "", err
+	}
+	return trans.ID, err
+
 }
 
 //LastBlock returns the last written block header
@@ -175,6 +182,22 @@ func (bc *BoltClient) GetAllBlocks() (results []model.Block, err error) {
 			block := model.Block{}
 			json.Unmarshal(value, &block)
 			results = append(results, block)
+			return nil // Continue ForEach
+		})
+	})
+}
+
+//GetAllTransactions elements of a list
+func (bc *BoltClient) GetAllTransactions() (results []model.Transaction, err error) {
+	return results, bc.boltDB.View(func(tx *bolt.Tx) error {
+		bucket := tx.Bucket([]byte(TransactionBucket))
+		if bucket == nil {
+			return ErrBucketNotFound
+		}
+		return bucket.ForEach(func(_, value []byte) error {
+			trans := model.Transaction{}
+			json.Unmarshal(value, &trans)
+			results = append(results, trans)
 			return nil // Continue ForEach
 		})
 	})

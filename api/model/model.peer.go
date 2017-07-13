@@ -9,8 +9,17 @@ type PeerStatus struct {
 	Header         Block `json:"header"`
 }
 
-//TransactionReceiveStruct receive structure
-type TransactionReceiveStruct struct {
-	Success      bool          `json:"success"`
+//TransactionPayload - list of tx to send to network
+//METHOD POST receive tx payload from network
+type TransactionPayload struct {
 	Transactions []Transaction `json:"transactions"`
+}
+
+//TransactionPostResponse structure for call /peer/transaction
+//METHOD POST response structure
+type TransactionPostResponse struct {
+	Success        bool     `json:"success"`
+	Message        string   `json:"message,omitempty"`
+	Error          string   `json:"error,omitempty"`
+	TransactionIDs []string `json:"transactionIds"`
 }

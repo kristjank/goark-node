@@ -88,3 +88,19 @@ func TestBoltClient_AllBlocks(t *testing.T) {
 	}
 	DBClient.Close()
 }
+
+func TestBoltClient_GetAllTx(t *testing.T) {
+
+	initDB()
+
+	res, err := DBClient.GetAllTransactions()
+
+	if err != nil {
+		t.Errorf(err.Error())
+	}
+
+	for _, element := range res {
+		log.Println(element)
+	}
+	DBClient.Close()
+}

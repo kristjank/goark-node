@@ -29,3 +29,6 @@ main/goark-node.db
 main/bolter
 
 \.vscode/
+api/ark-node.db
+main/ark-node.db
+main/ark-node.db

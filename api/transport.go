@@ -62,20 +62,27 @@ func GetHeight(c *gin.Context) {
 
 //ReceiveTransactions Returns a list of peers to client call. Response is in JSON
 func ReceiveTransactions(c *gin.Context) {
-	log.Debug("Received Tx")
-	//x, _ := ioutil.ReadAll(c.Request.Body)
-	var recv model.TransactionReceiveStruct
+	log.Debug("Received Tx from network")
+	var recv model.TransactionPayload
+	var txIDs []string
+
 	c.BindJSON(&recv)
 
-	if recv.Success {
-		for _, element := range recv.Transactions {
-			DBClient.SaveTransaction(element)
-			log.Println(element)
+	//saving tx to db
+	for _, element := range recv.Transactions {
+		id, err := DBClient.SaveTransaction(element)
+		if err == nil {
+			txIDs = append(txIDs, id)
+			log.Debug(txIDs)
 		}
+		log.Debug(element)
 	}
 
-	//DBClient.
-	//log.Printf("%v", recv)
-	//c.JSON(200, gin.H{"message": "OK"})
+	//preparing response to client
+	var txResponse model.TransactionPostResponse
+	txResponse.Success = true
+	txResponse.TransactionIDs = txIDs
 
+	//sending response
+	c.JSON(200, txResponse)
 }
