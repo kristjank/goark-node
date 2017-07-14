@@ -59,11 +59,6 @@ func initializeBoltClient() {
 func initializeRoutes() {
 	log.Info("Initializing routes")
 
-	// TODO implement checkHeaders function to check the correct header data
-	// indicating whether the request was from an authenticated peer? or not
-	// Handle the index route
-	//router.GET("/")
-
 	// Group peer related routes together
 	peerRoutes := router.Group("/peer")
 	{
@@ -76,7 +71,6 @@ func initializeRoutes() {
 
 	transactionRoutes := router.Group("/api/transactions")
 	{
-		// Handle the GET requests at /peer/list
 		transactionRoutes.GET("", api.GetTransactions)
 	}
 
@@ -98,7 +92,6 @@ func main() {
 	arkapi = arkapi.SetActiveConfiguration(core.MAINNET)
 
 	//reading commandline args
-	//SILENT MODE CHECKING AND AUTOMATION RUNNING
 	networkMode := flag.Bool("devnet", false, "Is devnet mode")
 	flag.Parse()
 
@@ -116,6 +109,7 @@ func main() {
 	router = gin.Default()
 	// Initialize the routes
 	initializeRoutes()
+
 	// Start serving the application
 	pNodeInfo := fmt.Sprintf("%s:%d", viper.GetString("address"), viper.GetInt("port"))
 	router.Run(pNodeInfo)
