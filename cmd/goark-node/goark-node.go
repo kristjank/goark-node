@@ -52,12 +52,8 @@ func loadConfig(isDEVNET bool) {
 }
 
 func initializeDB() {
-	api.DBClient = &api.BoltClient{}
-	api.DBClient.OpenBoltDb()
-	api.DBClient.InitializeBucket()
-
 	var err error
-	api.ArkNodeDB, err = storm.Open(viper.GetString("server.dbfilename"))
+	api.ArkNodeDB, err = storm.Open(viper.GetString("db.filename"))
 
 	if err != nil {
 		log.Error(err.Error())

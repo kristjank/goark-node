@@ -12,9 +12,7 @@ import (
 	"github.com/spf13/viper"
 )
 
-//DBClient interface is setup in goark-node.go.
-var DBClient IBoltClient
-
+//ArkNodeDB interface is setup in goark-node.go.
 var ArkNodeDB *storm.DB
 
 //sanityCheck - checking if call came from correct network
@@ -64,7 +62,10 @@ func ReceiveBlocks(c *gin.Context) {
 		var recv model.BlockReceiveStruct
 		c.BindJSON(&recv)
 
-		ArkNodeDB.Update(&recv.Block)
+		err := ArkNodeDB.Save(&recv.Block)
+		if err != nil {
+			log.Error(err.Error())
+		}
 		c.JSON(200, gin.H{"message": "OK"})
 	}
 }
@@ -73,18 +74,22 @@ func ReceiveBlocks(c *gin.Context) {
 func SendPeerStatus(c *gin.Context) {
 	err := sanityCheck(c.Request.Header)
 	if err != nil {
+		log.Error(err.Error())
 		c.JSON(http.StatusBadRequest, gin.H{"success": false, "message": err.Error()})
 	} else {
 
 		var peerStat model.PeerStatus
 
-		lastBlock, _ := DBClient.LastBlock()
+		lastBlock, err := getLastBlock()
+		if err != nil {
+			c.JSON(http.StatusOK, gin.H{"success": false, "message": err.Error()})
+		} else {
+			peerStat.Success = true
+			peerStat.Header = lastBlock
+			peerStat.Height = lastBlock.Height
 
-		peerStat.Success = true
-		peerStat.Header = lastBlock
-		peerStat.Height = lastBlock.Height
-
-		c.JSON(200, peerStat)
+			c.JSON(200, peerStat)
+		}
 	}
 }
 
@@ -95,9 +100,27 @@ func GetHeight(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"success": false, "message": err.Error()})
 	} else {
 
-		lastBlock, _ := DBClient.LastBlock()
-		c.JSON(200, gin.H{"success": true, "height": lastBlock.Height, "id": lastBlock.ID})
+		lastBlock, err := getLastBlock()
+		if err != nil {
+			c.JSON(http.StatusOK, gin.H{"success": false, "message": err.Error()})
+		} else {
+			c.JSON(200, gin.H{"success": true, "height": lastBlock.Height, "id": lastBlock.ID})
+		}
 	}
+}
+
+func getLastBlock() (model.Block, error) {
+	var lastBlock model.Block
+	var query storm.Query
+	var err error
+	query = ArkNodeDB.Select().Reverse()
+	err = query.First(&lastBlock)
+
+	if err != nil {
+		log.Error(err.Error())
+	}
+
+	return lastBlock, err
 }
 
 //GetAutoConfigureParams - send autoconfigure parameters
@@ -129,11 +152,12 @@ func ReceiveTransactions(c *gin.Context) {
 
 		//saving tx to db
 		for _, element := range recv.Transactions {
-			id, err := DBClient.SaveTransaction(element)
-			if err == nil {
-				txIDs = append(txIDs, id)
-				log.Debug(txIDs)
+			err := ArkNodeDB.Save(&element)
+			if err != nil {
+				log.Error(err.Error())
 			}
+			txIDs = append(txIDs, element.ID)
+			log.Debug(txIDs)
 			log.Debug(element)
 		}
 

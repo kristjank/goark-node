@@ -4,13 +4,22 @@ import (
 	"log"
 	"testing"
 
+	"github.com/asdine/storm"
+	"github.com/kristjank/goark-node/api"
 	"github.com/kristjank/goark-node/api/model"
+	"github.com/spf13/viper"
 )
 
 func initDB() {
-	DBClient = &BoltClient{}
-	DBClient.OpenBoltDb()
-	DBClient.InitializeBucket()
+	var err error
+	api.ArkNodeDB, err = storm.Open(viper.GetString("db.filename"))
+
+	if err != nil {
+		log.Error(err.Error())
+		panic(err.Error())
+	}
+
+	log.Println("Storm DB Opened at:", api.ArkNodeDB.Path)
 }
 
 func TestReadFromBucket(t *testing.T) {

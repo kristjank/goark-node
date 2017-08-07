@@ -10,7 +10,7 @@ type Block struct {
 	ID                   string        `json:"id" storm:"id"`
 	Version              int           `json:"version"`
 	Timestamp            int           `json:"timestamp"`
-	Height               int           `json:"height"`
+	Height               int           `json:"height" storm:"unique"`
 	PreviousBlock        string        `json:"previousBlock"`
 	NumberOfTransactions int           `json:"numberOfTransactions"`
 	TotalAmount          int           `json:"totalAmount"`
