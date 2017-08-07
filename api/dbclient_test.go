@@ -4,6 +4,8 @@ import (
 	"log"
 	"testing"
 
+	"github.com/asdine/storm/q"
+
 	"github.com/asdine/storm"
 	"github.com/kristjank/goark-node/api"
 	"github.com/kristjank/goark-node/api/model"
@@ -26,7 +28,9 @@ func TestReadFromBucket(t *testing.T) {
 
 	initDB()
 
-	res, err := DBClient.QueryBlock("12345679")
+	err = db.Select(q.Eq("ID")).Find(&users)
+
+	res, err := api.ArkNodeDB.Find("12345679")
 
 	if err != nil {
 		log.Println(err.Error())
@@ -37,7 +41,7 @@ func TestReadFromBucket(t *testing.T) {
 	DBClient.Close()
 }
 
-func TestLastBlock(t *testing.T) {
+func TestAllBlock(t *testing.T) {
 	initDB()
 
 	res, err := DBClient.LastBlock()

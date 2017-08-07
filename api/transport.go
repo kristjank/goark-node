@@ -115,6 +115,7 @@ func getLastBlock() (model.Block, error) {
 	var err error
 	query = ArkNodeDB.Select().Reverse()
 	err = query.First(&lastBlock)
+	query.
 
 	if err != nil {
 		log.Error(err.Error())
