@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/asdine/storm"
 	"github.com/gin-gonic/gin"
 	"github.com/kristjank/goark-node/api/model"
 	log "github.com/sirupsen/logrus"
@@ -13,6 +14,8 @@ import (
 
 //DBClient interface is setup in goark-node.go.
 var DBClient IBoltClient
+
+var ArkNodeDB *storm.DB
 
 //sanityCheck - checking if call came from correct network
 func sanityCheck(header http.Header) error {
@@ -32,12 +35,17 @@ func GetTransactions(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"success": false, "message": err.Error()})
 	} else {
 
-		res, err := DBClient.GetAllTransactions()
+		var results []model.Transaction
+		var query storm.Query
+		query = ArkNodeDB.Select().Reverse()
+
+		err := query.Find(&results)
+
 		if err == nil {
 			var response model.TransactionGetResponse
 			response.Success = true
-			response.Transactions = res
-			response.Count = strconv.Itoa(len(res))
+			response.Transactions = results
+			response.Count = strconv.Itoa(len(results))
 			c.JSON(200, response)
 		} else {
 			c.JSON(500, gin.H{"success": false, "message": err.Error()})
@@ -56,7 +64,7 @@ func ReceiveBlocks(c *gin.Context) {
 		var recv model.BlockReceiveStruct
 		c.BindJSON(&recv)
 
-		DBClient.SaveBlock(recv.Block)
+		ArkNodeDB.Update(&recv.Block)
 		c.JSON(200, gin.H{"message": "OK"})
 	}
 }

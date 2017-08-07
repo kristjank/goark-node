@@ -7,7 +7,7 @@ type TransactionType byte
 //It is used to post transaction to mainnet and to receive results from arkapi
 //Empty fields are emmited by default
 type Transaction struct {
-	ID                    string            `json:"id"`
+	ID                    string            `json:"id" storm:"id"`
 	Timestamp             int32             `json:"timestamp"`
 	RecipientID           string            `json:"recipientId"`
 	Amount                int64             `json:"amount"`

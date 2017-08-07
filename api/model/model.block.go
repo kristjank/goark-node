@@ -7,7 +7,7 @@ type BlockReceiveStruct struct {
 
 //Block structure
 type Block struct {
-	ID                   string        `json:"id"`
+	ID                   string        `json:"id" storm:"id"`
 	Version              int           `json:"version"`
 	Timestamp            int           `json:"timestamp"`
 	Height               int           `json:"height"`

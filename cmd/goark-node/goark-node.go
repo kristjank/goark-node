@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/asdine/storm"
 	"github.com/gin-gonic/gin"
 	"github.com/kristjank/ark-go/core"
 	"github.com/kristjank/goark-node/api"
@@ -50,10 +51,20 @@ func loadConfig(isDEVNET bool) {
 	}
 }
 
-func initializeBoltClient() {
+func initializeDB() {
 	api.DBClient = &api.BoltClient{}
 	api.DBClient.OpenBoltDb()
 	api.DBClient.InitializeBucket()
+
+	var err error
+	api.ArkNodeDB, err = storm.Open(viper.GetString("server.dbfilename"))
+
+	if err != nil {
+		log.Error(err.Error())
+		panic(err.Error())
+	}
+
+	log.Println("Storm DB Opened at:", api.ArkNodeDB.Path)
 }
 
 func initializeRoutes() {
@@ -97,7 +108,7 @@ func main() {
 
 	loadConfig(*networkMode)
 	initLogger()
-	initializeBoltClient()
+	initializeDB()
 
 	log.Println(flag.Args())
 	if *networkMode {
