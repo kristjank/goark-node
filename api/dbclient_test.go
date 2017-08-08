@@ -52,7 +52,7 @@ func TestListTx(t *testing.T) {
 	}
 
 	for id, element := range results {
-		log.Println(element.ID, element.Amount, element.Timestamp, id)
+		log.Println(element.ID, element.Amount, element.Timestamp, element.Blockid, id)
 	}
 
 	testNodeDB.Close()
@@ -75,12 +75,12 @@ func TestListBlocks(t *testing.T) {
 	testNodeDB.Close()
 }
 
-func TestLastBlock(t *testing.T) {
+func TestLastBlockByLimit(t *testing.T) {
 	initDB()
 
 	var results []model.Block
 	var lastBlock model.Block
-	err := testNodeDB.AllByIndex("Height", &results, storm.Reverse())
+	err := testNodeDB.AllByIndex("Height", &results, storm.Limit(1), storm.Reverse())
 
 	if err != nil {
 		log.Fatal(t.Name(), err.Error())
@@ -98,7 +98,7 @@ func TestLastBlock(t *testing.T) {
 	testNodeDB.Close()
 }
 
-func TestLastBlock2(t *testing.T) {
+func TestLastBlock(t *testing.T) {
 	initDB()
 
 	var lastBlock model.Block

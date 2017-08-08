@@ -26,11 +26,11 @@ func initLogger() {
 	if err == nil {
 		log.SetOutput(file)
 	} else {
-		log.Info("Failed to log to file, using default stderr")
+		log.Error("Failed to log to file, using default stderr")
 	}
 
 	//TODO set log level according to cfg/settings
-	log.SetLevel(log.DebugLevel)
+	//log.SetLevel(log.InfoLevel)
 }
 
 func loadConfig(isDEVNET bool) {
@@ -46,8 +46,7 @@ func loadConfig(isDEVNET bool) {
 	err := viper.ReadInConfig() // Find and read the config file
 
 	if err != nil {
-		fmt.Println(err.Error())
-		panic("No configuration file")
+		log.Panic("Read configuration error", err.Error())
 	}
 }
 
@@ -56,11 +55,10 @@ func initializeDB() {
 	api.ArkNodeDB, err = storm.Open(viper.GetString("db.filename"))
 
 	if err != nil {
-		log.Error(err.Error())
-		panic(err.Error())
+		log.Panic("Storm DB init error", err.Error())
 	}
 
-	log.Println("Storm DB Opened at:", api.ArkNodeDB.Path)
+	log.Info("Storm DB Opened at:", api.ArkNodeDB.Path)
 }
 
 func initializeRoutes() {
@@ -106,7 +104,7 @@ func main() {
 	initLogger()
 	initializeDB()
 
-	log.Println(flag.Args())
+	log.Info("Flag arguments", flag.Args())
 	if *networkMode {
 		log.Info("DEVNET mode active")
 		arkapi = arkapi.SetActiveConfiguration(core.DEVNET)
@@ -119,6 +117,6 @@ func main() {
 
 	// Start serving the application
 	pNodeInfo := fmt.Sprintf("%s:%d", viper.GetString("address"), viper.GetInt("port"))
+	log.Info("Starting server, listening on:", pNodeInfo)
 	router.Run(pNodeInfo)
-
 }

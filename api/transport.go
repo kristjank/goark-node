@@ -13,6 +13,7 @@ import (
 )
 
 //ArkNodeDB interface is setup in goark-node.go.
+//interface is visible in the whole package api
 var ArkNodeDB *storm.DB
 
 //sanityCheck - checking if call came from correct network
@@ -57,15 +58,15 @@ func ReceiveBlocks(c *gin.Context) {
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"success": false, "message": err.Error()})
 	} else {
-
-		log.Debug("Received blocks")
 		var recv model.BlockReceiveStruct
 		c.BindJSON(&recv)
 
+		log.Info("New block received - id: ", recv.Block.ID, " height:", recv.Block.Height, " transactions:", len(recv.Block.Transactions), " peer:", c.Request.RemoteAddr)
 		err := ArkNodeDB.Save(&recv.Block)
 		if err != nil {
 			log.Error(err.Error())
 		}
+
 		c.JSON(200, gin.H{"message": "OK"})
 	}
 }
@@ -107,20 +108,6 @@ func GetHeight(c *gin.Context) {
 			c.JSON(200, gin.H{"success": true, "height": lastBlock.Height, "id": lastBlock.ID})
 		}
 	}
-}
-
-func getLastBlock() (model.Block, error) {
-	var lastBlock model.Block
-	var query storm.Query
-	var err error
-	query = ArkNodeDB.Select().OrderBy("Height").Reverse()
-	err = query.First(&lastBlock)
-
-	if err != nil {
-		log.Error(err.Error())
-	}
-
-	return lastBlock, err
 }
 
 //GetAutoConfigureParams - send autoconfigure parameters
