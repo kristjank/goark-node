@@ -113,9 +113,8 @@ func getLastBlock() (model.Block, error) {
 	var lastBlock model.Block
 	var query storm.Query
 	var err error
-	query = ArkNodeDB.Select().Reverse()
+	query = ArkNodeDB.Select().OrderBy("Height").Reverse()
 	err = query.First(&lastBlock)
-	query.
 
 	if err != nil {
 		log.Error(err.Error())

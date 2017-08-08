@@ -4,43 +4,118 @@ import (
 	"log"
 	"testing"
 
-	"github.com/asdine/storm/q"
-
 	"github.com/asdine/storm"
-	"github.com/kristjank/goark-node/api"
 	"github.com/kristjank/goark-node/api/model"
-	"github.com/spf13/viper"
 )
+
+var testNodeDB *storm.DB
 
 func initDB() {
 	var err error
-	api.ArkNodeDB, err = storm.Open(viper.GetString("db.filename"))
+	testNodeDB, err = storm.Open("arktest.db")
 
 	if err != nil {
-		log.Error(err.Error())
+		log.Fatal(err.Error())
 		panic(err.Error())
 	}
 
-	log.Println("Storm DB Opened at:", api.ArkNodeDB.Path)
+	log.Println("Storm DB Opened at:", testNodeDB.Path)
 }
 
-func TestReadFromBucket(t *testing.T) {
+func TestSaveTx(t *testing.T) {
 
 	initDB()
 
-	err = db.Select(q.Eq("ID")).Find(&users)
+	var tx model.Transaction
 
-	res, err := api.ArkNodeDB.Find("12345679")
+	tx.ID = "123321blkm.,m12"
+	tx.Amount = 1000022
 
+	err := testNodeDB.Save(&tx)
 	if err != nil {
-		log.Println(err.Error())
+		log.Fatal(t.Name(), err.Error())
 	}
 
-	log.Println(t.Name(), "Found block:", res)
-
-	DBClient.Close()
+	testNodeDB.Close()
 }
 
+func TestListTx(t *testing.T) {
+	initDB()
+
+	var results []model.Transaction
+	//var query storm.Query
+	//	query = testNodeDB.All()
+
+	err := testNodeDB.All(&results)
+	if err != nil {
+		log.Fatal(t.Name(), err.Error())
+	}
+
+	for id, element := range results {
+		log.Println(element.ID, element.Amount, element.Timestamp, id)
+	}
+
+	testNodeDB.Close()
+}
+
+func TestListBlocks(t *testing.T) {
+	initDB()
+
+	var results []model.Block
+	err := testNodeDB.AllByIndex("Height", &results, storm.Reverse())
+
+	if err != nil {
+		log.Fatal(t.Name(), err.Error())
+	}
+
+	for id, element := range results {
+		log.Println(element.ID, element.Height, id)
+	}
+
+	testNodeDB.Close()
+}
+
+func TestLastBlock(t *testing.T) {
+	initDB()
+
+	var results []model.Block
+	var lastBlock model.Block
+	err := testNodeDB.AllByIndex("Height", &results, storm.Reverse())
+
+	if err != nil {
+		log.Fatal(t.Name(), err.Error())
+	}
+
+	/*for id, element := range results {
+		log.Println(element.ID, element.Height, id)
+		lastBlock = element
+		break
+	}*/
+
+	lastBlock = results[0]
+	log.Println(lastBlock)
+
+	testNodeDB.Close()
+}
+
+func TestLastBlock2(t *testing.T) {
+	initDB()
+
+	var lastBlock model.Block
+	var query storm.Query
+	var err error
+	query = testNodeDB.Select().OrderBy("Height").Reverse()
+	err = query.First(&lastBlock)
+	if err != nil {
+		log.Fatal(t.Name(), err.Error())
+	}
+
+	log.Println(lastBlock)
+
+	testNodeDB.Close()
+}
+
+/*
 func TestAllBlock(t *testing.T) {
 	initDB()
 
@@ -117,3 +192,4 @@ func TestBoltClient_GetAllTx(t *testing.T) {
 	}
 	DBClient.Close()
 }
+*/

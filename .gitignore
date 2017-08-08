@@ -40,3 +40,4 @@ cmd/goark-node/debug
 cmd/goark-node/logs/ark.log
 cmd/goark-node/db/ark-node.db
 cmd/goark-node/logs/ark.log
+*.db
