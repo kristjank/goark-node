@@ -16,3 +16,7 @@ func getLastBlock() (model.Block, error) {
 
 	return results[0], err
 }
+
+func syncBlockChain(lastBlockHeight int) {
+	//ArkApiClient.ListPeers
+}

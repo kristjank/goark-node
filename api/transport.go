@@ -7,6 +7,7 @@ import (
 
 	"github.com/asdine/storm"
 	"github.com/gin-gonic/gin"
+	"github.com/kristjank/ark-go/core"
 	"github.com/kristjank/goark-node/api/model"
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
@@ -15,6 +16,7 @@ import (
 //ArkNodeDB interface is setup in goark-node.go.
 //interface is visible in the whole package api
 var ArkNodeDB *storm.DB
+var ArkApiClient *core.ArkClient
 
 //sanityCheck - checking if call came from correct network
 func sanityCheck(header http.Header) error {
