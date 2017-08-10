@@ -16,7 +16,9 @@ import (
 //ArkNodeDB interface is setup in goark-node.go.
 //interface is visible in the whole package api
 var ArkNodeDB *storm.DB
-var ArkApiClient *core.ArkClient
+
+//ArkAPIClient - using to talk with other nodes with the ARK-GO Client API
+var ArkAPIClient *core.ArkClient
 
 //sanityCheck - checking if call came from correct network
 func sanityCheck(header http.Header) error {

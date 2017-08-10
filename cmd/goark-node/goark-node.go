@@ -100,8 +100,8 @@ func main() {
 	log.Info("---- GOARK Relay Node Starting ----")
 
 	//init arkapi client - to get other peers and sync with blockchain
-	api.ArkApiClient = core.NewArkClient(nil)
-	api.ArkApiClient = api.ArkApiClient.SetActiveConfiguration(core.MAINNET)
+	api.ArkAPIClient = core.NewArkClient(nil)
+	api.ArkAPIClient = api.ArkAPIClient.SetActiveConfiguration(core.MAINNET)
 
 	//api.ArkApiClient = core.TestMethodNewArkClient(nil)
 
@@ -117,7 +117,7 @@ func main() {
 	log.Info("Flag arguments", flag.Args())
 	if *networkMode {
 		log.Info("DEVNET mode active")
-		api.ArkApiClient = api.ArkApiClient.SetActiveConfiguration(core.DEVNET)
+		api.ArkAPIClient = api.ArkAPIClient.SetActiveConfiguration(core.DEVNET)
 	}
 
 	// Set the router as the default one provided by Gin
