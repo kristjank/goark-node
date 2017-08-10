@@ -87,12 +87,6 @@ func TestLastBlockByLimit(t *testing.T) {
 		log.Fatal(t.Name(), err.Error())
 	}
 
-	/*for id, element := range results {
-		log.Println(element.ID, element.Height, id)
-		lastBlock = element
-		break
-	}*/
-
 	lastBlock = results[0]
 	log.Println(lastBlock)
 

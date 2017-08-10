@@ -60,6 +60,8 @@ func initializeDB() {
 	}
 
 	log.Info("Storm DB Opened at:", api.ArkNodeDB.Path)
+
+	//defer api.ArkNodeDB.Close()
 }
 
 func initializeRoutes() {
