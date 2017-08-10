@@ -100,8 +100,8 @@ func main() {
 	log.Info("---- GOARK Relay Node Starting ----")
 
 	//init arkapi client - to get other peers and sync with blockchain
-	api.ArkApiClient = core.NewArkClient(nil)
-	api.ArkApiClient = api.ArkApiClient.SetActiveConfiguration(core.MAINNET)
+	api.ArkAPIClient = core.NewArkClient(nil)
+	api.ArkAPIClient = api.ArkAPIClient.SetActiveConfiguration(core.MAINNET)
 
 	//api.ArkApiClient = core.TestMethodNewArkClient(nil)
 

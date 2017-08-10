@@ -26,7 +26,7 @@ func getLastBlock() (model.Block, error) {
 
 //SyncBlockChain syncs blockchain to the lastest block
 func SyncBlockChain() {
-	resp, _, _ := ArkApiClient.GetPeerHeight()
+	resp, _, _ := ArkAPIClient.GetPeerHeight()
 
 	if resp.Success {
 		localLastBlock, err := getLastBlock()
@@ -38,7 +38,7 @@ func SyncBlockChain() {
 		localHeight := localLastBlock.Height
 		for localHeight < resp.Height {
 			log.Info("Blockchain not in sync. Syncing from block ", localHeight+80, "Blockchain height:", localHeight)
-			respData, _, _ := ArkApiClient.GetFullBlocksFromPeer(localLastBlock.Height + 80)
+			respData, _, _ := ArkAPIClient.GetFullBlocksFromPeer(localLastBlock.Height + 80)
 
 			if respData.Success {
 				localHeight = saveBlocks2Database(respData.Blocks)
