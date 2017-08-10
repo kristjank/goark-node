@@ -64,10 +64,10 @@ func ReceiveBlocks(c *gin.Context) {
 		c.BindJSON(&recv)
 
 		log.Info("New block received - id: ", recv.Block.ID, " height:", recv.Block.Height, " transactions:", len(recv.Block.Transactions), " peer:", c.Request.RemoteAddr)
-		err := ArkNodeDB.Save(&recv.Block)
+		/*err := ArkNodeDB.Save(&recv.Block)
 		if err != nil {
 			log.Error(err.Error())
-		}
+		}*/
 
 		c.JSON(200, gin.H{"message": "OK"})
 	}

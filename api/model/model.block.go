@@ -1,8 +1,22 @@
 package model
 
-//BlockReceiveStruct struktura prejetih blockov
+//BlockReceiveStruct from POST request - handling received blocks from the active network
 type BlockReceiveStruct struct {
 	Block Block `json:"block"`
+}
+
+//BlockResponse structure to receive blocks from a random peer  - from GET request
+type BlockResponse struct {
+	Success bool    `json:"success"`
+	Blocks  []Block `json:"blocks"`
+	Count   int     `json:"count"`
+}
+
+//BlockHeightResponse structure to receive blocks from a random peer - from GET request
+type BlockHeightResponse struct {
+	Success bool   `json:"success"`
+	Height  int    `json:"height"`
+	ID      string `json:"id"`
 }
 
 //Block structure

@@ -19,7 +19,7 @@ func initLogger() {
 	// Log as JSON instead of the default ASCII formatter.
 	log.SetFormatter(&log.JSONFormatter{})
 
-	//log.SetOutput(os.Stdout)
+	log.SetOutput(os.Stdout)
 
 	// You could set this to any `io.Writer` such as a file
 	file, err := os.OpenFile(viper.GetString("logFileName"), os.O_CREATE|os.O_WRONLY, 0666)
@@ -29,6 +29,7 @@ func initLogger() {
 		log.Error("Failed to log to file, using default stderr")
 	}
 
+	log.SetOutput(os.Stdout)
 	//TODO set log level according to cfg/settings
 	//log.SetLevel(log.InfoLevel)
 }
@@ -90,12 +91,19 @@ func initializeRoutes() {
 	}
 }
 
+func initBlockChain() {
+	api.SyncBlockChain()
+}
+
 ///////////////////////////////////////////////////////////////////////////////////////
 func main() {
 	log.Info("---- GOARK Relay Node Starting ----")
 
 	//init arkapi client - to get other peers and sync with blockchain
 	api.ArkApiClient = core.NewArkClient(nil)
+	api.ArkApiClient = api.ArkApiClient.SetActiveConfiguration(core.MAINNET)
+
+	//api.ArkApiClient = core.TestMethodNewArkClient(nil)
 
 	//reading commandline args
 	networkMode := flag.Bool("devnet", false, "Is devnet mode")
@@ -104,6 +112,7 @@ func main() {
 	loadConfig(*networkMode)
 	initLogger()
 	initializeDB()
+	initBlockChain()
 
 	log.Info("Flag arguments", flag.Args())
 	if *networkMode {
