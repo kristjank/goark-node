@@ -117,7 +117,7 @@ func main() {
 	log.Info("Flag arguments", flag.Args())
 	if *networkMode {
 		log.Info("DEVNET mode active")
-		api.ArkApiClient = api.ArkApiClient.SetActiveConfiguration(core.DEVNET)
+		api.ArkAPIClient = api.ArkAPIClient.SetActiveConfiguration(core.DEVNET)
 	}
 
 	// Set the router as the default one provided by Gin

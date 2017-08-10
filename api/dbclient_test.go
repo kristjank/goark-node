@@ -12,7 +12,8 @@ var testNodeDB *storm.DB
 
 func initDB() {
 	var err error
-	testNodeDB, err = storm.Open("arktest.db")
+	//opening DB from GO-ARK settings folder
+	testNodeDB, err = storm.Open("../cmd/goark-node/db/ark-node.db")
 
 	if err != nil {
 		log.Fatal(err.Error())
