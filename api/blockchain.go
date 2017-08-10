@@ -37,8 +37,8 @@ func SyncBlockChain() {
 
 		localHeight := localLastBlock.Height
 		for localHeight < resp.Height {
-			log.Info("Blockchain not in sync. Syncing from block ", localHeight+80, "Blockchain height:", localHeight)
-			respData, _, _ := ArkApiClient.GetFullBlocksFromPeer(localLastBlock.Height + 80)
+			log.Info("Blockchain not in sync. Syncing from block ", localHeight, "Blockchain height:", localHeight)
+			respData, _, _ := ArkApiClient.GetFullBlocksFromPeer(localLastBlock.Height)
 
 			if respData.Success {
 				localHeight = saveBlocks2Database(respData.Blocks)
