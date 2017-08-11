@@ -23,11 +23,11 @@ var ArkAPIClient *core.ArkClient
 //sanityCheck - checking if call came from correct network
 func sanityCheck(header http.Header) error {
 	if header.Get("nethash") != viper.GetString("network.nethash") {
-		return errors.New("NetHash mismatch - network version mismatch")
+		return errors.New("Headers NOT OK - NetHash mismatch - network version mismatch")
 	}
-	/*if header.Get("version") != viper.GetString("version") {
-		return errors.New("Version mismatch")
-	}*/
+	if header.Get("port") != viper.GetString("port") {
+		return errors.New("Headers NOT OK - Port mismatch")
+	}
 	return nil
 }
 
@@ -35,28 +35,29 @@ func sanityCheck(header http.Header) error {
 func SendTransactions(c *gin.Context) {
 	err := sanityCheck(c.Request.Header)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"success": false, "message": err.Error()})
-	} else {
-
-		tx2Send, err := getTransactions(0)
-
-		if err == nil {
-			var response model.TransactionGetResponse
-			response.Success = true
-			response.Transactions = tx2Send
-			response.Count = strconv.Itoa(len(tx2Send))
-			c.JSON(200, response)
-		} else {
-			c.JSON(500, gin.H{"success": false, "message": err.Error()})
-		}
+		c.JSON(http.StatusOK, gin.H{"success": false, "message": err.Error()})
+		return
 	}
+
+	tx2Send, err := getTransactions(0)
+
+	if err == nil {
+		var response model.TransactionGetResponse
+		response.Success = true
+		response.Transactions = tx2Send
+		response.Count = strconv.Itoa(len(tx2Send))
+		c.JSON(200, response)
+	} else {
+		c.JSON(500, gin.H{"success": false, "message": err.Error()})
+	}
+
 }
 
 //SendPeerList Returns a list of peers to client call. Response is in JSON
 func SendPeerList(c *gin.Context) {
 	err := sanityCheck(c.Request.Header)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"success": false, "message": err.Error()})
+		c.JSON(http.StatusOK, gin.H{"success": false, "message": err.Error()})
 	} else {
 		c.JSON(200, gin.H{"success": true, "peers": core.EnvironmentParams.Network.PeerList})
 	}
@@ -64,13 +65,15 @@ func SendPeerList(c *gin.Context) {
 
 //ReceiveBlocks from blockchain
 func ReceiveBlocks(c *gin.Context) {
-	//err := sanityCheck(c.Request.Header)
-	//if err != nil {
-	//	log.Error(err.Error())
-	//	c.JSON(http.StatusBadRequest, gin.H{"success": false, "message": err.Error()})
-	//} else {
+	err := sanityCheck(c.Request.Header)
+	if err != nil {
+		//	log.Error(err.Error())
+		c.JSON(http.StatusOK, gin.H{"success": false, "message": err.Error()})
+		return
+	}
+
 	var recv model.BlockReceiveStruct
-	err := c.BindJSON(&recv)
+	err = c.BindJSON(&recv)
 
 	if err != nil {
 		log.Error(err.Error())
@@ -97,34 +100,20 @@ func ReceiveBlocks(c *gin.Context) {
 func SendPeerStatus(c *gin.Context) {
 	err := sanityCheck(c.Request.Header)
 	if err != nil {
-		log.Error(err.Error())
-		c.JSON(http.StatusBadRequest, gin.H{"success": false, "message": err.Error()})
+		//log.Error(err.Error())
+		c.JSON(http.StatusOK, gin.H{"success": false, "message": err.Error()})
+		return
+	}
+
+	var peerStat model.PeerStatus
+	lastBlock, err := getLastBlock()
+	if err != nil {
+		c.JSON(http.StatusOK, gin.H{"success": false, "message": err.Error()})
 	} else {
-
-		var peerStat model.PeerStatus
-
-		lastBlock, err := getLastBlock()
-		if err != nil {
-			c.JSON(http.StatusOK, gin.H{"success": false, "message": err.Error()})
-		} else {
-			peerStat.Success = true
-			peerStat.Height = lastBlock.Height
-
-			//Filling Header manually - there is a difference in types (fields TotalAmount, TotalFee and Reward)
-			peerStat.Header.BlockSignature = lastBlock.BlockSignature
-			peerStat.Header.GeneratorPublicKey = lastBlock.GeneratorPublicKey
-			peerStat.Header.Height = lastBlock.Height
-			peerStat.Header.ID = lastBlock.ID
-			peerStat.Header.NumberOfTransactions = lastBlock.NumberOfTransactions
-			peerStat.Header.PayloadHash = lastBlock.PayloadHash
-			peerStat.Header.PayloadLength = lastBlock.PayloadLength
-			//peerStat.Header.Reward, _ = strconv.Atoi(lastBlock.Reward)
-			peerStat.Header.Timestamp = lastBlock.Timestamp
-			//peerStat.Header.TotalAmount, _ = strconv.Atoi(lastBlock.TotalAmount)
-			//peerStat.Header.TotalFee, _ = strconv.Atoi(lastBlock.TotalFee)
-			peerStat.Header.Version = lastBlock.Version
-			c.JSON(200, peerStat)
-		}
+		peerStat.Success = true
+		peerStat.Height = lastBlock.Height
+		peerStat.Header = lastBlock
+		c.JSON(200, peerStat)
 	}
 }
 
@@ -132,16 +121,17 @@ func SendPeerStatus(c *gin.Context) {
 func SendHeight(c *gin.Context) {
 	err := sanityCheck(c.Request.Header)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"success": false, "message": err.Error()})
-	} else {
-
-		lastBlock, err := getLastBlock()
-		if err != nil {
-			c.JSON(http.StatusOK, gin.H{"success": false, "message": err.Error()})
-		} else {
-			c.JSON(200, gin.H{"success": true, "height": lastBlock.Height, "id": lastBlock.ID})
-		}
+		c.JSON(http.StatusOK, gin.H{"success": false, "message": err.Error()})
+		return
 	}
+
+	lastBlock, err := getLastBlock()
+	if err != nil {
+		c.JSON(http.StatusOK, gin.H{"success": false, "message": err.Error()})
+		return
+	}
+
+	c.JSON(200, gin.H{"success": true, "height": lastBlock.Height, "id": lastBlock.ID})
 }
 
 //SendAutoConfigureParams - send autoconfigure parameters
@@ -162,32 +152,35 @@ func SendAutoConfigureParams(c *gin.Context) {
 func ReceiveTransactions(c *gin.Context) {
 	err := sanityCheck(c.Request.Header)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"success": false, "message": err.Error()})
-	} else {
-
-		log.Debug("Received Tx from network")
-		var recv model.TransactionPayload
-		var txIDs []string
-
-		c.BindJSON(&recv)
-
-		//saving tx to db
-		for _, element := range recv.Transactions {
-			err := ArkNodeDB.Save(&element)
-			if err != nil {
-				log.Error(err.Error())
-			}
-			txIDs = append(txIDs, element.ID)
-			log.Debug(txIDs)
-			log.Debug(element)
-		}
-
-		//preparing response to client
-		var txResponse model.TransactionPostResponse
-		txResponse.Success = true
-		txResponse.TransactionIDs = txIDs
-
-		//sending response
-		c.JSON(200, txResponse)
+		c.JSON(http.StatusOK, gin.H{"success": false, "message": err.Error()})
 	}
+
+	log.Debug("Received Tx from network")
+	var recv model.TransactionPayload
+	var txIDs []string
+
+	err = c.BindJSON(&recv)
+	if err != nil {
+		log.Error(err.Error())
+	}
+
+	//saving tx to db
+	for _, element := range recv.Transactions {
+		err := ArkNodeDB.Save(&element)
+		if err != nil {
+			log.Error(err.Error())
+		}
+		txIDs = append(txIDs, element.ID)
+		log.Debug(txIDs)
+		log.Debug(element)
+	}
+
+	//preparing response to client
+	var txResponse model.TransactionPostResponse
+	txResponse.Success = true
+	txResponse.TransactionIDs = txIDs
+
+	//sending response
+	c.JSON(200, txResponse)
+
 }
