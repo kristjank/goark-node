@@ -95,6 +95,30 @@ func TestLastBlockByLimit(t *testing.T) {
 	testNodeDB.Close()
 }
 
+func TestGetBlockByID(t *testing.T) {
+	initDB()
+	var block model.Block
+	err := testNodeDB.One("ID", "1844069042066945391", &block)
+
+	if err != nil {
+		log.Fatal(t.Name(), err.Error())
+	}
+
+	log.Println(block)
+}
+
+func TestGetTransByID(t *testing.T) {
+	initDB()
+	var trans model.Transaction
+	err := testNodeDB.One("ID", "cbd6862966bb1b03ba742397b7e5a88d6eefb393a362ead0d605723b840db2af", &trans)
+
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
+	log.Println(trans)
+}
+
 func TestLastBlock(t *testing.T) {
 	initDB()
 

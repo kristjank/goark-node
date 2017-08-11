@@ -59,3 +59,23 @@ func getLastBlock() (model.Block, error) {
 
 	return results[0], err
 }
+
+func getBlockByID(blockID string) (model.Block, error) {
+	var block model.Block
+	err := ArkNodeDB.One("ID", blockID, &block)
+
+	if err != nil {
+		log.Error(err.Error())
+	}
+	return block, err
+}
+
+func getTransactionByID(transID string) (model.Transaction, error) {
+	var trans model.Transaction
+	err := ArkNodeDB.One("ID", transID, &trans)
+
+	if err != nil {
+		log.Error(err.Error())
+	}
+	return trans, err
+}

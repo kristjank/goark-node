@@ -17,7 +17,7 @@ type Transaction struct {
 	VendorField           string                 `json:"vendorField,omitempty"`
 	Signature             string                 `json:"signature"`
 	SignSignature         string                 `json:"signSignature,omitempty"`
-	Signatures            string                 `json:"signatures,omitempty"`
+	Signatures            []string               `json:"signatures,omitempty"`
 	SenderPublicKey       string                 `json:"senderPublicKey"`
 	SecondSenderPublicKey string                 `json:"secondSenderPublicKey,omitempty"`
 	RequesterPublicKey    string                 `json:"requesterPublicKey,omitempty"`
