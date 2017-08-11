@@ -79,11 +79,11 @@ func ReceiveBlocks(c *gin.Context) {
 		log.Error(err.Error())
 	}
 
-	log.Info("New block received - id: ", recv.Block.ID, " height:", recv.Block.Height, " transactions:", len(recv.Block.Transactions), " peer:", c.Request.RemoteAddr)
+	//log.Info("New block received - id: ", recv.Block.ID, " height:", recv.Block.Height, " transactions:", len(recv.Block.Transactions), " peer:", c.Request.RemoteAddr)
 	lastBlock, _ := getLastBlock()
 
 	if recv.Block.Height-lastBlock.Height == 1 {
-		log.Info("Saving block: ", recv.Block.ID, " height:", recv.Block.Height, " transactions:", len(recv.Block.Transactions), " peer:", c.Request.RemoteAddr)
+		log.Info("Saving new block: ", recv.Block.ID, " height:", recv.Block.Height, " transactions:", len(recv.Block.Transactions), " peer:", c.Request.RemoteAddr)
 		err := ArkNodeDB.Save(&recv.Block)
 		if err != nil {
 			log.Error(err.Error())
