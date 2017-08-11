@@ -70,7 +70,7 @@ func initializeRoutes() {
 	// Group peer related routes together
 	peerRoutes := router.Group("/peer")
 	{
-		peerRoutes.GET("/list", api.GetTransactions)
+		peerRoutes.GET("/list", api.SendPeerList)
 		peerRoutes.GET("/status", api.SendPeerStatus)
 
 		peerRoutes.POST("/blocks", api.ReceiveBlocks)
@@ -79,17 +79,17 @@ func initializeRoutes() {
 
 	transactionRoutes := router.Group("/api/transactions")
 	{
-		transactionRoutes.GET("", api.GetTransactions)
+		transactionRoutes.GET("", api.SendTransactions)
 	}
 
 	apiRoutes := router.Group("/api/blocks")
 	{
-		apiRoutes.GET("/getHeight", api.GetHeight)
+		apiRoutes.GET("/getHeight", api.SendHeight)
 	}
 
 	autoconfigureRoutes := router.Group("/api/loader")
 	{
-		autoconfigureRoutes.GET("/autoconfigure", api.GetAutoConfigureParams)
+		autoconfigureRoutes.GET("/autoconfigure", api.SendAutoConfigureParams)
 	}
 }
 

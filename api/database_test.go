@@ -99,7 +99,7 @@ func TestLastBlockByLimit(t *testing.T) {
 func TestGetBlockByID(t *testing.T) {
 	initDB()
 	var block model.Block
-	err := testNodeDB.One("ID", "1844069042066945391", &block)
+	err := testNodeDB.One("ID", "4366553906931540162", &block)
 
 	if err != nil {
 		log.Fatal(t.Name(), err.Error())

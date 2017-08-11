@@ -1,21 +1,24 @@
 package api
 
 import (
+	"strconv"
+
 	"github.com/asdine/storm"
 	"github.com/kristjank/goark-node/api/model"
 	log "github.com/sirupsen/logrus"
 )
 
 //DB FUNCTIONS
-func saveBlocks2Database(blocks []model.Block) int {
+func saveBlocks2Database(blocks []model.BlockTmpSync) int {
 	tx, err := ArkNodeDB.Begin(true)
 	if err != nil {
 		return -1
 	}
 	defer tx.Rollback()
 
-	for _, block := range blocks {
-		//saving block
+	for _, blockTmp := range blocks {
+		block := remapBlock(blockTmp)
+		//saving converted block
 		err = tx.Save(&block)
 		if err != nil {
 			log.Error(err.Error())
@@ -89,4 +92,32 @@ func getTransactionByID(transID string) (model.Transaction, error) {
 		log.Error(err.Error())
 	}
 	return trans, err
+}
+
+//////////////////////////////////////////////////////////////
+//UTIL:
+//NEED TO convert fields...
+//NOT ELEGANT :(
+func remapBlock(bs model.BlockTmpSync) model.Block {
+	reward, _ := strconv.Atoi(bs.Reward)
+	ta, _ := strconv.Atoi(bs.TotalAmount)
+	tf, _ := strconv.Atoi(bs.TotalFee)
+
+	block := model.Block{
+		BlockSignature:       bs.BlockSignature,
+		GeneratorPublicKey:   bs.GeneratorPublicKey,
+		Height:               bs.Height,
+		ID:                   bs.ID,
+		NumberOfTransactions: bs.NumberOfTransactions,
+		PayloadHash:          bs.PayloadHash,
+		PayloadLength:        bs.PayloadLength,
+		PreviousBlock:        bs.PreviousBlock,
+		Reward:               reward,
+		Timestamp:            bs.Timestamp,
+		TotalAmount:          ta,
+		TotalFee:             tf,
+		Transactions:         bs.Transactions,
+		Version:              bs.Version,
+	}
+	return block
 }

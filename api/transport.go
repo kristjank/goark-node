@@ -31,8 +31,8 @@ func sanityCheck(header http.Header) error {
 	return nil
 }
 
-//GetTransactions Returns a list of peers to client call. Response is in JSON
-func GetTransactions(c *gin.Context) {
+//SendTransactions Returns a list of peers to client call. Response is in JSON
+func SendTransactions(c *gin.Context) {
 	err := sanityCheck(c.Request.Header)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"success": false, "message": err.Error()})
@@ -52,28 +52,45 @@ func GetTransactions(c *gin.Context) {
 	}
 }
 
-//ReceiveBlocks from blockchain
-func ReceiveBlocks(c *gin.Context) {
+//SendPeerList Returns a list of peers to client call. Response is in JSON
+func SendPeerList(c *gin.Context) {
 	err := sanityCheck(c.Request.Header)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"success": false, "message": err.Error()})
 	} else {
-		var recv model.BlockReceiveStruct
-		c.BindJSON(&recv)
+		c.JSON(200, gin.H{"success": true, "peers": core.EnvironmentParams.Network.PeerList})
+	}
+}
 
-		log.Info("New block received - id: ", recv.Block.ID, " height:", recv.Block.Height, " transactions:", len(recv.Block.Transactions), " peer:", c.Request.RemoteAddr)
-		//lastBlock, _ := getLastBlock()
+//ReceiveBlocks from blockchain
+func ReceiveBlocks(c *gin.Context) {
+	//err := sanityCheck(c.Request.Header)
+	//if err != nil {
+	//	log.Error(err.Error())
+	//	c.JSON(http.StatusBadRequest, gin.H{"success": false, "message": err.Error()})
+	//} else {
+	var recv model.BlockReceiveStruct
+	err := c.BindJSON(&recv)
 
-		//	if recv.Block.Height-lastBlock.Height == 1 {
+	if err != nil {
+		log.Error(err.Error())
+	}
+
+	log.Info("New block received - id: ", recv.Block.ID, " height:", recv.Block.Height, " transactions:", len(recv.Block.Transactions), " peer:", c.Request.RemoteAddr)
+	lastBlock, _ := getLastBlock()
+
+	if recv.Block.Height-lastBlock.Height == 1 {
 		log.Info("Saving block: ", recv.Block.ID, " height:", recv.Block.Height, " transactions:", len(recv.Block.Transactions), " peer:", c.Request.RemoteAddr)
 		err := ArkNodeDB.Save(&recv.Block)
 		if err != nil {
 			log.Error(err.Error())
 		}
-		//	}
-
-		c.JSON(200, gin.H{"message": "OK"})
+		c.JSON(200, gin.H{"success": true, "blockId": recv.Block.ID})
+	} else {
+		c.JSON(200, gin.H{"success": false, "error": "Chain not at the same height. Unable to receive"})
 	}
+
+	//}
 }
 
 //SendPeerStatus respondes to other peers about node statuts
@@ -101,18 +118,18 @@ func SendPeerStatus(c *gin.Context) {
 			peerStat.Header.NumberOfTransactions = lastBlock.NumberOfTransactions
 			peerStat.Header.PayloadHash = lastBlock.PayloadHash
 			peerStat.Header.PayloadLength = lastBlock.PayloadLength
-			peerStat.Header.Reward, _ = strconv.Atoi(lastBlock.Reward)
+			//peerStat.Header.Reward, _ = strconv.Atoi(lastBlock.Reward)
 			peerStat.Header.Timestamp = lastBlock.Timestamp
-			peerStat.Header.TotalAmount, _ = strconv.Atoi(lastBlock.TotalAmount)
-			peerStat.Header.TotalFee, _ = strconv.Atoi(lastBlock.TotalFee)
+			//peerStat.Header.TotalAmount, _ = strconv.Atoi(lastBlock.TotalAmount)
+			//peerStat.Header.TotalFee, _ = strconv.Atoi(lastBlock.TotalFee)
 			peerStat.Header.Version = lastBlock.Version
 			c.JSON(200, peerStat)
 		}
 	}
 }
 
-//GetHeight returns local blockchain height
-func GetHeight(c *gin.Context) {
+//SendHeight returns local blockchain height
+func SendHeight(c *gin.Context) {
 	err := sanityCheck(c.Request.Header)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"success": false, "message": err.Error()})
@@ -127,8 +144,8 @@ func GetHeight(c *gin.Context) {
 	}
 }
 
-//GetAutoConfigureParams - send autoconfigure parameters
-func GetAutoConfigureParams(c *gin.Context) {
+//SendAutoConfigureParams - send autoconfigure parameters
+func SendAutoConfigureParams(c *gin.Context) {
 	var resp model.AutoConfigureResponse
 
 	resp.Success = true
