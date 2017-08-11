@@ -1,27 +1,26 @@
 package model
 
-//PeerStatus response sending structure
+//PeerStatus response sending structure. It show the current status of the peer
 type PeerStatus struct {
-	Success        bool  `json:"success"`
-	Height         int   `json:"height"`
-	ForgingAllowed bool  `json:"forgingAllowed"`
-	CurrentSlot    int   `json:"currentSlot"`
-	Header         Block `json:"header"`
-}
-
-//TransactionPayload - list of tx to send to network
-//METHOD POST receive tx payload from network
-type TransactionPayload struct {
-	Transactions []Transaction `json:"transactions"`
-}
-
-//TransactionPostResponse structure for call /peer/transaction
-//METHOD POST response structure
-type TransactionPostResponse struct {
-	Success        bool     `json:"success"`
-	Message        string   `json:"message,omitempty"`
-	Error          string   `json:"error,omitempty"`
-	TransactionIDs []string `json:"transactionIds"`
+	Success        bool `json:"success"`
+	Height         int  `json:"height"`
+	ForgingAllowed bool `json:"forgingAllowed"`
+	CurrentSlot    int  `json:"currentSlot"`
+	Header         struct {
+		ID                   string `json:"id"`
+		Height               int    `json:"height"`
+		Version              int    `json:"version"`
+		TotalAmount          int    `json:"totalAmount"`
+		TotalFee             int    `json:"totalFee"`
+		Reward               int    `json:"reward"`
+		PayloadHash          string `json:"payloadHash"`
+		PayloadLength        int    `json:"payloadLength"`
+		Timestamp            int    `json:"timestamp"`
+		NumberOfTransactions int    `json:"numberOfTransactions"`
+		PreviousBlock        string `json:"previousBlock"`
+		GeneratorPublicKey   string `json:"generatorPublicKey"`
+		BlockSignature       string `json:"blockSignature"`
+	} `json:"header"`
 }
 
 //AutoConfigureResponse to clients - so they can setup communcation accordingly

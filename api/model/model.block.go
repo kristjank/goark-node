@@ -9,7 +9,7 @@ type BlockReceiveStruct struct {
 type BlockResponse struct {
 	Success bool    `json:"success"`
 	Blocks  []Block `json:"blocks"`
-	Count   int     `json:"count"`
+	Count   int     `json:"count,omitempty"`
 }
 
 //BlockHeightResponse structure to receive blocks from a random peer - from GET request
@@ -19,23 +19,20 @@ type BlockHeightResponse struct {
 	ID      string `json:"id"`
 }
 
-//Block structure
+//Block structure to store block data
 type Block struct {
-	ID                   string        `json:"id" storm:"id"`
+	ID                   string        `json:"id"`
 	Version              int           `json:"version"`
+	Height               int           `json:"height"`
 	Timestamp            int           `json:"timestamp"`
-	Height               int           `json:"height" storm:"index,unique"`
 	PreviousBlock        string        `json:"previousBlock"`
 	NumberOfTransactions int           `json:"numberOfTransactions"`
-	TotalAmount          int           `json:"totalAmount"`
-	TotalFee             int           `json:"totalFee"`
-	Reward               int           `json:"reward"`
+	TotalAmount          string        `json:"totalAmount"`
+	TotalFee             string        `json:"totalFee"`
+	Reward               string        `json:"reward"`
 	PayloadLength        int           `json:"payloadLength"`
 	PayloadHash          string        `json:"payloadHash"`
 	GeneratorPublicKey   string        `json:"generatorPublicKey"`
-	GeneratorID          string        `json:"generatorId"`
 	BlockSignature       string        `json:"blockSignature"`
-	Confirmations        int           `json:"confirmations"`
-	TotalForged          string        `json:"totalForged"`
-	Transactions         []Transaction `json:"transactions,omitempty"`
+	Transactions         []Transaction `json:"transactions"`
 }

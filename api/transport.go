@@ -90,9 +90,21 @@ func SendPeerStatus(c *gin.Context) {
 			c.JSON(http.StatusOK, gin.H{"success": false, "message": err.Error()})
 		} else {
 			peerStat.Success = true
-			peerStat.Header = lastBlock
 			peerStat.Height = lastBlock.Height
 
+			//Filling Header manually - there is a difference in types (fields TotalAmount, TotalFee and Reward)
+			peerStat.Header.BlockSignature = lastBlock.BlockSignature
+			peerStat.Header.GeneratorPublicKey = lastBlock.GeneratorPublicKey
+			peerStat.Header.Height = lastBlock.Height
+			peerStat.Header.ID = lastBlock.ID
+			peerStat.Header.NumberOfTransactions = lastBlock.NumberOfTransactions
+			peerStat.Header.PayloadHash = lastBlock.PayloadHash
+			peerStat.Header.PayloadLength = lastBlock.PayloadLength
+			peerStat.Header.Reward, _ = strconv.Atoi(lastBlock.Reward)
+			peerStat.Header.Timestamp = lastBlock.Timestamp
+			peerStat.Header.TotalAmount, _ = strconv.Atoi(lastBlock.TotalAmount)
+			peerStat.Header.TotalFee, _ = strconv.Atoi(lastBlock.TotalFee)
+			peerStat.Header.Version = lastBlock.Version
 			c.JSON(200, peerStat)
 		}
 	}
