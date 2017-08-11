@@ -16,13 +16,15 @@ func SyncBlockChain() {
 
 	localHeight := localLastBlock.Height
 	peerSwitcher := 0
-	for localHeight < ArkAPIClient.GetActivePeer().Height {
-		log.Info("Blockchain not in sync. ", fmt.Sprintf("Synced level at: %3.3f%%", float64(localHeight)/float64(ArkAPIClient.GetActivePeer().Height)*100.0), " [from block:", localHeight, " to current blockchain height:", ArkAPIClient.GetActivePeer().Height)
+	blockChainHeight := ArkAPIClient.GetActivePeer().Height
+	for localHeight < blockChainHeight {
+		log.Info("Blockchain not in sync. ", fmt.Sprintf("Synced level at: %3.3f%%", float64(localHeight)/float64(blockChainHeight)*100.0), " [from block:", localHeight, " to current blockchain height:", blockChainHeight)
 
 		//Switch peer ever 10K blocks - while syncing with blockchain -
 		if peerSwitcher < (localHeight / 10000) {
 			peerSwitcher = (localHeight / 10000)
 			switchPeer()
+			blockChainHeight = ArkAPIClient.GetActivePeer().Height
 		}
 
 		respData, err, _ := ArkAPIClient.GetFullBlocksFromPeer(localHeight)
@@ -41,5 +43,5 @@ func SyncBlockChain() {
 //Helpers
 func switchPeer() {
 	ArkAPIClient = ArkAPIClient.SwitchPeer()
-	log.Info("Switched active peer for blockchain sync: ", ArkAPIClient.GetActivePeer())
+	log.Info("Switched active peer for blockchain sync: ", ArkAPIClient.GetActivePeer(), " peer height: ", ArkAPIClient.GetActivePeer().Height)
 }
