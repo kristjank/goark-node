@@ -60,6 +60,17 @@ func getLastBlock() (model.Block, error) {
 	return results[0], err
 }
 
+func getTransactions(offset int) ([]model.Transaction, error) {
+	var results []model.Transaction
+	err := ArkNodeDB.AllByIndex("Index", &results, storm.Limit(50), storm.Skip(offset), storm.Reverse())
+
+	if err != nil {
+		log.Error("GetLastblock ", err.Error())
+	}
+
+	return results, err
+}
+
 func getBlockByID(blockID string) (model.Block, error) {
 	var block model.Block
 	err := ArkNodeDB.One("ID", blockID, &block)

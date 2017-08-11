@@ -8,7 +8,7 @@ type TransactionType byte
 //Empty fields are emmited by default
 type Transaction struct {
 	ID                    string                 `json:"id" storm:"id"`
-	Timestamp             int32                  `json:"timestamp"`
+	Timestamp             int32                  `json:"timestamp" storm:"index"`
 	RecipientID           string                 `json:"recipientId"`
 	Amount                int64                  `json:"amount" storm:"index"`
 	Asset                 map[string]interface{} `json:"asset"`
@@ -21,10 +21,11 @@ type Transaction struct {
 	SenderPublicKey       string                 `json:"senderPublicKey"`
 	SecondSenderPublicKey string                 `json:"secondSenderPublicKey,omitempty"`
 	RequesterPublicKey    string                 `json:"requesterPublicKey,omitempty"`
-	Blockid               string                 `json:"blockid"`
-	Height                int                    `json:"height,omitempty"`
+	Blockid               string                 `json:"blockid" storm:"index"`
+	Height                int                    `json:"height" storm:"index"`
 	SenderID              string                 `json:"senderId"`
 	Confirmations         int                    `json:"confirmations"`
+	PkIndex               uint64                 `storm:"index,increment"`
 }
 
 //TransactionGetResponse to send resposes

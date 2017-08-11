@@ -38,17 +38,13 @@ func GetTransactions(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"success": false, "message": err.Error()})
 	} else {
 
-		var results []model.Transaction
-		var query storm.Query
-		query = ArkNodeDB.Select().Reverse()
-
-		err := query.Find(&results)
+		tx2Send, err := getTransactions(0)
 
 		if err == nil {
 			var response model.TransactionGetResponse
 			response.Success = true
-			response.Transactions = results
-			response.Count = strconv.Itoa(len(results))
+			response.Transactions = tx2Send
+			response.Count = strconv.Itoa(len(tx2Send))
 			c.JSON(200, response)
 		} else {
 			c.JSON(500, gin.H{"success": false, "message": err.Error()})

@@ -35,4 +35,6 @@ type Block struct {
 	GeneratorPublicKey   string        `json:"generatorPublicKey"`
 	BlockSignature       string        `json:"blockSignature"`
 	Transactions         []Transaction `json:"transactions"`
+	Index                uint64        `storm:"index,increment"`
+	PkIndex              uint64        `storm:"index,increment"`
 }

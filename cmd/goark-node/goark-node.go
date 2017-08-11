@@ -114,7 +114,7 @@ func main() {
 	loadConfig(*networkMode)
 	initLogger()
 	initializeDB()
-	initBlockChain()
+	//initBlockChain()
 
 	log.Info("Flag arguments", flag.Args())
 	if *networkMode {

@@ -110,7 +110,10 @@ func TestGetBlockByID(t *testing.T) {
 func TestGetTransByID(t *testing.T) {
 	initDB()
 	var trans model.Transaction
-	err := testNodeDB.One("ID", "cbd6862966bb1b03ba742397b7e5a88d6eefb393a362ead0d605723b840db2af", &trans)
+	//44d9d0a3093232b9368a24af90577741df8340b93732db23b90d44f6590d3e42
+	//cbd6862966bb1b03ba742397b7e5a88d6eefb393a362ead0d605723b840db2af
+	//b2ef0adc90e3cf4af5d221350d79c2f2712378e0ef5a71244eecaca4afdc7140  -- negative timestamp... int representation
+	err := testNodeDB.One("ID", "b2ef0adc90e3cf4af5d221350d79c2f2712378e0ef5a71244eecaca4afdc7140", &trans)
 
 	if err != nil {
 		log.Fatal(err.Error())
