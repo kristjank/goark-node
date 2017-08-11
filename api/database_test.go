@@ -49,7 +49,8 @@ func TestListTx(t *testing.T) {
 	//var query storm.Query
 	//	query = testNodeDB.All()
 
-	err := testNodeDB.All(&results)
+	//err := testNodeDB.All(&results)
+	err := testNodeDB.AllByIndex("PkIndex", &results, storm.Limit(50), storm.Skip(5), storm.Reverse())
 	if err != nil {
 		log.Fatal(t.Name(), err.Error())
 	}

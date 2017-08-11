@@ -114,7 +114,9 @@ func main() {
 	loadConfig(*networkMode)
 	initLogger()
 	initializeDB()
-	initBlockChain()
+	//starting blockchain sync in a thread...
+	//TODO needs testing
+	go initBlockChain()
 
 	log.Info("Flag arguments", flag.Args())
 	if *networkMode {

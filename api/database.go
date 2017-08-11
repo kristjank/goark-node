@@ -62,7 +62,7 @@ func getLastBlock() (model.Block, error) {
 
 func getTransactions(offset int) ([]model.Transaction, error) {
 	var results []model.Transaction
-	err := ArkNodeDB.AllByIndex("Index", &results, storm.Limit(50), storm.Skip(offset), storm.Reverse())
+	err := ArkNodeDB.AllByIndex("PkIndex", &results, storm.Limit(50), storm.Skip(offset), storm.Reverse())
 
 	if err != nil {
 		log.Error("GetLastblock ", err.Error())
