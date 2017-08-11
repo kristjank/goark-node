@@ -25,7 +25,7 @@ func saveBlocks2Database(blocks []model.Block) int {
 		//saving transactions from block - also to transaction bucket...
 		if len(block.Transactions) > 0 {
 			for _, trans := range block.Transactions {
-				//adding blockbefore saving to transaction bucket
+				//adding blockid before saving to transaction bucket
 				trans.Blockid = block.ID
 				err = tx.Save(&trans)
 				if err != nil {
@@ -35,8 +35,11 @@ func saveBlocks2Database(blocks []model.Block) int {
 			}
 		}
 	}
-
 	err = tx.Commit()
+
+	if err != nil {
+		log.Error("Error comming Storm transaction", err.Error())
+	}
 
 	localLastBlock, _ := getLastBlock()
 	return localLastBlock.Height
@@ -48,7 +51,6 @@ func getLastBlock() (model.Block, error) {
 
 	if err != nil {
 		log.Error("GetLastblock ", err.Error())
-
 		//empty database - i.e. first run
 		if err.Error() == "not found" {
 			return model.Block{Height: 0}, nil

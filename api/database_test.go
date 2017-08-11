@@ -2,6 +2,7 @@ package api
 
 import (
 	"log"
+	"os"
 	"testing"
 
 	"github.com/asdine/storm"
@@ -21,6 +22,7 @@ func initDB() {
 	}
 
 	log.Println("Storm DB Opened at:", testNodeDB.Path)
+	log.SetOutput(os.Stdout)
 }
 
 func TestSaveTx(t *testing.T) {
@@ -88,7 +90,7 @@ func TestLastBlockByLimit(t *testing.T) {
 	}
 
 	lastBlock = results[0]
-	log.Println(lastBlock)
+	log.Println(lastBlock.Height)
 
 	testNodeDB.Close()
 }

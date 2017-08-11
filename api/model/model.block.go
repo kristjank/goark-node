@@ -21,9 +21,9 @@ type BlockHeightResponse struct {
 
 //Block structure to store block data
 type Block struct {
-	ID                   string        `json:"id"`
+	ID                   string        `json:"id" storm:"id"`
 	Version              int           `json:"version"`
-	Height               int           `json:"height"`
+	Height               int           `json:"height" storm:"index"`
 	Timestamp            int           `json:"timestamp"`
 	PreviousBlock        string        `json:"previousBlock"`
 	NumberOfTransactions int           `json:"numberOfTransactions"`

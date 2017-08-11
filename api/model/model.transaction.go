@@ -10,7 +10,7 @@ type Transaction struct {
 	ID                    string                 `json:"id" storm:"id"`
 	Timestamp             int32                  `json:"timestamp"`
 	RecipientID           string                 `json:"recipientId"`
-	Amount                int64                  `json:"amount"`
+	Amount                int64                  `json:"amount" storm:"index"`
 	Asset                 map[string]interface{} `json:"asset"`
 	Fee                   int64                  `json:"fee"`
 	Type                  TransactionType        `json:"type"`
