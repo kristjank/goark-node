@@ -25,7 +25,7 @@ type Transaction struct {
 	Height                int                    `json:"height" storm:"index"`
 	SenderID              string                 `json:"senderId"`
 	Confirmations         int                    `json:"confirmations"`
-	PkIndex               uint64                 `storm:"index,increment"`
+	PkIndex               uint64                 `json:"-" storm:"index,increment"`
 }
 
 //TransactionGetResponse to send resposes

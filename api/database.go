@@ -41,7 +41,7 @@ func saveBlocks2Database(blocks []model.BlockTmpSync) int {
 	err = tx.Commit()
 
 	if err != nil {
-		log.Error("Error comming Storm transaction", err.Error())
+		log.Error("Error commiting Storm transaction", err.Error())
 	}
 
 	localLastBlock, _ := getLastBlock()
@@ -68,7 +68,7 @@ func getTransactions(offset int) ([]model.Transaction, error) {
 	err := ArkNodeDB.AllByIndex("PkIndex", &results, storm.Limit(50), storm.Skip(offset), storm.Reverse())
 
 	if err != nil {
-		log.Error("GetLastblock ", err.Error())
+		log.Error("getTransactions ", err.Error())
 	}
 
 	return results, err

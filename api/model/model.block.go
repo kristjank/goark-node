@@ -35,16 +35,16 @@ type Block struct {
 	GeneratorPublicKey   string        `json:"generatorPublicKey"`
 	BlockSignature       string        `json:"blockSignature"`
 	Transactions         []Transaction `json:"transactions"`
-	PkIndex              uint64        `storm:"index,increment"`
+	PkIndex              uint64        `json:"-" storm:"index,increment"`
 }
 
 //BlockTmpSync structure to store block data
 //used for large syncing /peer/blocks/?lastblockheight
-//different types
+//different types TMP FIX until main node update
 type BlockTmpSync struct {
-	ID                   string        `json:"id" storm:"id"`
+	ID                   string        `json:"id"`
 	Version              int           `json:"version"`
-	Height               int           `json:"height" storm:"index"`
+	Height               int           `json:"height"`
 	Timestamp            int           `json:"timestamp"`
 	PreviousBlock        string        `json:"previousBlock"`
 	NumberOfTransactions int           `json:"numberOfTransactions"`
@@ -56,5 +56,5 @@ type BlockTmpSync struct {
 	GeneratorPublicKey   string        `json:"generatorPublicKey"`
 	BlockSignature       string        `json:"blockSignature"`
 	Transactions         []Transaction `json:"transactions"`
-	PkIndex              uint64        `storm:"index,increment"`
+	PkIndex              uint64        `json:"-"`
 }

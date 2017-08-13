@@ -17,7 +17,6 @@ func initDB() {
 	testNodeDB, err = storm.Open("../cmd/goark-node/db/ark-node.db")
 
 	if err != nil {
-		log.Fatal(err.Error())
 		panic(err.Error())
 	}
 
@@ -36,7 +35,7 @@ func TestSaveTx(t *testing.T) {
 
 	err := testNodeDB.Save(&tx)
 	if err != nil {
-		log.Fatal(t.Name(), err.Error())
+		t.Error(err.Error())
 	}
 
 	testNodeDB.Close()
@@ -52,7 +51,7 @@ func TestListTx(t *testing.T) {
 	//err := testNodeDB.All(&results)
 	err := testNodeDB.AllByIndex("PkIndex", &results, storm.Limit(50), storm.Skip(5), storm.Reverse())
 	if err != nil {
-		log.Fatal(t.Name(), err.Error())
+		t.Error(err.Error())
 	}
 
 	for id, element := range results {
@@ -66,10 +65,10 @@ func TestListBlocks(t *testing.T) {
 	initDB()
 
 	var results []model.Block
-	err := testNodeDB.AllByIndex("Height", &results, storm.Reverse())
+	err := testNodeDB.AllByIndex("Height", &results, storm.Limit(500), storm.Reverse())
 
 	if err != nil {
-		log.Fatal(t.Name(), err.Error())
+		t.Error(err.Error())
 	}
 
 	for id, element := range results {
@@ -87,7 +86,7 @@ func TestLastBlockByLimit(t *testing.T) {
 	err := testNodeDB.AllByIndex("Height", &results, storm.Limit(1), storm.Reverse())
 
 	if err != nil {
-		log.Fatal(t.Name(), err.Error())
+		t.Error(err.Error())
 	}
 
 	lastBlock = results[0]
@@ -102,7 +101,7 @@ func TestGetBlockByID(t *testing.T) {
 	err := testNodeDB.One("ID", "4366553906931540162", &block)
 
 	if err != nil {
-		log.Fatal(t.Name(), err.Error())
+		t.Error(err.Error())
 	}
 
 	log.Println(block)
@@ -117,7 +116,7 @@ func TestGetTransByID(t *testing.T) {
 	err := testNodeDB.One("ID", "b2ef0adc90e3cf4af5d221350d79c2f2712378e0ef5a71244eecaca4afdc7140", &trans)
 
 	if err != nil {
-		log.Fatal(err.Error())
+		t.Error(err.Error())
 	}
 
 	log.Println(trans)
