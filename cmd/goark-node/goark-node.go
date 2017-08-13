@@ -74,8 +74,8 @@ func initializeRoutes() {
 		peerRoutes.GET("/list", api.SendPeerList)
 		peerRoutes.GET("/status", api.SendPeerStatus)
 
-		peerRoutes.POST("/blocks", api.ReceiveBlocks)
-		peerRoutes.POST("/transactions", api.ReceiveTransactions)
+		peerRoutes.POST("/blocks", api.CheckIfChainLoading(), api.ReceiveBlocks)
+		peerRoutes.POST("/transactions", api.CheckIfChainLoading(), api.ReceiveTransactions)
 	}
 
 	transactionRoutes := router.Group("/api/transactions")
