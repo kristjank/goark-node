@@ -105,6 +105,7 @@ func TestGetBlockByID(t *testing.T) {
 	}
 
 	log.Println(block)
+	testNodeDB.Close()
 }
 
 func TestGetTransByID(t *testing.T) {
