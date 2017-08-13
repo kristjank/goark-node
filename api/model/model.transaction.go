@@ -41,13 +41,3 @@ type TransactionGetResponse struct {
 type TransactionPayload struct {
 	Transactions []Transaction `json:"transactions"`
 }
-
-//TransactionPostResponse structure for call /peer/transaction
-//METHOD POST response structure
-//To send response to client
-type TransactionPostResponse struct {
-	Success        bool     `json:"success"`
-	Message        string   `json:"message,omitempty"`
-	Error          string   `json:"error,omitempty"`
-	TransactionIDs []string `json:"transactionIds"`
-}

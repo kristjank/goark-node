@@ -1,7 +1,6 @@
 package api
 
 import (
-	"errors"
 	"net/http"
 	"strconv"
 
@@ -20,25 +19,11 @@ var ArkNodeDB *storm.DB
 //ArkAPIClient - using to talk with other nodes with the ARK-GO Client API
 var ArkAPIClient *core.ArkClient
 
-//sanityCheck - checking if call came from correct network
-func sanityCheck(header http.Header) error {
-	if header.Get("nethash") != viper.GetString("network.nethash") {
-		return errors.New("Headers NOT OK - NetHash mismatch - network version mismatch")
-	}
-	if header.Get("port") != viper.GetString("port") {
-		return errors.New("Headers NOT OK - Port mismatch")
-	}
-	return nil
-}
+//IsBlockchainSynced - Global locker (semaphore) - to ignore writes and receive blocks if blocks arent at the height
+var IsBlockchainSynced *bool
 
 //SendTransactions Returns a list of peers to client call. Response is in JSON
 func SendTransactions(c *gin.Context) {
-	err := sanityCheck(c.Request.Header)
-	if err != nil {
-		c.JSON(http.StatusOK, gin.H{"success": false, "message": err.Error()})
-		return
-	}
-
 	tx2Send, err := getTransactions(0)
 
 	if err == nil {
@@ -55,26 +40,13 @@ func SendTransactions(c *gin.Context) {
 
 //SendPeerList Returns a list of peers to client call. Response is in JSON
 func SendPeerList(c *gin.Context) {
-	err := sanityCheck(c.Request.Header)
-	if err != nil {
-		c.JSON(http.StatusOK, gin.H{"success": false, "message": err.Error()})
-	} else {
-		c.JSON(200, gin.H{"success": true, "peers": core.EnvironmentParams.Network.PeerList})
-	}
+	c.JSON(200, gin.H{"success": true, "peers": core.EnvironmentParams.Network.PeerList})
 }
 
 //ReceiveBlocks from blockchain
 func ReceiveBlocks(c *gin.Context) {
-	err := sanityCheck(c.Request.Header)
-	if err != nil {
-		//	log.Error(err.Error())
-		c.JSON(http.StatusOK, gin.H{"success": false, "message": err.Error()})
-		return
-	}
-
 	var recv model.BlockReceiveStruct
-	err = c.BindJSON(&recv)
-
+	err := c.BindJSON(&recv)
 	if err != nil {
 		log.Error(err.Error())
 	}
@@ -92,19 +64,10 @@ func ReceiveBlocks(c *gin.Context) {
 	} else {
 		c.JSON(200, gin.H{"success": false, "error": "Chain not at the same height. Unable to receive"})
 	}
-
-	//}
 }
 
 //SendPeerStatus respondes to other peers about node statuts
 func SendPeerStatus(c *gin.Context) {
-	err := sanityCheck(c.Request.Header)
-	if err != nil {
-		//log.Error(err.Error())
-		c.JSON(http.StatusOK, gin.H{"success": false, "message": err.Error()})
-		return
-	}
-
 	var peerStat model.PeerStatus
 	lastBlock, err := getLastBlock()
 	if err != nil {
@@ -119,12 +82,6 @@ func SendPeerStatus(c *gin.Context) {
 
 //SendHeight returns local blockchain height
 func SendHeight(c *gin.Context) {
-	err := sanityCheck(c.Request.Header)
-	if err != nil {
-		c.JSON(http.StatusOK, gin.H{"success": false, "message": err.Error()})
-		return
-	}
-
 	lastBlock, err := getLastBlock()
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{"success": false, "message": err.Error()})
@@ -150,16 +107,11 @@ func SendAutoConfigureParams(c *gin.Context) {
 
 //ReceiveTransactions Returns a list of peers to client call. Response is in JSON
 func ReceiveTransactions(c *gin.Context) {
-	err := sanityCheck(c.Request.Header)
-	if err != nil {
-		c.JSON(http.StatusOK, gin.H{"success": false, "message": err.Error()})
-	}
-
 	log.Debug("Received Tx from network")
 	var recv model.TransactionPayload
 	var txIDs []string
 
-	err = c.BindJSON(&recv)
+	err := c.BindJSON(&recv)
 	if err != nil {
 		log.Error(err.Error())
 	}
@@ -175,12 +127,6 @@ func ReceiveTransactions(c *gin.Context) {
 		log.Debug(element)
 	}
 
-	//preparing response to client
-	var txResponse model.TransactionPostResponse
-	txResponse.Success = true
-	txResponse.TransactionIDs = txIDs
-
 	//sending response
-	c.JSON(200, txResponse)
-
+	c.JSON(200, gin.H{"success": true, "transactionIds": txIDs})
 }

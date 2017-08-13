@@ -6,8 +6,13 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
+func init() {
+	IsBlockchainSynced = new(bool)
+}
+
 //SyncBlockChain syncs blockchain to the lastest block
 func SyncBlockChain() {
+	*IsBlockchainSynced = false
 	localLastBlock, err := getLastBlock()
 	if err != nil {
 		log.Error("Error getting local last block", err.Error())
@@ -43,6 +48,7 @@ func SyncBlockChain() {
 			blockChainHeight = switchPeer()
 		}
 	}
+	*IsBlockchainSynced = true
 }
 
 //Helpers

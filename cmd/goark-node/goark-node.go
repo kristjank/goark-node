@@ -69,6 +69,7 @@ func initializeRoutes() {
 
 	// Group peer related routes together
 	peerRoutes := router.Group("/peer")
+	peerRoutes.Use(api.CheckNetworkHeaders())
 	{
 		peerRoutes.GET("/list", api.SendPeerList)
 		peerRoutes.GET("/status", api.SendPeerStatus)
@@ -78,11 +79,13 @@ func initializeRoutes() {
 	}
 
 	transactionRoutes := router.Group("/api/transactions")
+	transactionRoutes.Use(api.CheckNetworkHeaders())
 	{
 		transactionRoutes.GET("", api.SendTransactions)
 	}
 
 	apiRoutes := router.Group("/api/blocks")
+	apiRoutes.Use(api.CheckNetworkHeaders())
 	{
 		apiRoutes.GET("/getHeight", api.SendHeight)
 	}
@@ -91,6 +94,7 @@ func initializeRoutes() {
 	{
 		autoconfigureRoutes.GET("/autoconfigure", api.SendAutoConfigureParams)
 	}
+
 }
 
 func initBlockChain() {

@@ -8,15 +8,21 @@ import (
 )
 
 //CheckNetworkHeaders check on middleware level
-//NOT USED ATM
+//Function setup in goark-node.go -InitRoutes method
 func CheckNetworkHeaders() gin.HandlerFunc {
 	return func(c *gin.Context) {
+		//cc := c.Copy()
 		if c.Request.Header.Get("nethash") != viper.GetString("network.nethash") {
-			c.AbortWithStatus(http.StatusBadRequest)
+			c.AbortWithStatusJSON(http.StatusOK, gin.H{"success": false, "message": "ENETHASH - Headers NOT OK - NetHash mismatch - network version mismatch"})
+
+		} else if c.Request.Header.Get("port") != viper.GetString("port") {
+			c.AbortWithStatusJSON(http.StatusOK, gin.H{"success": false, "message": "EPORT - Headers NOT OK - Port mismatch"})
+
+		} else if !*IsBlockchainSynced {
+			c.AbortWithStatusJSON(http.StatusOK, gin.H{"success": false, "message": "ECHAIN_LOADING - Blockchain is LOADING/Syncing"})
+
+		} else {
+			c.Next()
 		}
-		if c.Request.Header.Get("version") != viper.GetString("network.version") {
-			c.AbortWithStatus(http.StatusBadRequest)
-		}
-		c.Next()
 	}
 }
