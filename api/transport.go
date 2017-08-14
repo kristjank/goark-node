@@ -55,7 +55,7 @@ func ReceiveBlocks(c *gin.Context) {
 	lastBlock, _ := getLastBlock()
 
 	if recv.Block.Height-lastBlock.Height == 1 {
-		log.Info("Saving new block: ", recv.Block.ID, " height:", recv.Block.Height, " transactions:", len(recv.Block.Transactions), " peer:", c.Request.RemoteAddr)
+		log.Info("Saving new block: ", recv.Block.ID, " height:", recv.Block.Height, " transactions:", len(recv.Block.Transactions), " peer:", c.ClientIP())
 		err := ArkNodeDB.Save(&recv.Block)
 		if err != nil {
 			log.Error(err.Error())

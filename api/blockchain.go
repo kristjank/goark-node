@@ -8,6 +8,7 @@ import (
 
 func init() {
 	IsBlockchainSynced = new(bool)
+	*IsBlockchainSynced = true
 }
 
 //SyncBlockChain syncs blockchain to the lastest block
