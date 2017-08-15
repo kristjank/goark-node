@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"io"
 	"os"
 
 	"github.com/asdine/storm"
@@ -19,17 +20,14 @@ func initLogger() {
 	// Log as JSON instead of the default ASCII formatter.
 	log.SetFormatter(&log.JSONFormatter{})
 
-	log.SetOutput(os.Stdout)
-
 	// You could set this to any `io.Writer` such as a file
 	file, err := os.OpenFile(viper.GetString("logFileName"), os.O_CREATE|os.O_WRONLY, 0666)
 	if err == nil {
-		log.SetOutput(file)
+		log.SetOutput(io.MultiWriter(file, os.Stdout))
 	} else {
 		log.Error("Failed to log to file, using default stderr")
 	}
 
-	log.SetOutput(os.Stdout)
 	//TODO set log level according to cfg/settings
 	//log.SetLevel(log.InfoLevel)
 }
@@ -132,7 +130,12 @@ func main() {
 	}
 
 	// Set the router as the default one provided by Gin
+	//yourfile, _ := os.Create("logs/server.log")
+	//gin.DefaultWriter = io.MultiWriter(yourfile)
 	router = gin.Default()
+	//router.Use(gin.LoggerWithWriter(io.MultiWriter(yourfile)))
+
+	//router = gin.Default()
 	// Initialize the routes
 	initializeRoutes()
 
