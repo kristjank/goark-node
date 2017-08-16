@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"io"
 	"os"
 
 	"github.com/asdine/storm"
@@ -19,17 +20,14 @@ func initLogger() {
 	// Log as JSON instead of the default ASCII formatter.
 	log.SetFormatter(&log.JSONFormatter{})
 
-	log.SetOutput(os.Stdout)
-
 	// You could set this to any `io.Writer` such as a file
 	file, err := os.OpenFile(viper.GetString("logFileName"), os.O_CREATE|os.O_WRONLY, 0666)
 	if err == nil {
-		log.SetOutput(file)
+		log.SetOutput(io.MultiWriter(file, os.Stdout))
 	} else {
 		log.Error("Failed to log to file, using default stderr")
 	}
 
-	log.SetOutput(os.Stdout)
 	//TODO set log level according to cfg/settings
 	//log.SetLevel(log.InfoLevel)
 }
@@ -106,8 +104,6 @@ func initBlockChain() {
 
 ///////////////////////////////////////////////////////////////////////////////////////
 func main() {
-	log.Info("---- GOARK Relay Node Starting ----")
-
 	//init arkapi client - to get other peers and sync with blockchain
 	api.ArkAPIClient = core.NewArkClient(nil)
 	api.ArkAPIClient = api.ArkAPIClient.SetActiveConfiguration(core.MAINNET)
@@ -123,6 +119,7 @@ func main() {
 	initializeDB()
 	//starting blockchain sync in a thread...
 	//TODO needs testing
+	log.Info("---- GOARK Relay Node Starting ----")
 	go initBlockChain()
 
 	log.Info("Flag arguments", flag.Args())
@@ -131,8 +128,21 @@ func main() {
 		api.ArkAPIClient = api.ArkAPIClient.SetActiveConfiguration(core.DEVNET)
 	}
 
+	//GIN SERVER INIT
 	// Set the router as the default one provided by Gin
-	router = gin.Default()
+	f, err := os.OpenFile("logs/server.log", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	if err != nil {
+		log.Fatalf("error opening file: %v", err)
+	}
+	defer f.Close()
+
+	gin.SetMode(gin.DebugMode)
+	gin.DefaultWriter = io.MultiWriter(f)
+	router = gin.New()
+	router.Use(gin.Logger())
+	router.Use(gin.Recovery())
+
+	//router = gin.Default()
 	// Initialize the routes
 	initializeRoutes()
 
