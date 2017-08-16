@@ -16,29 +16,19 @@
 *.test
 *.prof
 *.ark
-main/log/goark-node.log
 
-main/debug
-
-api/goark-node\.db
-api/goark-node.db.lock
+base/goark-node\.db
+base/goark-node.db.lock
 main/goark-node.db
 main/goark-node.db.lock
 main/goark-node.db
 main/goark-node.db
-main/bolter
 
 \.vscode/
-api/ark-node.db
-main/ark-node.db
-main/ark-node.db
-cmd/goark-node/debug
-cmd/goark-node/db/ark-node.db
+base/ark-node.db
 cmd/goark-node/db/ark-node.db
 cmd/goark-node/debug
-cmd/goark-node/debug
-cmd/goark-node/logs/ark.log
-cmd/goark-node/db/ark-node.db
 cmd/goark-node/logs/ark.log
 *.db
+*.log
 cmd/goark-node/goark-node
