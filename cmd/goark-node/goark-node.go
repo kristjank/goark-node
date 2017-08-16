@@ -3,12 +3,13 @@ package main
 import (
 	"flag"
 	"fmt"
+	"io"
 	"os"
 
 	"github.com/asdine/storm"
 	"github.com/gin-gonic/gin"
 	"github.com/kristjank/ark-go/core"
-	"github.com/kristjank/goark-node/api"
+	"github.com/kristjank/goark-node/base"
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 )
@@ -19,19 +20,19 @@ func initLogger() {
 	// Log as JSON instead of the default ASCII formatter.
 	log.SetFormatter(&log.JSONFormatter{})
 
-	log.SetOutput(os.Stdout)
-
 	// You could set this to any `io.Writer` such as a file
 	file, err := os.OpenFile(viper.GetString("logFileName"), os.O_CREATE|os.O_WRONLY, 0666)
 	if err == nil {
-		log.SetOutput(file)
+		log.SetOutput(io.MultiWriter(file, os.Stdout))
 	} else {
 		log.Error("Failed to log to file, using default stderr")
 	}
 
-	log.SetOutput(os.Stdout)
 	//TODO set log level according to cfg/settings
 	//log.SetLevel(log.InfoLevel)
+
+	//redirecting stdOut of client ArkApiClient to logger
+	//base.ArkAPIClient.Std = file
 }
 
 func loadConfig(isDEVNET bool) {
@@ -53,13 +54,13 @@ func loadConfig(isDEVNET bool) {
 
 func initializeDB() {
 	var err error
-	api.ArkNodeDB, err = storm.Open(viper.GetString("db.filename"))
+	base.ArkNodeDB, err = storm.Open(viper.GetString("db.filename"))
 
 	if err != nil {
 		log.Panic("Storm DB init error", err.Error())
 	}
 
-	log.Info("Storm DB Opened at:", api.ArkNodeDB.Path)
+	log.Info("Storm DB Opened at:", base.ArkNodeDB.Path)
 
 	//defer api.ArkNodeDB.Close()
 }
@@ -69,48 +70,46 @@ func initializeRoutes() {
 
 	// Group peer related routes together
 	peerRoutes := router.Group("/peer")
-	peerRoutes.Use(api.CheckNetworkHeaders())
+	peerRoutes.Use(base.CheckNetworkHeaders())
 	{
-		peerRoutes.GET("/list", api.SendPeerList)
-		peerRoutes.GET("/status", api.SendPeerStatus)
+		peerRoutes.GET("/list", base.SendPeerList)
+		peerRoutes.GET("/status", base.SendPeerStatus)
 
 		//TODO fix parallel semaphore for concurency exection of BS syncing
 		//peerRoutes.POST("/blocks", api.CheckIfChainLoading(), api.ReceiveBlocks)
 		//peerRoutes.POST("/transactions", api.CheckIfChainLoading(), api.ReceiveTransactions)
-		peerRoutes.POST("/blocks", api.ReceiveBlocks)
-		peerRoutes.POST("/transactions", api.ReceiveTransactions)
+		peerRoutes.POST("/blocks", base.ReceiveBlocks)
+		peerRoutes.POST("/transactions", base.ReceiveTransactions)
 	}
 
 	transactionRoutes := router.Group("/api/transactions")
-	transactionRoutes.Use(api.CheckNetworkHeaders())
+	transactionRoutes.Use(base.CheckNetworkHeaders())
 	{
-		transactionRoutes.GET("", api.SendTransactions)
+		transactionRoutes.GET("", base.SendTransactions)
 	}
 
 	apiRoutes := router.Group("/api/blocks")
-	apiRoutes.Use(api.CheckNetworkHeaders())
+	apiRoutes.Use(base.CheckNetworkHeaders())
 	{
-		apiRoutes.GET("/getHeight", api.SendHeight)
+		apiRoutes.GET("/getHeight", base.SendHeight)
 	}
 
 	autoconfigureRoutes := router.Group("/api/loader")
 	{
-		autoconfigureRoutes.GET("/autoconfigure", api.SendAutoConfigureParams)
+		autoconfigureRoutes.GET("/autoconfigure", base.SendAutoConfigureParams)
 	}
 
 }
 
 func initBlockChain() {
-	api.SyncBlockChain()
+	base.SyncBlockChain()
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////
 func main() {
-	log.Info("---- GOARK Relay Node Starting ----")
-
 	//init arkapi client - to get other peers and sync with blockchain
-	api.ArkAPIClient = core.NewArkClient(nil)
-	api.ArkAPIClient = api.ArkAPIClient.SetActiveConfiguration(core.MAINNET)
+	base.ArkAPIClient = core.NewArkClient(nil)
+	base.ArkAPIClient = base.ArkAPIClient.SetActiveConfiguration(core.MAINNET)
 
 	//api.ArkApiClient = core.TestMethodNewArkClient(nil)
 
@@ -123,16 +122,30 @@ func main() {
 	initializeDB()
 	//starting blockchain sync in a thread...
 	//TODO needs testing
+	log.Info("---- GOARK Relay Node Starting ----")
 	go initBlockChain()
 
 	log.Info("Flag arguments", flag.Args())
 	if *networkMode {
 		log.Info("DEVNET mode active")
-		api.ArkAPIClient = api.ArkAPIClient.SetActiveConfiguration(core.DEVNET)
+		base.ArkAPIClient = base.ArkAPIClient.SetActiveConfiguration(core.DEVNET)
 	}
 
+	//GIN SERVER INIT
 	// Set the router as the default one provided by Gin
-	router = gin.Default()
+	f, err := os.OpenFile("logs/server.log", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	if err != nil {
+		log.Fatalf("error opening file: %v", err)
+	}
+	defer f.Close()
+
+	gin.SetMode(gin.DebugMode)
+	gin.DefaultWriter = io.MultiWriter(f)
+	router = gin.New()
+	router.Use(gin.Logger())
+	router.Use(gin.Recovery())
+
+	//router = gin.Default()
 	// Initialize the routes
 	initializeRoutes()
 

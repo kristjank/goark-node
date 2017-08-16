@@ -1,10 +1,10 @@
-package api
+package base
 
 import (
 	"strconv"
 
 	"github.com/asdine/storm"
-	"github.com/kristjank/goark-node/api/model"
+	"github.com/kristjank/goark-node/base/model"
 	log "github.com/sirupsen/logrus"
 )
 
