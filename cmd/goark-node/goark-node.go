@@ -76,10 +76,10 @@ func initializeRoutes() {
 		peerRoutes.GET("/status", base.SendPeerStatus)
 
 		//TODO fix parallel semaphore for concurency exection of BS syncing
-		//peerRoutes.POST("/blocks", api.CheckIfChainLoading(), api.ReceiveBlocks)
-		//peerRoutes.POST("/transactions", api.CheckIfChainLoading(), api.ReceiveTransactions)
-		peerRoutes.POST("/blocks", base.ReceiveBlocks)
-		peerRoutes.POST("/transactions", base.ReceiveTransactions)
+		peerRoutes.POST("/blocks", base.CheckIfChainLoading(), base.ReceiveBlocks)
+		peerRoutes.POST("/transactions", base.CheckIfChainLoading(), base.ReceiveTransactions)
+		//peerRoutes.POST("/blocks", base.ReceiveBlocks)
+		//peerRoutes.POST("/transactions", base.ReceiveTransactions)
 	}
 
 	transactionRoutes := router.Group("/api/transactions")
@@ -122,8 +122,9 @@ func main() {
 	initializeDB()
 	//starting blockchain sync in a thread...
 	//TODO needs testing
+	go base.SyncBlockChain()
+
 	log.Info("---- GOARK Relay Node Starting ----")
-	go initBlockChain()
 
 	log.Info("Flag arguments", flag.Args())
 	if *networkMode {
@@ -153,4 +154,5 @@ func main() {
 	pNodeInfo := fmt.Sprintf("%s:%d", viper.GetString("address"), viper.GetInt("port"))
 	log.Info("Starting server, listening on:", pNodeInfo)
 	router.Run(pNodeInfo)
+
 }

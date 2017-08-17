@@ -6,14 +6,11 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-func init() {
-	IsBlockchainSynced = new(bool)
-	*IsBlockchainSynced = true
-}
-
 //SyncBlockChain syncs blockchain to the lastest block
+//it is run when starting the node
 func SyncBlockChain() {
-	*IsBlockchainSynced = false
+	setBCStatus(false)
+
 	localLastBlock, err := getLastBlock()
 	if err != nil {
 		log.Error("Error getting local last block", err.Error())
@@ -23,6 +20,13 @@ func SyncBlockChain() {
 	localHeight := localLastBlock.Height
 	peerSwitcher := 0
 	blockChainHeight := ArkAPIClient.GetActivePeer().Height
+	//In case peer is behind main nodes...
+	if blockChainHeight <= localHeight {
+		log.Info("Localheight ", localHeight, "is greater than connected peer height")
+		blockChainHeight = switchPeer()
+		localHeight -= 50
+	}
+
 	for localHeight < blockChainHeight {
 		//Switch peer ever 10K blocks - while syncing with blockchain -
 		if peerSwitcher < (localHeight / 10000) {
@@ -49,13 +53,24 @@ func SyncBlockChain() {
 			blockChainHeight = switchPeer()
 		}
 	}
-	*IsBlockchainSynced = true
+	setBCStatus(true)
 }
 
-//Helpers
 func switchPeer() int {
 	ArkAPIClient = ArkAPIClient.SwitchPeer()
 	peerHeight := ArkAPIClient.GetActivePeer().Height
 	log.Info("Switched active peer for blockchain sync: ", ArkAPIClient.GetActivePeer(), " peer height: ", peerHeight)
 	return peerHeight
+}
+
+func setBCStatus(status bool) {
+	SyncMutex.Lock()
+	IsBlockchainSynced = status
+	SyncMutex.Unlock()
+}
+
+func getBCStatus() bool {
+	SyncMutex.RLock()
+	defer SyncMutex.RUnlock()
+	return IsBlockchainSynced
 }

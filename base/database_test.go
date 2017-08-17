@@ -6,7 +6,7 @@ import (
 	"testing"
 
 	"github.com/asdine/storm"
-	"github.com/kristjank/goark-node/api/model"
+	"github.com/kristjank/goark-node/base/model"
 )
 
 var testNodeDB *storm.DB

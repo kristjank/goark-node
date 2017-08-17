@@ -14,17 +14,20 @@ func ReceiveBlocks(c *gin.Context) {
 		log.Error(err.Error())
 	}
 
-	//log.Info("New block received - id: ", recv.Block.ID, " height:", recv.Block.Height, " transactions:", len(recv.Block.Transactions), " peer:", c.Request.RemoteAddr)
 	lastBlock, _ := getLastBlock()
-
-	if recv.Block.Height-lastBlock.Height == 1 {
+	blockDiff := recv.Block.Height - lastBlock.Height
+	//TODO add checking if same block is received - we take the last one
+	if blockDiff <= 1 && getBCStatus() {
 		log.Info("Saving new block: ", recv.Block.ID, " height:", recv.Block.Height, " transactions:", len(recv.Block.Transactions), " peer:", c.ClientIP())
 		err := ArkNodeDB.Save(&recv.Block)
 		if err != nil {
 			log.Error(err.Error())
 		}
 		c.JSON(200, gin.H{"success": true, "blockId": recv.Block.ID})
-	} else {
-		c.JSON(200, gin.H{"success": false, "error": "Chain not at the same height. Unable to receive"})
+	} else if blockDiff > 1 && getBCStatus() {
+		//look like there was a small network jump - resyncing blocks - here calling it not in thread...
+		log.Info("Calling resync - lost", blockDiff, " blocks!")
+		go SyncBlockChain()
+		c.JSON(200, gin.H{"success": false, "message": "ECHAIN_NOT_SYNCED"})
 	}
 }
