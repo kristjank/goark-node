@@ -28,7 +28,7 @@ func CheckNetworkHeaders() gin.HandlerFunc {
 //Function setup in goark-node.go -InitRoutes method
 func CheckIfChainLoading() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		if !getBCStatus() {
+		if !getBlockChainSyncStatus() {
 			log.Error("ECHAIN_LOADING")
 			c.AbortWithStatusJSON(http.StatusOK, gin.H{"success": false, "message": "ECHAIN_LOADING - Blockchain is LOADING/Syncing"})
 		} else {

@@ -101,10 +101,6 @@ func initializeRoutes() {
 
 }
 
-func initBlockChain() {
-	base.SyncBlockChain()
-}
-
 ///////////////////////////////////////////////////////////////////////////////////////
 func main() {
 	//init arkapi client - to get other peers and sync with blockchain
@@ -122,7 +118,7 @@ func main() {
 	initializeDB()
 	//starting blockchain sync in a thread...
 	//TODO needs testing
-	go base.SyncBlockChain()
+	//go base.SyncBlockChain(base.ArkAPIClient.GetActivePeer().Height)
 
 	log.Info("---- GOARK Relay Node Starting ----")
 

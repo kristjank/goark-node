@@ -8,8 +8,13 @@ import (
 
 //SyncBlockChain syncs blockchain to the lastest block
 //it is run when starting the node
-func SyncBlockChain() {
-	setBCStatus(false)
+func SyncBlockChain(blockChainHeight int) {
+
+	//we are already syncing - just return the thread
+	if !getBlockChainSyncStatus(){
+		return
+	}
+	setBlockChainSyncStatus(false)
 
 	localLastBlock, err := getLastBlock()
 	if err != nil {
@@ -19,13 +24,6 @@ func SyncBlockChain() {
 
 	localHeight := localLastBlock.Height
 	peerSwitcher := 0
-	blockChainHeight := ArkAPIClient.GetActivePeer().Height
-	//In case peer is behind main nodes...
-	if blockChainHeight <= localHeight {
-		log.Info("Localheight ", localHeight, "is greater than connected peer height")
-		blockChainHeight = switchPeer()
-		localHeight -= 50
-	}
 
 	for localHeight < blockChainHeight {
 		//Switch peer ever 10K blocks - while syncing with blockchain -
@@ -53,7 +51,7 @@ func SyncBlockChain() {
 			blockChainHeight = switchPeer()
 		}
 	}
-	setBCStatus(true)
+	setBlockChainSyncStatus(true)
 }
 
 func switchPeer() int {
@@ -63,13 +61,14 @@ func switchPeer() int {
 	return peerHeight
 }
 
-func setBCStatus(status bool) {
+//HELPER SYNC WRAPPERS
+func setBlockChainSyncStatus(status bool) {
 	SyncMutex.Lock()
 	IsBlockchainSynced = status
 	SyncMutex.Unlock()
 }
 
-func getBCStatus() bool {
+func getBlockChainSyncStatus() bool {
 	SyncMutex.RLock()
 	defer SyncMutex.RUnlock()
 	return IsBlockchainSynced

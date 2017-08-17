@@ -26,5 +26,5 @@ var SyncMutex = &sync.RWMutex{}
 
 func init() {
 	ChainSyncChannel = make(chan int, 1)
-	setBCStatus(false)
+	setBlockChainSyncStatus(true)
 }
