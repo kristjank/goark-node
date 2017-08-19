@@ -105,9 +105,6 @@ func initializeRoutes() {
 func main() {
 	//init arkapi client - to get other peers and sync with blockchain
 	base.ArkAPIClient = core.NewArkClient(nil)
-	base.ArkAPIClient = base.ArkAPIClient.SetActiveConfiguration(core.MAINNET)
-
-	//api.ArkApiClient = core.TestMethodNewArkClient(nil)
 
 	//reading commandline args
 	networkMode := flag.Bool("devnet", false, "Is devnet mode")
@@ -137,7 +134,7 @@ func main() {
 	defer f.Close()
 
 	gin.SetMode(gin.DebugMode)
-	gin.DefaultWriter = io.MultiWriter(f)
+	gin.DefaultWriter = io.MultiWriter(f, os.Stdout)
 	router = gin.New()
 	router.Use(gin.Logger())
 	router.Use(gin.Recovery())
