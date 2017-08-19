@@ -12,4 +12,23 @@
 
 # Project-local glide cache, RE: https://github.com/Masterminds/glide/issues/736
 .glide/
-main/debug
+*.exe
+*.test
+*.prof
+*.ark
+
+base/goark-node\.db
+base/goark-node.db.lock
+main/goark-node.db
+main/goark-node.db.lock
+main/goark-node.db
+main/goark-node.db
+
+\.vscode/
+base/ark-node.db
+cmd/goark-node/db/ark-node.db
+cmd/goark-node/debug
+cmd/goark-node/logs/ark.log
+*.db
+*.log
+cmd/goark-node/goark-node

@@ -1,0 +1,31 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        { 
+            "name": "GO DEVNET",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "remotePath": "",
+            "port": 2345,
+            "host": "127.0.0.1",
+            "program": "${workspaceRoot}/cmd/goark-node/goark-node.go",
+            "env": {},
+            "args": ["-devnet=true"],
+            "showLog": true
+        },
+        {
+            "name": "GO MAINNET",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "remotePath": "",
+            "port": 2345,
+            "host": "127.0.0.1",
+            "program": "${workspaceRoot}/cmd/goark-node/goark-node.go",
+            "env": {},
+            "args": [],
+            "showLog": true
+        }
+    ]
+}

@@ -1,0 +1,77 @@
+{
+  "port": 4002,
+  "address": "0.0.0.0",
+  "version": "0.2.0",
+  "fileLogLevel": "debug",
+  "logFileName": "logs/dark.log",
+  "consoleLogLevel": "debug",
+  "trustProxy": false,
+  "network" : {
+    "nethash": "578e820911f24e039733b45e4882b73e301f813a0d2c31330dafda84534ffa23",
+    "explorer" : "https://dexplorer.arkcoin.net",
+    "token" : "DARK",
+    "symbol" : "DѦ",
+    "version" : 30
+  },
+  "db": {
+    "filename": "db/devark-node.db"
+  },
+  "api": {
+    "mount": true,
+    "access": {
+      "whiteList": []
+    },
+    "options": {
+      "limits": {
+        "max": 0,
+        "delayMs": 0,
+        "delayAfter": 0,
+        "windowMs": 60000
+      }
+    }
+  },
+  "peers": {
+    "minimumNetworkReach": 4,
+    "list": [
+      {"ip":"167.114.29.32", "port":4000},
+      {"ip":"167.114.29.33", "port":4000},
+      {"ip":"167.114.29.34", "port":4000},
+      {"ip":"167.114.29.35", "port":4000},
+      {"ip":"167.114.29.36", "port":4000}
+    ],
+    "blackList": [],
+    "options": {
+      "limits": {
+        "max": 0,
+        "delayMs": 0,
+        "delayAfter": 0,
+        "windowMs": 60000
+      },
+      "maxUpdatePeers": 20,
+      "timeout": 5000
+    }
+  },
+  "forging": {
+    "coldstart": 6,
+    "force": true,
+    "secret": [],
+    "access": {
+      "whiteList": [
+        "127.0.0.1"
+      ]
+    }
+  },
+  "loading": {
+    "verifyOnLoading": false,
+    "loadPerIteration": 5000
+  },
+  "ssl": {
+    "enabled": false,
+    "options": {
+      "port": 443,
+      "address": "0.0.0.0",
+      "key": "./ssl/ark.key",
+      "cert": "./ssl/ark.crt"
+    }
+  }
+}
