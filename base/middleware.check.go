@@ -32,7 +32,7 @@ func CheckIfChainLoading() gin.HandlerFunc {
 			log.Error("ECHAIN_LOADING")
 			c.AbortWithStatusJSON(http.StatusOK, gin.H{"success": false, "message": "ECHAIN_LOADING - Blockchain is LOADING/Syncing"})
 		} else {
-			log.Info("CHAIN_SYNCED - continue")
+			//log.Info("CHAIN_SYNCED - continue")
 			c.Next()
 		}
 	}
