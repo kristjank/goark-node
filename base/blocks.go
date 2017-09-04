@@ -18,7 +18,7 @@ func ReceiveBlocks(c *gin.Context) {
 	blockDiff := recv.Block.Height - lastBlock.Height
 	//TODO add checking if same block is received - we take the last one
 	if blockDiff <= 1 && getBlockChainSyncStatus() {
-		log.Info("Saving new block: ", recv.Block.ID, " height:", recv.Block.Height, " transactions:", len(recv.Block.Transactions), " peer:", c.ClientIP())
+		log.Info("Saving new block: ", recv.Block.ID, " height:", recv.Block.Height, " transactions:", recv.Block.NumberOfTransactions, " peer:", c.ClientIP())
 		err := ArkNodeDB.Save(&recv.Block)
 		if err != nil {
 			log.Error(err.Error())
