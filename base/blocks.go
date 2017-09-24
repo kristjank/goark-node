@@ -85,9 +85,8 @@ func CheckCommonBlocks(c *gin.Context) {
 			block2Ret = block
 		}
 
-		log.Println(block.Height)
 		if err != nil {
-			c.JSON(200, gin.H{"success": false})
+			c.JSON(200, gin.H{"success": false, "blockId": block.ID})
 		}
 	}
 
