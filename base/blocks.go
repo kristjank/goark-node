@@ -2,6 +2,7 @@ package base
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/kristjank/ark-go/core"
 	"github.com/kristjank/goark-node/base/model"
 	log "github.com/sirupsen/logrus"
 )
@@ -17,7 +18,7 @@ func ReceiveBlocks(c *gin.Context) {
 	lastBlock, _ := getLastBlock()
 	blockDiff := recv.Block.Height - lastBlock.Height
 	if blockDiff == 1 && getBlockChainSyncStatus() {
-		//Mutex to wait - for saving complete
+		//Mutex to wait - for saving 2 complete
 		//Then common blocks can continue
 		if !GetSaveBlockMutex() {
 			SetSaveBlockMutex(true)
@@ -27,6 +28,7 @@ func ReceiveBlocks(c *gin.Context) {
 				log.Error(err.Error())
 			}
 			c.JSON(200, gin.H{"success": true, "blockId": recv.Block.ID})
+			multiBroadCastBlock(recv)
 			SetSaveBlockMutex(false)
 		} else {
 			log.Debug("Saving process 2 DB active")
@@ -44,6 +46,28 @@ func ReceiveBlocks(c *gin.Context) {
 			log.Info("Received different block than saved one: ", recv.Block.ID, " height:", recv.Block.Height, " with peer:", c.ClientIP())
 			c.JSON(200, gin.H{"success": false, "blockId": recv.Block.ID})
 		}
+	}
+}
+
+func multiBroadCastBlock(block model.BlockReceiveStruct) {
+	numberOfPeers2MultiBroadCastTo := 10
+	if numberOfPeers2MultiBroadCastTo > 15 {
+		numberOfPeers2MultiBroadCastTo = 15
+		log.Warn("Max broadcast number too high - set by user, reseting to value 15")
+	}
+	log.Info("Starting multibroadcast/multithreaded parallel payout to ", numberOfPeers2MultiBroadCastTo, " number of peers")
+	peers := ArkAPIClient.GetRandomXPeers(numberOfPeers2MultiBroadCastTo)
+	for i := 0; i < numberOfPeers2MultiBroadCastTo; i++ {
+		//treaded function
+		go func(blockPayload model.BlockReceiveStruct, peer core.Peer) {
+			//defer wg.Done()
+			arkTmpClient := core.NewArkClientFromPeer(peer)
+			res, _, _ := arkTmpClient.PostBlock(blockPayload)
+			//TODO - maybe check for success of sending
+			if res.Success {
+				log.Debug("Block ", blockPayload.Block.ID, " retransmited to ", peer)
+			}
+		}(block, peers[i])
 	}
 }
 
