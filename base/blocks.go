@@ -1,6 +1,8 @@
 package base
 
 import (
+	"strings"
+
 	"github.com/gin-gonic/gin"
 	"github.com/kristjank/ark-go/core"
 	"github.com/kristjank/goark-node/base/model"
@@ -20,8 +22,8 @@ func ReceiveBlocks(c *gin.Context) {
 	if blockDiff == 1 && getBlockChainSyncStatus() {
 		//Mutex to wait - for saving 2 complete
 		//Then common blocks can continue
-		if !GetSaveBlockMutex() {
-			SetSaveBlockMutex(true)
+		if !getSaveBlockMutex() {
+			setSaveBlockMutex(true)
 			log.Info("Saving new block: ", recv.Block.ID, " height:", recv.Block.Height, " transactions:", recv.Block.NumberOfTransactions, " peer:", c.ClientIP())
 			err := ArkNodeDB.Save(&recv.Block)
 			if err != nil {
@@ -29,7 +31,7 @@ func ReceiveBlocks(c *gin.Context) {
 			}
 			c.JSON(200, gin.H{"success": true, "blockId": recv.Block.ID})
 			multiBroadCastBlock(recv)
-			SetSaveBlockMutex(false)
+			setSaveBlockMutex(false)
 		} else {
 			log.Debug("Saving process 2 DB active")
 		}
@@ -39,11 +41,11 @@ func ReceiveBlocks(c *gin.Context) {
 		go SyncBlockChain(recv.Block.Height)
 		c.JSON(200, gin.H{"success": false, "message": "ECHAIN_NOT_SYNCED"})
 	} else if blockDiff == 0 && getBlockChainSyncStatus() {
-		if checkCommonBlock(recv.Block) {
+		if isEqualBlock(recv.Block) {
 			log.Info("Found common block: ", recv.Block.ID, " height:", recv.Block.Height, " with peer:", c.ClientIP())
 			c.JSON(200, gin.H{"success": true, "blockId": recv.Block.ID})
 		} else {
-			log.Info("Received different block than saved one: ", recv.Block.ID, " height:", recv.Block.Height, " with peer:", c.ClientIP())
+			log.Error("Received different block than saved one: ", recv.Block.ID, " height:", recv.Block.Height, " with peer:", c.ClientIP())
 			c.JSON(200, gin.H{"success": false, "blockId": recv.Block.ID})
 		}
 	}
@@ -71,7 +73,38 @@ func multiBroadCastBlock(block model.BlockReceiveStruct) {
 	}
 }
 
-func checkCommonBlock(block model.Block) bool {
+func CheckCommonBlocks(c *gin.Context) {
+	timestamp := 0
+	var block2Ret model.Block
+	var blockResponse = new(model.BlockCommonResponse)
+	for _, el := range strings.Split(c.Query("ids"), ",") {
+		block, err := getBlockByID(el)
+
+		if block.Timestamp > timestamp {
+			timestamp = block.Timestamp
+			block2Ret = block
+		}
+
+		log.Println(block.Height)
+		if err != nil {
+			c.JSON(200, gin.H{"success": false})
+		}
+	}
+
+	blockResponse.Success = true
+	blockResponse.Common.Height = block2Ret.Height
+	blockResponse.Common.ID = block2Ret.ID
+	blockResponse.Common.PreviousBlock = block2Ret.PreviousBlock
+	blockResponse.Common.Timestamp = block2Ret.Timestamp
+
+	block2Ret, _ = getLastBlock()
+	blockResponse.LastBlockHeight = block2Ret.Height
+
+	c.JSON(200, blockResponse)
+
+}
+
+func isEqualBlock(block model.Block) bool {
 	dbBlock, err := getBlockByID(block.ID)
 	if err != nil {
 		log.Error("Error check common block", err.Error())

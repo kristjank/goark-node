@@ -25,6 +25,18 @@ type BlockHeightResponse struct {
 	ID      string `json:"id"`
 }
 
+//BlockCommonResponse response to peer/blocks/common?ids...
+type BlockCommonResponse struct {
+	Success bool `json:"success"`
+	Common  struct {
+		Height        int    `json:"height"`
+		ID            string `json:"id"`
+		PreviousBlock string `json:"previousBlock"`
+		Timestamp     int    `json:"timestamp"`
+	} `json:"common"`
+	LastBlockHeight int `json:"lastBlockHeight"`
+}
+
 //Block structure to store block data
 type Block struct {
 	ID                   string        `json:"id" storm:"id"`

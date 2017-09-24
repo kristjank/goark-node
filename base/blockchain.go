@@ -74,13 +74,13 @@ func getBlockChainSyncStatus() bool {
 	return IsBlockchainSynced
 }
 
-func SetSaveBlockMutex(status bool) {
+func setSaveBlockMutex(status bool) {
 	SaveBlockMutex.Lock()
 	IsBlockSaving = status
 	SaveBlockMutex.Unlock()
 }
 
-func GetSaveBlockMutex() bool {
+func getSaveBlockMutex() bool {
 	SaveBlockMutex.RLock()
 	defer SaveBlockMutex.RUnlock()
 	return IsBlockSaving

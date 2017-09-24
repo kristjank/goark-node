@@ -78,6 +78,7 @@ func initializeRoutes() {
 
 		peerRoutes.POST("/blocks", base.CheckIfChainLoading(), base.ReceiveBlocks)
 		peerRoutes.POST("/transactions", base.CheckIfChainLoading(), base.ReceiveTransactions)
+		peerRoutes.GET("/blocks/common", base.CheckIfChainLoading(), base.CheckCommonBlocks)
 	}
 
 	transactionRoutes := router.Group("/api/transactions")
@@ -135,8 +136,8 @@ func main() {
 	defer f.Close()
 
 	gin.SetMode(gin.DebugMode)
-	//gin.DefaultWriter = io.MultiWriter(f, os.Stdout)
-	gin.DefaultWriter = io.MultiWriter(f)
+	gin.DefaultWriter = io.MultiWriter(f, os.Stdout)
+	//gin.DefaultWriter = io.MultiWriter(f)
 
 	router = gin.New()
 	router.Use(gin.Logger())

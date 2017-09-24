@@ -17,6 +17,8 @@ var ArkAPIClient *core.ArkClient
 //IsBlockchainSynced - Global locker (semaphore) - to ignore writes and receive blocks if blocks arent at the height
 var IsBlockchainSynced bool
 
+//IsBlockSaving - Global locker (semaphore) - to ignore writes of secondly received blocks if the same...
+//Important for eventhook api
 var IsBlockSaving bool
 
 //ChainSyncChannel - to signalend execution of chain sync
