@@ -37,7 +37,37 @@ func ReceiveBlocks(c *gin.Context) {
 		go SyncBlockChain(recv.Block.Height)
 		c.JSON(200, gin.H{"success": false, "message": "ECHAIN_NOT_SYNCED"})
 	} else if blockDiff == 0 && getBlockChainSyncStatus() {
-		log.Info("Found common block: ", recv.Block.ID, " height:", recv.Block.Height, " with peer:", c.ClientIP())
-		c.JSON(200, gin.H{"success": true, "blockId": recv.Block.ID})
+		if checkCommonBlock(recv.Block) {
+			log.Info("Found common block: ", recv.Block.ID, " height:", recv.Block.Height, " with peer:", c.ClientIP())
+			c.JSON(200, gin.H{"success": true, "blockId": recv.Block.ID})
+		} else {
+			log.Info("Received different block than saved one: ", recv.Block.ID, " height:", recv.Block.Height, " with peer:", c.ClientIP())
+			c.JSON(200, gin.H{"success": false, "blockId": recv.Block.ID})
+		}
 	}
+}
+
+func checkCommonBlock(block model.Block) bool {
+	dbBlock, err := getBlockByID(block.ID)
+	if err != nil {
+		log.Error("Error check common block", err.Error())
+		return false
+	}
+	if compareBlocks(dbBlock, block) {
+		return true
+	}
+	return false
+}
+
+func compareBlocks(a, b model.Block) bool {
+	if &a == &b {
+		return true
+	}
+	if a.Height != b.Height || a.Timestamp != b.Timestamp {
+		return false
+	}
+	if len(a.Transactions) != len(b.Transactions) || len(a.Transactions) != len(b.Transactions) {
+		return false
+	}
+	return true
 }
