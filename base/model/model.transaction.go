@@ -1,6 +1,6 @@
 package model
 
-//TransactionType to store the type)
+//TransactionType to make it more readable - enum
 type TransactionType byte
 
 //Transaction struct - represents structure of ARK.io blockchain transaction
@@ -40,4 +40,12 @@ type TransactionGetResponse struct {
 //Parse transaction from Array- e.g. block or post transaction
 type TransactionPayload struct {
 	Transactions []Transaction `json:"transactions"`
+}
+
+//PostTransactionResponse structure for call /peer/list
+type PostTransactionResponse struct {
+	Success        bool     `json:"success"`
+	Message        string   `json:"message"`
+	Error          string   `json:"error"`
+	TransactionIDs []string `json:"transactionIds"`
 }

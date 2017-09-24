@@ -15,6 +15,7 @@ import (
 )
 
 var router *gin.Engine
+var GOARKNodeVersion string
 
 func initLogger() {
 	// Log as JSON instead of the default ASCII formatter.
@@ -75,11 +76,8 @@ func initializeRoutes() {
 		peerRoutes.GET("/list", base.SendPeerList)
 		peerRoutes.GET("/status", base.SendPeerStatus)
 
-		//TODO fix parallel semaphore for concurency exection of BS syncing
 		peerRoutes.POST("/blocks", base.CheckIfChainLoading(), base.ReceiveBlocks)
 		peerRoutes.POST("/transactions", base.CheckIfChainLoading(), base.ReceiveTransactions)
-		//peerRoutes.POST("/blocks", base.ReceiveBlocks)
-		//peerRoutes.POST("/transactions", base.ReceiveTransactions)
 	}
 
 	transactionRoutes := router.Group("/api/transactions")
@@ -103,6 +101,9 @@ func initializeRoutes() {
 
 ///////////////////////////////////////////////////////////////////////////////////////
 func main() {
+	//sending GOARK-NODE Version that we are working with payments
+	//setting the version
+	GOARKNodeVersion = "v0.2.0"
 	//init arkapi client - to get other peers and sync with blockchain
 	base.ArkAPIClient = core.NewArkClient(nil)
 
