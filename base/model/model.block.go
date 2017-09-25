@@ -12,11 +12,29 @@ type BlockResponse struct {
 	Count   int            `json:"count,omitempty"`
 }
 
+//PostBlockResponse structure to receive result from PostBlock
+type PostBlockResponse struct {
+	Success bool   `json:"success"`
+	BlockID string `json:"blockID,omitempty"`
+}
+
 //BlockHeightResponse structure to receive blocks from a random peer - from GET request
 type BlockHeightResponse struct {
 	Success bool   `json:"success"`
 	Height  int    `json:"height"`
 	ID      string `json:"id"`
+}
+
+//BlockCommonResponse response to peer/blocks/common?ids...
+type BlockCommonResponse struct {
+	Success bool `json:"success"`
+	Common  struct {
+		Height        int    `json:"height"`
+		ID            string `json:"id"`
+		PreviousBlock string `json:"previousBlock"`
+		Timestamp     int    `json:"timestamp"`
+	} `json:"common"`
+	LastBlockHeight int `json:"lastBlockHeight"`
 }
 
 //Block structure to store block data

@@ -11,7 +11,7 @@ import (
 func SyncBlockChain(blockChainHeight int) {
 
 	//we are already syncing - just return the thread
-	if !getBlockChainSyncStatus(){
+	if !getBlockChainSyncStatus() {
 		return
 	}
 	setBlockChainSyncStatus(false)
@@ -72,4 +72,16 @@ func getBlockChainSyncStatus() bool {
 	SyncMutex.RLock()
 	defer SyncMutex.RUnlock()
 	return IsBlockchainSynced
+}
+
+func setSaveBlockMutex(status bool) {
+	SaveBlockMutex.Lock()
+	IsBlockSaving = status
+	SaveBlockMutex.Unlock()
+}
+
+func getSaveBlockMutex() bool {
+	SaveBlockMutex.RLock()
+	defer SaveBlockMutex.RUnlock()
+	return IsBlockSaving
 }
