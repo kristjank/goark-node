@@ -77,17 +77,20 @@ func CheckCommonBlocks(c *gin.Context) {
 	timestamp := 0
 	var block2Ret model.Block
 	var blockResponse = new(model.BlockCommonResponse)
+
 	for _, el := range strings.Split(c.Query("ids"), ",") {
 		block, err := getBlockByID(el)
+		if err != nil {
+			block2Ret, _ = getLastBlock()
+			c.JSON(200, gin.H{"success": true, "common": nil, "lastBlockHeight": block2Ret.Height})
+			return
+		}
 
 		if block.Timestamp > timestamp {
 			timestamp = block.Timestamp
 			block2Ret = block
 		}
 
-		if err != nil {
-			c.JSON(200, gin.H{"success": false, "blockId": block.ID})
-		}
 	}
 
 	blockResponse.Success = true

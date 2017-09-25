@@ -136,8 +136,8 @@ func main() {
 	defer f.Close()
 
 	gin.SetMode(gin.DebugMode)
-	gin.DefaultWriter = io.MultiWriter(f, os.Stdout)
-	//gin.DefaultWriter = io.MultiWriter(f)
+	//gin.DefaultWriter = io.MultiWriter(f, os.Stdout)
+	gin.DefaultWriter = io.MultiWriter(f)
 
 	router = gin.New()
 	router.Use(gin.Logger())
