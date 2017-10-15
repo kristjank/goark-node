@@ -24,14 +24,16 @@ func ReceiveBlocks(c *gin.Context) {
 		//Then common blocks can continue
 		if !getSaveBlockMutex() {
 			setSaveBlockMutex(true)
-			log.Info("Saving new block: ", recv.Block.ID, " height:", recv.Block.Height, " transactions:", recv.Block.NumberOfTransactions, " peer:", c.ClientIP())
-			err := ArkNodeDB.Save(&recv.Block)
-			if err != nil {
-				log.Error(err.Error())
+			if validateBlock(recv.Block, lastBlock) {
+				log.Info("Saving new block: ", recv.Block.ID, " height:", recv.Block.Height, " transactions:", recv.Block.NumberOfTransactions, " peer:", c.ClientIP())
+				err := ArkNodeDB.Save(&recv.Block)
+				if err != nil {
+					log.Error(err.Error())
+				}
+				c.JSON(200, gin.H{"success": true, "blockId": recv.Block.ID})
+				multiBroadCastBlock(recv)
+				setSaveBlockMutex(false)
 			}
-			c.JSON(200, gin.H{"success": true, "blockId": recv.Block.ID})
-			multiBroadCastBlock(recv)
-			setSaveBlockMutex(false)
 		} else {
 			log.Debug("Saving process 2 DB active")
 		}
@@ -129,4 +131,13 @@ func compareBlocks(a, b model.Block) bool {
 		return false
 	}
 	return true
+}
+
+func validateBlock(received, lastBlock model.Block) bool, error {
+	blockOK := 0
+	if received.PreviousBlock == lastBlock.ID {
+		blockOK++
+	}
+	
+	return false
 }
