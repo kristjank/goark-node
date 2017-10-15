@@ -26,6 +26,7 @@ func ReceiveBlocks(c *gin.Context) {
 			setSaveBlockMutex(true)
 			if validateBlock(recv.Block, lastBlock) {
 				log.Info("Saving new block: ", recv.Block.ID, " height:", recv.Block.Height, " transactions:", recv.Block.NumberOfTransactions, " peer:", c.ClientIP())
+				go matchHooks(recv.Block)
 				err := ArkNodeDB.Save(&recv.Block)
 				if err != nil {
 					log.Error(err.Error())
@@ -133,11 +134,11 @@ func compareBlocks(a, b model.Block) bool {
 	return true
 }
 
-func validateBlock(received, lastBlock model.Block) bool, error {
+func validateBlock(received, lastBlock model.Block) bool {
 	blockOK := 0
 	if received.PreviousBlock == lastBlock.ID {
 		blockOK++
 	}
-	
-	return false
+
+	return true
 }
