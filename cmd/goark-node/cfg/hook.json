@@ -1,0 +1,34 @@
+{
+    "id": "webhook",
+    "response-message": "I got the payload!",
+    "trigger-rule":
+    {
+      "and":
+      [
+        {
+          "match":
+          {
+            "type": "payload-hash-sha1",
+            "secret": "mysecret",
+            "parameter":
+            {
+              "source": "header",
+              "name": "X-Hub-Signature"
+            }
+          }
+        },
+        {
+          "match":
+          {
+            "type": "value",
+            "value": "refs/heads/master",
+            "parameter":
+            {
+              "source": "payload",
+              "name": "ref"
+            }
+          }
+        }
+      ]
+    }
+  }

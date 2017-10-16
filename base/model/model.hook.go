@@ -1,9 +1,9 @@
 package model
 
 type Hook struct {
-	ID              string        `json:"id"`
-	ResponseMessage string        `json:"response-message"`
-	Trigger         []TriggerRule `json:"trigger-rule"`
+	ID              string      `json:"id"`
+	ResponseMessage string      `json:"response-message"`
+	Trigger         TriggerRule `json:"trigger-rule"`
 }
 
 type TriggerRule struct {
