@@ -1,0 +1,13 @@
+{
+    "hooks": [
+        {
+            "hook-id" : "HOOK SENDER TEST",
+            "callbackURI": "http://localhost/test",
+            "conditions" : {
+                "RecipientID"  : "Axxaasd",
+                "Type"         : 2,
+                "SenderID"     : "asdasda" 
+            }
+        }
+    ]
+}
