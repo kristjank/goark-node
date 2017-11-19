@@ -1,0 +1,17 @@
+{
+    "hooks": [
+        {
+            "hook-id" : "HOOK SENDER TEST",
+            "callbackURI": "http://localhost/test",
+            "trigger-rule" : 
+                { 
+                    "match" : 
+                    {
+                        "RecipientID"  : "Axxaasd",
+                        "Type"         : 2,
+                        "SenderID"     : "asdasda"
+                    }
+                }
+        }
+    ]
+}
