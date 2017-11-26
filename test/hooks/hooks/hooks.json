@@ -1,16 +1,14 @@
 {
     "hooks": [
         {
-            "hook-id" : "HOOK SENDER TEST",
-            "callbackURI": "http://localhost/test",
-            "trigger-rule" : 
+            "HookID" : "HOOK SENDER TEST",
+            "CallbackURI": "http://localhost/test",
+            "HookType":"slack",
+            "TriggerRule" : 
                 { 
-                    "match" : 
-                    {
-                        "RecipientID"  : "Axxaasd",
-                        "Type"         : 2,
-                        "SenderID"     : "asdasda"
-                    }
+                    "RecipientID"  : "Axxaasd",
+                    "Type"         : 2,
+                    "SenderID"     : "asdasda"
                 }
         }
     ]
