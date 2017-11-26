@@ -76,6 +76,7 @@ func multiBroadCastBlock(block model.BlockReceiveStruct) {
 	}
 }
 
+//CheckCommonBlocks handles api call peer/common
 func CheckCommonBlocks(c *gin.Context) {
 	timestamp := 0
 	var block2Ret model.Block
@@ -125,6 +126,11 @@ func compareBlocks(a, b model.Block) bool {
 	if &a == &b {
 		return true
 	}
+
+	if a.BlockSignature != b.BlockSignature || a.GeneratorPublicKey != b.GeneratorPublicKey {
+		return false
+	}
+
 	if a.Height != b.Height || a.Timestamp != b.Timestamp {
 		return false
 	}
@@ -135,10 +141,8 @@ func compareBlocks(a, b model.Block) bool {
 }
 
 func validateBlock(received, lastBlock model.Block) bool {
-	blockOK := 0
-	if received.PreviousBlock == lastBlock.ID {
-		blockOK++
+	if received.PreviousBlock == lastBlock.ID && received.Height == lastBlock.Height+1 {
+		return true
 	}
-
-	return true
+	return false
 }

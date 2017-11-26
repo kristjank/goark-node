@@ -29,9 +29,11 @@ func initLogger() {
 		log.Error("Failed to log to file, using default stderr")
 	}
 
-	//TODO set log level according to cfg/settings
-	//log.SetLevel(log.InfoLevel)
-
+	level, err := log.ParseLevel(viper.GetString("fileLogLevel"))
+	if err != nil {
+		log.SetLevel(log.InfoLevel)
+	}
+	log.SetLevel(level)
 	//redirecting stdOut of client ArkApiClient to logger
 	//base.ArkAPIClient.Std = file
 }
@@ -118,6 +120,11 @@ func main() {
 	//starting blockchain sync in a thread...
 	//TODO needs testing
 	//go base.SyncBlockChain(base.ArkAPIClient.GetActivePeer().Height)
+
+	//corba cli init
+	if err := RootCommand().Execute(); err != nil {
+		log.Fatal(err)
+	}
 
 	log.Info("---- GOARK Relay Node Starting ----")
 

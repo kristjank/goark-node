@@ -19,24 +19,44 @@ func ReceiveTransactions(c *gin.Context) {
 	if err != nil {
 		log.Error(err.Error())
 	}
-	multiBroadCastTx(recv)
 
-	//saving tx to db
-	for _, element := range recv.Transactions {
-		err := ArkNodeDB.Save(&element)
+	txCheckedOk := true
+	for _, tx := range recv.Transactions {
+		err := tx.Verify()
 		if err != nil {
-			log.Error(err.Error())
+			c.JSON(200, gin.H{"success": false, "message": err.Error()})
+			log.Error("Wrong TX received from ", c.ClientIP(), " error ", err.Error(), " txID ", tx.ID)
+			txCheckedOk = false
 		}
-		txIDs = append(txIDs, element.ID)
-		log.Debug(txIDs)
-		log.Debug(element)
+		if tx.SecondSenderPublicKey != "" {
+			err = tx.SecondVerify()
+			if err != nil {
+				c.JSON(200, gin.H{"success": false, "message": err.Error()})
+				log.Error("Wrong TX received from ", c.ClientIP(), " error ", err.Error(), " txID ", tx.ID)
+				txCheckedOk = false
+			}
+		}
 	}
 
-	//sending response
-	c.JSON(200, gin.H{"success": true, "transactionIds": txIDs})
+	//if checks have passed - sending tx's out to forging nodes
+	if txCheckedOk {
+		multiBroadCastTx(recv)
+
+		//saving tx to db
+		for _, element := range recv.Transactions {
+			err := ArkNodeDB.Save(&element)
+			if err != nil {
+				log.Error(err.Error())
+			}
+			txIDs = append(txIDs, element.ID)
+		}
+
+		//sending response
+		c.JSON(200, gin.H{"success": true, "transactionIds": txIDs})
+	}
 }
 
-//SendTransactions Returns a list of peers to client call. Response is in JSON
+//SendTransactions Returns a list transactions from db
 func SendTransactions(c *gin.Context) {
 	tx2Send, err := getTransactions(0)
 
@@ -68,6 +88,8 @@ func multiBroadCastTx(txPayload model.TransactionPayload) {
 			//TODO - maybe check for success of sending
 			if res.Success {
 				log.Debug("Transactions retransmited OK ", res.TransactionIDs)
+			} else {
+				log.Error("Transactions retransmited OK ", res.Message, res.Error)
 			}
 		}(txPayload, peers[i])
 	}
