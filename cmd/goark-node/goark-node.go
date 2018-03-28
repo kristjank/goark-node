@@ -61,7 +61,7 @@ func initializeDB() {
 		log.Panic("Storm DB init error", err.Error())
 	}
 
-	log.Info("Storm DB Opened at:", base.ArkNodeDB.Path)
+	log.Info("Storm DB Opened")
 
 	//defer api.ArkNodeDB.Close()
 }
@@ -117,7 +117,7 @@ func main() {
 	initializeDB()
 	//starting blockchain sync in a thread...
 	//TODO needs testing
-	//go base.SyncBlockChain(base.ArkAPIClient.GetActivePeer().Height)
+	go base.SyncBlockChain(base.ArkAPIClient.GetActivePeer().Height)
 
 	log.Info("---- GOARK Relay Node Starting ----")
 
